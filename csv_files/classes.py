@@ -13,7 +13,7 @@ class Lijnvoering:
         self.traject8 = traject8
         self.traject9 = traject9
 
-    def minutenLijnvoering(self):
+    def SLijnvoering(self):
         trajectLijst = [self.traject1, self.traject2, self.traject3, self.traject4,
         self.traject5, self.traject6, self.traject7, self.traject8, self.traject9]
         minuten = 0
@@ -25,19 +25,14 @@ class Lijnvoering:
                 treinen += 1
         for traject in trajectLijst:
             if traject is not '':
-                if traject.spoor1 is not '':
-                    if traject.spoor1 in kritiekeSporenLijst and traject.spoor1 not in kritiekeSporen:
-                        kritiekeSporen.append(traject.spoor1)
-                if traject.spoor2 is not '':
-                    if traject.spoor2 in kritiekeSporenLijst and traject.spoor2 not in kritiekeSporen:
-                        kritiekeSporen.append(traject.spoor1)
-                if traject.spoor3 is not '':
-                    if traject.spoor3 in kritiekeSporenLijst and traject.spoor3 not in kritiekeSporen:
-                        kritiekeSporen.append(traject.spoor1)
+                for spoor in traject.__dict__.items():
+                    if spoor[1] is not '':
+                        if spoor[1] in kritiekeSporenLijst and spoor[1] not in kritiekeSporen:
+                            kritiekeSporen.append(spoor)
 
         p = len(kritiekeSporen) / len(kritiekeSporenLijst)
 
-        return ['min = {}'.format(minuten), 't = {}'.format(treinen), 'p = {}'.format(p) ]
+        return ['min = {}'.format(minuten), 't = {}'.format(treinen), 'p = {}'.format(p), 'S = {}'.format(10000 * p - (treinen * 20 + minuten / 10)) ]
 
 class Traject:
     def __init__(self, spoor1, spoor2 = '', spoor3 = '', spoor4 = '',
@@ -102,4 +97,4 @@ traject_2 = Traject(sporenLijst[3], sporenLijst[4], sporenLijst[5])
 
 lijn_1 = Lijnvoering(traject_1, traject_2)
 
-print(Lijnvoering.minutenLijnvoering(lijn_1))
+print(Lijnvoering.SLijnvoering(lijn_1))
