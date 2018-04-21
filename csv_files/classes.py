@@ -46,6 +46,16 @@ class Traject:
         self.spoor7 = spoor7
         self.spoor8 = spoor8
         self.spoor9 = spoor9
+        spoorlist = [self.spoor1, self.spoor2, self.spoor3, self.spoor4, self.spoor5,
+            self.spoor6, self.spoor7, self.spoor8, self.spoor9]
+        for i in range(len(spoorlist) - 1):
+            if spoorlist[i] != '' and spoorlist[i+1] != '':
+                if (spoorlist[i].stationBegin != spoorlist[i+1].stationBegin
+                    and spoorlist[i].stationEind != spoorlist[i+1].stationEind
+                    and spoorlist[i].stationBegin != spoorlist[i+1].stationEind
+                    and spoorlist[i].stationEind != spoorlist[i+1].stationBegin):
+                        print('Error: cannot make traject')
+                        break
 
     def minutenTraject(self):
         spoorlist = [self.spoor1, self.spoor2, self.spoor3, self.spoor4, self.spoor5,
@@ -91,9 +101,10 @@ with open('ConnectiesHolland.csv') as csvfile:
         and lijn not in kritiekeSporenLijst):
             kritiekeSporenLijst.append(lijn)
 
-traject_1 = Traject(sporenLijst[0], sporenLijst[1], sporenLijst[2])
+traject_1 = Traject(sporenLijst[0], sporenLijst[1])
 
-traject_2 = Traject(sporenLijst[3], sporenLijst[4], sporenLijst[5])
+traject_2 = Traject(sporenLijst[3], sporenLijst[4], sporenLijst[5],
+    sporenLijst[6], sporenLijst[7], sporenLijst[8])
 
 lijn_1 = Lijnvoering(traject_1, traject_2)
 
