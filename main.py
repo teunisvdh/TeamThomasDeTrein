@@ -51,7 +51,7 @@ def main():
 
     lijn_1 = [traject_1, traject_2, traject_3, traject_4, traject_5, traject_6, traject_7]
 
-    print(classes.Lijnvoering(lijn_1, kritiekeSporenLijst).SLijnvoering())
+    print(classes.Lijnvoering(lijn_1).SLijnvoering(kritiekeSporenLijst))
 
 
 if __name__ == "__main__":

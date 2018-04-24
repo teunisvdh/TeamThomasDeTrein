@@ -1,8 +1,9 @@
 class Lijnvoering:
-    def __init__(self, trajectLijst, kritiekeSporenLijst):
+    def __init__(self, trajectLijst):
         self.trajectLijst = trajectLijst
+        
+    def SLijnvoering(self, kritiekeSporenLijst):
         self.kritiekeSporenLijst = kritiekeSporenLijst
-    def SLijnvoering(self):
         minuten = 0
         treinen = 0
         kritiekeSporen = []
