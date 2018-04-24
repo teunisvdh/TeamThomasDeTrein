@@ -5,15 +5,15 @@ class Lijnvoering:
         traject3 = '', traject4 = '',traject5 = '',
         traject6 = '', traject7= '', traject8= '',
         traject9 = ''):
-            self.traject1 = traject1
-            self.traject2 = traject2
-            self.traject3 = traject3
-            self.traject4 = traject4
-            self.traject5 = traject5
-            self.traject6 = traject6
-            self.traject7 = traject7
-            self.traject8 = traject8
-            self.traject9 = traject9
+        self.traject1 = traject1
+        self.traject2 = traject2
+        self.traject3 = traject3
+        self.traject4 = traject4
+        self.traject5 = traject5
+        self.traject6 = traject6
+        self.traject7 = traject7
+        self.traject8 = traject8
+        self.traject9 = traject9
 
     def SLijnvoering(self):
         trajectLijst = [self.traject1, self.traject2,
