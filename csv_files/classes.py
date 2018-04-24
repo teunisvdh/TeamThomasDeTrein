@@ -58,14 +58,14 @@ class Traject:
         spoorlist = [self.spoor1, self.spoor2,
             self.spoor3, self.spoor4, self.spoor5,
             self.spoor6, self.spoor7, self.spoor8, self.spoor9]
-        for i in range(len(spoorlist) - 1):
-            if spoorlist[i] != '' and spoorlist[i+1] != '':
-                if (spoorlist[i].stationBegin != spoorlist[i+1].stationBegin
-                    and spoorlist[i].stationEind != spoorlist[i+1].stationEind
-                    and spoorlist[i].stationBegin != spoorlist[i+1].stationEind
-                    and spoorlist[i].stationEind != spoorlist[i+1].stationBegin):
-                        print('Error: cannot make traject')
-                        break
+            for i in range(len(spoorlist) - 1):
+                if spoorlist[i] != '' and spoorlist[i+1] != '':
+                    if (spoorlist[i].stationBegin != spoorlist[i+1].stationBegin
+                        and spoorlist[i].stationEind != spoorlist[i+1].stationEind
+                        and spoorlist[i].stationBegin != spoorlist[i+1].stationEind
+                        and spoorlist[i].stationEind != spoorlist[i+1].stationBegin):
+                            print('Error: cannot make traject')
+                            break
 
     def minutenTraject(self):
         spoorlist = [self.spoor1, self.spoor2, self.spoor3,
