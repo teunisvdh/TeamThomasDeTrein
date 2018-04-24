@@ -3,7 +3,6 @@ import sys
 import os
 from data import *
 from classes import classes
-from classes import opendata
 from classes import helpers
 
 def main():
