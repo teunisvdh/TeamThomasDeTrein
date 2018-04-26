@@ -55,6 +55,7 @@ def main():
     lijn_1 = [Trajectory_1, Trajectory_2, Trajectory_3, Trajectory_4, Trajectory_5, Trajectory_6, Trajectory_7]
 
     print(classes.Line(lijn_1).SLine(criticalRailwayList))
+    print(helpers.printList(RailwayList))
 
 
 if __name__ == "__main__":

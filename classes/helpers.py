@@ -3,4 +3,4 @@ def printList(RailwayList):
     for i in range(len(RailwayList)):
         print('{}:{},{},{}'.format(i, RailwayList[i].stationBeginning,
             RailwayList[i].stationEnd,
-            RailwayList[i].minuten))
+            RailwayList[i].minutes))
