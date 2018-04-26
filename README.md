@@ -4,7 +4,7 @@
 
 Assignment for the UvA-course **'Heuristics'**
 
-**Case:** [RailNL] (http://heuristieken.nl/wiki/index.php?title=RailNL)
+**Case:** [RailNL](http://heuristieken.nl/wiki/index.php?title=RailNL)
 
 
 
