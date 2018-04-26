@@ -1,58 +1,65 @@
-class Lijnvoering:
-    def __init__(self, trajectLijst):
-        self.trajectLijst = trajectLijst
-        
-    def SLijnvoering(self, kritiekeSporenLijst):
-        self.kritiekeSporenLijst = kritiekeSporenLijst
-        minuten = 0
-        treinen = 0
-        kritiekeSporen = []
-        for traject in self.trajectLijst:
-            if traject is not '':
-                minuten += Traject.minutenTraject(traject)
-                treinen += 1
-        for traject in self.trajectLijst:
-            for spoor in traject.__dict__.items():
-                for spoortje in spoor[1]:
-                    if spoortje not in kritiekeSporen:
-                        if spoortje in self.kritiekeSporenLijst:
-                            kritiekeSporen.append(spoortje)
+class Line:
+    def __init__(self, TrajectoryList):
+        self.TrajectoryList = TrajectoryList
 
-        p = len(kritiekeSporen) / len(self.kritiekeSporenLijst)
+    # calculates S for a set of Trajectorys
+    def SLine(self, criticalRailwayList):
+        self.criticalRailwayList = criticalRailwayList
+        minutes = 0
+        trains = 0
+        criticalRailway = []
 
-        return ['min = {}'.format(minuten),
-            't = {}'.format(treinen), 'p = {}'.format(p),
-            'S = {}'.format(10000 * p - (treinen * 20 + minuten / 10)) ]
+        # adds minutes of each railway in trajectory to minutes
+        for Trajectory in self.TrajectoryList:
+            minutes += Trajectory.minutesTrajectory()
+            trains += 1
 
-class Traject:
-    def __init__(self, spoorlist):
-        self.spoorlist = spoorlist
-        for i in range(len(self.spoorlist) - 1):
-            if (self.spoorlist[i].stationBegin != self.spoorlist[i+1].stationBegin
-                and self.spoorlist[i].stationEind != self.spoorlist[i+1].stationEind
-                and self.spoorlist[i].stationBegin != self.spoorlist[i+1].stationEind
-                and self.spoorlist[i].stationEind != self.spoorlist[i+1].stationBegin):
-                    print('Error: cannot make traject')
-                    print(self.spoorlist[i].stationBegin)
-                    print(self.spoorlist[i+1].stationBegin)
+        # looks for all critical railways in trajectory and puts them in a list
+        for Trajectory in self.TrajectoryList:
+            for Rail in Trajectory.__dict__.items():
+                for Railtje in Rail[1]:
+                    if Railtje not in criticalRailway:
+                        if Railtje in self.criticalRailwayList:
+                            criticalRailway.append(Railtje)
+
+        p = len(criticalRailway) / len(self.criticalRailwayList)
+
+        return ['min = {}'.format(minutes),
+            't = {}'.format(trains), 'p = {}'.format(p),
+            'S = {}'.format(10000 * p - (trains * 20 + minutes / 10)) ]
+
+class Trajectory:
+    def __init__(self, Raillist):
+        self.Raillist = Raillist
+
+        # checks if all railways are really connected
+        for i in range(len(self.Raillist) - 1):
+            if (self.Raillist[i].stationBeginning != self.Raillist[i+1].stationBeginning
+                and self.Raillist[i].stationEnd != self.Raillist[i+1].stationEnd
+                and self.Raillist[i].stationBeginning != self.Raillist[i+1].stationEnd
+                and self.Raillist[i].stationEnd != self.Raillist[i+1].stationBeginning):
+                    print('Error: cannot make Trajectory')
+                    print(self.Raillist[i].stationBeginning)
+                    print(self.Raillist[i+1].stationBeginning)
                     break
 
-    def minutenTraject(self):
-        minuten = 0
-        for station in self.spoorlist:
+    # calculates total amount of minutes for each Trajectory
+    def minutesTrajectory(self):
+        minutes = 0
+        for station in self.Raillist:
             if station is not '':
-                minuten += station.minuten
-        return minuten
+                minutes += station.minutes
+        return minutes
 
-class Spoor:
-    def __init__(self, stationBegin, stationEind, minuten):
-        self.stationBegin = stationBegin
-        self.stationEind = stationEind
-        self.minuten = int(minuten)
+class Rail:
+    def __init__(self, stationBeginning, stationEnd, minutes):
+        self.stationBeginning = stationBeginning
+        self.stationEnd = stationEnd
+        self.minutes = int(minutes)
 
 class Station:
-    def __init__(self, name, x, y, kritiek):
+    def __init__(self, name, x, y, Critical):
         self.name = name
         self.x = x
         self.y = y
-        self.kritiek = kritiek
+        self.Critical = Critical

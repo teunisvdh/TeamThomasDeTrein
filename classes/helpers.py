@@ -1,5 +1,6 @@
-def printList(sporenLijst):
-    for i in range(len(sporenLijst)):
-        print('{}:{},{},{}'.format(i, sporenLijst[i].stationBegin,
-            sporenLijst[i].stationEind,
-            sporenLijst[i].minuten))
+# makes indexed list of all railway connections
+def printList(RailwayList):
+    for i in range(len(RailwayList)):
+        print('{}:{},{},{}'.format(i, RailwayList[i].stationBeginning,
+            RailwayList[i].stationEnd,
+            RailwayList[i].minuten))

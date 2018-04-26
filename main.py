@@ -6,51 +6,55 @@ from classes import classes
 from classes import helpers
 
 def main():
+    # opens file of stations and puts it in a list
+    # also creates list of all critical stations
     with open('data/StationsHolland.csv') as csvfile:
         stationsinfo = csv.reader(csvfile, delimiter=',')
-        stationLijst = []
-        kritiekeStationLijst = []
+        stationList = []
+        criticalstationList = []
         for station in stationsinfo:
-            stationLijst.append(classes.Station(station[0], station[1], station[2], station[3]))
+            stationList.append(classes.Station(station[0], station[1], station[2], station[3]))
             if station[-1] == 'Kritiek':
-                kritiekeStationLijst.append(station[0])
+                criticalstationList.append(station[0])
 
+    # opens file of all connections and puts them in a list
+    # also creates list of all critical railways
     with open('data/ConnectiesHolland.csv') as csvfile:
-        stationsverbindingen = csv.reader(csvfile, delimiter=',')
-        sporenLijst = []
-        kritiekeSporenLijst = []
-        for lijn in stationsverbindingen:
-            sporenLijst.append(classes.Spoor(lijn[0], lijn[1], lijn[2]))
-        for lijn in sporenLijst:
-            if (lijn.stationBegin in kritiekeStationLijst
-                or lijn.stationEind in kritiekeStationLijst
-                and lijn not in kritiekeSporenLijst):
-                    kritiekeSporenLijst.append(lijn)
+        stationConnections = csv.reader(csvfile, delimiter=',')
+        RailwayList = []
+        criticalRailwayList = []
+        for lijn in stationConnections:
+            RailwayList.append(classes.Rail(lijn[0], lijn[1], lijn[2]))
+        for lijn in RailwayList:
+            if (lijn.stationBeginning in criticalstationList
+                or lijn.stationEnd in criticalstationList
+                and lijn not in criticalRailwayList):
+                    criticalRailwayList.append(lijn)
 
-    spoorlist_1 = [sporenLijst[1], sporenLijst[0], sporenLijst[27], sporenLijst[25], sporenLijst[10]]
-    traject_1 = classes.Traject(spoorlist_1)
+    Raillist_1 = [RailwayList[1], RailwayList[0], RailwayList[27], RailwayList[25], RailwayList[10]]
+    Trajectory_1 = classes.Trajectory(Raillist_1)
 
-    spoorlist_2 = [sporenLijst[3], sporenLijst[4], sporenLijst[5], sporenLijst[17]]
-    traject_2 = classes.Traject(spoorlist_2)
+    Raillist_2 = [RailwayList[3], RailwayList[4], RailwayList[5], RailwayList[17]]
+    Trajectory_2 = classes.Trajectory(Raillist_2)
 
-    spoorlist_3 = [sporenLijst[12], sporenLijst[21], sporenLijst[23]]
-    traject_3 = classes.Traject(spoorlist_3)
+    Raillist_3 = [RailwayList[12], RailwayList[21], RailwayList[23]]
+    Trajectory_3 = classes.Trajectory(Raillist_3)
 
-    spoorlist_4 = [sporenLijst[15], sporenLijst[19], sporenLijst[13]]
-    traject_4 = classes.Traject(spoorlist_4)
+    Raillist_4 = [RailwayList[15], RailwayList[19], RailwayList[13]]
+    Trajectory_4 = classes.Trajectory(Raillist_4)
 
-    spoorlist_5 = [sporenLijst[16], sporenLijst[26], sporenLijst[27]]
-    traject_5 = classes.Traject(spoorlist_5)
+    Raillist_5 = [RailwayList[16], RailwayList[26], RailwayList[27]]
+    Trajectory_5 = classes.Trajectory(Raillist_5)
 
-    spoorlist_6 = [sporenLijst[14], sporenLijst[22], sporenLijst[24], sporenLijst[11]]
-    traject_6 = classes.Traject(spoorlist_6)
+    Raillist_6 = [RailwayList[14], RailwayList[22], RailwayList[24], RailwayList[11]]
+    Trajectory_6 = classes.Trajectory(Raillist_6)
 
-    spoorlist_7 = [sporenLijst[6]]
-    traject_7 = classes.Traject(spoorlist_7)
+    Raillist_7 = [RailwayList[6]]
+    Trajectory_7 = classes.Trajectory(Raillist_7)
 
-    lijn_1 = [traject_1, traject_2, traject_3, traject_4, traject_5, traject_6, traject_7]
+    lijn_1 = [Trajectory_1, Trajectory_2, Trajectory_3, Trajectory_4, Trajectory_5, Trajectory_6, Trajectory_7]
 
-    print(classes.Lijnvoering(lijn_1).SLijnvoering(kritiekeSporenLijst))
+    print(classes.Line(lijn_1).SLine(criticalRailwayList))
 
 
 if __name__ == "__main__":
