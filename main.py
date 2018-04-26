@@ -21,41 +21,41 @@ def main():
     # also creates list of all critical railways
     with open('data/ConnectiesHolland.csv') as csvfile:
         stationConnections = csv.reader(csvfile, delimiter=',')
-        RailwayList = []
+        railwayList = []
         criticalRailwayList = []
         for lijn in stationConnections:
-            RailwayList.append(classes.Rail(lijn[0], lijn[1], lijn[2]))
-        for lijn in RailwayList:
+            railwayList.append(classes.Rail(lijn[0], lijn[1], lijn[2]))
+        for lijn in railwayList:
             if (lijn.stationBeginning in criticalstationList
                 or lijn.stationEnd in criticalstationList
                 and lijn not in criticalRailwayList):
                     criticalRailwayList.append(lijn)
 
-    Raillist_1 = [RailwayList[1], RailwayList[0], RailwayList[27], RailwayList[25], RailwayList[10]]
-    Trajectory_1 = classes.Trajectory(Raillist_1)
+    raillist_1 = [railwayList[1], railwayList[0], railwayList[27], railwayList[25], railwayList[10]]
+    trajectory_1 = classes.Trajectory(raillist_1)
 
-    Raillist_2 = [RailwayList[3], RailwayList[4], RailwayList[5], RailwayList[17]]
-    Trajectory_2 = classes.Trajectory(Raillist_2)
+    raillist_2 = [railwayList[3], railwayList[4], railwayList[5], railwayList[17]]
+    trajectory_2 = classes.Trajectory(raillist_2)
 
-    Raillist_3 = [RailwayList[12], RailwayList[21], RailwayList[23]]
-    Trajectory_3 = classes.Trajectory(Raillist_3)
+    raillist_3 = [railwayList[12], railwayList[21], railwayList[23]]
+    trajectory_3 = classes.Trajectory(raillist_3)
 
-    Raillist_4 = [RailwayList[15], RailwayList[19], RailwayList[13]]
-    Trajectory_4 = classes.Trajectory(Raillist_4)
+    raillist_4 = [railwayList[15], railwayList[19], railwayList[13]]
+    trajectory_4 = classes.Trajectory(raillist_4)
 
-    Raillist_5 = [RailwayList[16], RailwayList[26], RailwayList[27]]
-    Trajectory_5 = classes.Trajectory(Raillist_5)
+    raillist_5 = [railwayList[16], railwayList[26], railwayList[27]]
+    trajectory_5 = classes.Trajectory(raillist_5)
 
-    Raillist_6 = [RailwayList[14], RailwayList[22], RailwayList[24], RailwayList[11]]
-    Trajectory_6 = classes.Trajectory(Raillist_6)
+    raillist_6 = [railwayList[14], railwayList[22], railwayList[24], railwayList[11]]
+    trajectory_6 = classes.Trajectory(raillist_6)
 
-    Raillist_7 = [RailwayList[6]]
-    Trajectory_7 = classes.Trajectory(Raillist_7)
+    raillist_7 = [railwayList[6]]
+    trajectory_7 = classes.Trajectory(raillist_7)
 
-    lijn_1 = [Trajectory_1, Trajectory_2, Trajectory_3, Trajectory_4, Trajectory_5, Trajectory_6, Trajectory_7]
+    lijn_1 = [trajectory_1, trajectory_2, trajectory_3, trajectory_4, trajectory_5, trajectory_6, trajectory_7]
 
     print(classes.Line(lijn_1).SLine(criticalRailwayList))
-    print(helpers.printList(RailwayList))
+    print(helpers.printList(railwayList))
 
 
 if __name__ == "__main__":
