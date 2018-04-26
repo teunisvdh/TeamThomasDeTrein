@@ -12,7 +12,7 @@ Determining what trajectories can best be made is done by maximizing the followi
 
 	S = p*10.000 - (t*20 + min/10). 
 		
-	S is the score, p is the percentage of critical railways used, t is the number of trajectories used and min is the total amount of time (in minutes) of all the trajectories combined.  
+	S is the score, p is the fraction of critical railways used, t is the number of trajectories used and min is the total amount of time (in minutes) of all the trajectories combined.  
 
 The repository contains several files: 
 
