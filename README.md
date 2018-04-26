@@ -26,4 +26,4 @@ The repository contains several files:
 	
 	- StationsHolland.csv: A file containing all stations (for intercity-trains) in the provinces of Noord- and Zuid-Holland (The Netherlands). 
 
-All files are free to use. For questions you can always send an email to markvandenHoven@icloud.com, thymenyj@gmail.com, teunisvanderhofstad@hotmail.com. 
+All files are free to use. For questions you can always send an email to markvandenhoven@icloud.com, thymenyj@gmail.com, teunisvanderhofstad@hotmail.com. 
