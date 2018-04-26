@@ -20,10 +20,10 @@ The repository contains several files:
 	
 	- classes.py: Multiple classes and functions used in the program.  
 	
-	- helpers.py: A program that displays all railways and their information to make things visible for programmers. 
+	- helpers.py: A supporting file. For now containing a program that displays all railways and their information to make things visible for programmers. 
 	
 	- ConnectiesHolland.csv: A file containing all railways (for intercity-trains) in the provinces of Noord- and Zuid-Holland (The Netherlands).
 	
 	- StationsHolland.csv: A file containing all stations (for intercity-trains) in the provinces of Noord- and Zuid-Holland (The Netherlands). 
 
-All files are free to use. For questions you can always send an email to markvandenHoven@icloud.com, thymenyj@gmail.com, teunisvanderhofstad@hotmail.com. 
+All files are free to use. For questions you can always send an email to markvandenhoven@icloud.com, thymenyj@gmail.com, teunisvanderhofstad@hotmail.com. 
