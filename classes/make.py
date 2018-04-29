@@ -12,7 +12,9 @@ def makeLine1(RailwayList):
 	trajectory3 = classes.Trajectory([RailwayList[12], RailwayList[21], RailwayList[23]])
 	trajectory4 = classes.Trajectory([RailwayList[15], RailwayList[19], RailwayList[13]])
 	trajectory5 = classes.Trajectory([RailwayList[16], RailwayList[26], RailwayList[27]])
-	trajectory6 = classes.Trajectory([RailwayList[14], RailwayList[22], RailwayList[24], RailwayList[11], RailwayList[6]])
+	trajectory6 = classes.Trajectory([RailwayList[14], RailwayList[22], RailwayList[24], RailwayList[11]])
+	trajectory7 = classes.Trajectory([RailwayList[6]])
 
-	line1 = [trajectory1, trajectory2, trajectory3, trajectory4, trajectory5, trajectory6]
+	line1 = [trajectory1, trajectory2, trajectory3, trajectory4, trajectory5, trajectory6, trajectory7]
+
 	return line1

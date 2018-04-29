@@ -1,10 +1,12 @@
 import csv
 import sys
 import os
+import random
 from data import *
 from classes import classes
 from classes import helpers
 from classes import make
+from classes import randomAlgoritme
 
 def main():
     # open the files including critical data
@@ -14,10 +16,14 @@ def main():
     # make line of trajectories
     line1 = make.makeLine1(RailwayList)
 
-    #print calculated score
+    helpers.show.printList(RailwayList)
+
+    # print calculated score
     helpers.show.printScore(line1, criticalRailwayList)
 
+    rail = randomAlgoritme.randomAlgoritme(RailwayList)
 
+    helpers.show.printScore(rail, criticalRailwayList)
 
 if __name__ == "__main__":
     main()
