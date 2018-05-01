@@ -7,36 +7,36 @@ from classes import classes
 
 # deze functie is nog niet helemaal af, comments komen later
 
-def randomAlgoritme(RailwayList):
-    rail = []
-    for i in range(7):
-        raill = []
-        rand_2 = random.randint(0, len(RailwayList) - 1)
-        raill.append(RailwayList[rand_2])
-        for i in range(random.randint(1,10)):
-            corresponding = []
-            for railll in RailwayList:
-                minutes = 0
-                if (raill[-1].stationBeginning == railll.stationBeginning
-                    or raill[-1].stationBeginning == railll.stationEnd
-                    or raill[-1].stationEnd == railll.stationBeginning
-                    or raill[-1].stationEnd == railll.stationEnd):
-                        corresponding.append(railll)
+def randomAlgorithm(RailwayList):
+    aantalTrajecten = 7
+    finalrail = []
+    for traject in range(aantalTrajecten):
+        listOfRails = []
+        randomRail = random.randint(0, len(RailwayList) - 1)
+        listOfRails.append(RailwayList[randomRail])
 
-            rand_3 = random.randint(0, len(corresponding) - 1)
-            raill.append(corresponding[rand_3])
+        amountOfRails = random.randint(1,10)
+        for amount in range(amountOfRails):
+            correspondingStations = []
 
-            for rails in raill:
-                minutes += rails.minutes
-                print(minutes)
-                if minutes > 120:
-                    print(raill)
-                    print(raill[-1])
-                    raill.remove(raill[-1])
-                    print(raill)
+            for rail in RailwayList:
+                if (listOfRails[-1].stationBeginning == rail.stationBeginning
+                    or listOfRails[-1].stationBeginning == rail.stationEnd
+                    or listOfRails[-1].stationEnd == rail.stationBeginning
+                    or listOfRails[-1].stationEnd == rail.stationEnd):
+                        correspondingStations.append(rail)
 
+            randomRailNext = random.randint(0, len(correspondingStations) - 1)
+            listOfRails.append(correspondingStations[randomRailNext])
 
-        trajectorry = classes.Trajectory(raill)
-        rail.append(trajectorry)
+            minutesTrajectory = 0
+            for rails in listOfRails:
+                minutesTrajectory += rails.minutes
+                if minutesTrajectory > 120:
+                    listOfRails.pop()
 
-    return rail
+        trajectoryFinal = classes.Trajectory(listOfRails)
+
+        finalrail.append(trajectoryFinal)
+
+    return finalrail

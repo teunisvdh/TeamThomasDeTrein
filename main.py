@@ -21,7 +21,7 @@ def main():
     # print calculated score
     # helpers.show.printScore(line1, criticalRailwayList)
 
-    rail = randomAlgoritme.randomAlgoritme(RailwayList)
+    rail = randomAlgoritme.randomAlgorithm(RailwayList)
 
     # for traject in rail:
     #     print("!!!!!!!!!!!!!!stop!!!!!!!!!!!!!!!!!")
