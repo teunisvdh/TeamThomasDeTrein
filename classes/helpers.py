@@ -25,7 +25,7 @@ class show:
                 RailwayList[i].minutes))
 
     def printScore(self, criticalRailwayList):
-        print(classes.Line(self).SLine(criticalRailwayList))
+        return classes.Line(self).SLine(criticalRailwayList)
 
 class openFile:
     """

@@ -42,9 +42,11 @@ class Line:
 
         p = len(criticalRailway) / len(self.criticalRailwayList)
 
-        return ['min = {}'.format(minutes),
+        alles = ['min = {}'.format(minutes),
             't = {}'.format(trains), 'p = {}'.format(p),
             'S = {}'.format(10000 * p - (trains * 20 + minutes / 10)) ]
+
+        return 10000 * p - (trains * 20 + minutes / 10)
 
 class Trajectory:
     """

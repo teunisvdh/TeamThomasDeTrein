@@ -6,7 +6,7 @@ from data import *
 from classes import classes
 from classes import helpers
 from classes import make
-from classes import randomAlgoritme
+from classes import randomAlgorithm
 
 def main():
     # open the files including critical data
@@ -20,8 +20,11 @@ def main():
 
     # print calculated score
     # helpers.show.printScore(line1, criticalRailwayList)
+    listofs = []
 
-    rail = randomAlgoritme.randomAlgorithm(RailwayList)
+    for i in range(100000):
+        rail = randomAlgorithm.randomAlgorithm(RailwayList)
+        listofs.append(helpers.show.printScore(rail, criticalRailwayList))
 
     # for traject in rail:
     #     print("!!!!!!!!!!!!!!stop!!!!!!!!!!!!!!!!!")
@@ -32,8 +35,8 @@ def main():
     #             print("to")
     #             print(stationecht.stationEnd)
 
-
-    helpers.show.printScore(rail, criticalRailwayList)
+    print(max(listofs))
+    #helpers.show.printScore(rail, criticalRailwayList)
 
 if __name__ == "__main__":
     main()
