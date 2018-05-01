@@ -22,7 +22,7 @@ def main():
     # helpers.show.printScore(line1, criticalRailwayList)
     listofs = []
 
-    for i in range(100000):
+    for i in range(100):
         rail = randomAlgorithm.randomAlgorithm(RailwayList)
         listofs.append(helpers.show.printScore(rail, criticalRailwayList))
 

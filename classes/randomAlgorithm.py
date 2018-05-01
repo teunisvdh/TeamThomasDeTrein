@@ -40,8 +40,15 @@ def randomAlgorithm(RailwayList):
                     or listOfRails[-1].stationEnd == rail.stationEnd):
                         correspondingStations.append(rail)
 
-            # add one random connection from this list to the trajectory
             randomRailNext = random.randint(0, len(correspondingStations) - 1)
+            var = 0
+            # add one random connection from this list to the trajectory
+            while(correspondingStations[randomRailNext] in listOfRails):
+                var += 1
+                randomRailNext = random.randint(0, len(correspondingStations) - 1)
+                if var == 10:
+                    break
+
             listOfRails.append(correspondingStations[randomRailNext])
 
             # check if amounts of minutes does not exceed
