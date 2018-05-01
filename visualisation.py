@@ -23,26 +23,11 @@ with open('data/ConnectiesHolland.csv') as csvfile:
 
 # stationTrajectory = [stationList[0], stationList[1], stationList[2], stationList[3]]
 
-# print(connectionList[0].stationBeginning)
-# if (connectionList[0].stationBeginning == stationList[0].name):
-#     print("yessss")
-# else:
-#     print("noooo")
-
 for station in stationList:
     x = float(station.y)
     y = float(station.x)
     plt.plot(x, y, 'ro-')
     plt.annotate(station.name, xy=(x,y))
-
-# def connect(begin, end):
-#     x1 = float(stationList[begin].y)
-#     y1 = float(stationList[begin].x)
-#     x2 = float(stationList[end].y)
-#     y2 = float(stationList[end].x)
-#     plt.plot([x1, x2], [y1, y2], 'r--', linewidth=0.3)
-#
-# connect(18, 10);
 
 def connect(begin, end):
     nameBegin = begin
@@ -59,14 +44,8 @@ def connect(begin, end):
             break
     plt.plot([x1, x2], [y1, y2], 'r--', linewidth=0.3)
 
-
-#
 for connection in connectionList:
     connect(connection.stationBeginning, connection.stationEnd)
-
-# for station in stationTrajectory:
-#     print(station.name)
-#     # connect(station, station+1)
 
 plt.xlabel("longitude")
 plt.ylabel("latitude")
