@@ -5,16 +5,14 @@ from data import *
 from classes import classes
 
 def makeLine1(RailwayList):
-"""
-Makes a line by combining trajectories.
+	"""Makes a line by combining trajectories.
 
-Args:
-RailwayList: list of all the railways.
-trajectory: list of railways.
+	Args:
+		RailwayList(list): list of all the railways.
 
-Returns:
-line: list of trajectories used.
-"""
+	Returns:
+		line: list of trajectories used.
+	"""
 	# define the trajectory
 	trajectory1 = classes.Trajectory([RailwayList[1], RailwayList[0], RailwayList[27], RailwayList[25], RailwayList[10]])
 	trajectory2 = classes.Trajectory([RailwayList[3], RailwayList[4], RailwayList[5], RailwayList[17]])

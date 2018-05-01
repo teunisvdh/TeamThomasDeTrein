@@ -5,22 +5,20 @@ from data import *
 from classes import classes
 
 class show:
-"""
-Class contains functions to show information.
+    """Class contains functions to show information.
 
-Functions:
-printList.
-"""
+    Functions:
+        printList.
+    """
     def printList(RailwayList):
-    """
-    Prints list indexed list of all railway connections.
+        """Prints list indexed list of all railway connections.
 
-    Args:
-    RailwayList (list): List of railways that you want to print.
+        Args:
+            RailwayList (list): List of railways that you want to print.
 
-    Returns:
-    Printed list of indexed railways.
-    """
+        Returns:
+            Printed list of indexed railways.
+        """
         for i in range(len(RailwayList)):
             print('{}:{},{},{}'.format(i, RailwayList[i].stationBeginning,
                 RailwayList[i].stationEnd,
@@ -30,24 +28,24 @@ printList.
         print(classes.Line(self).SLine(criticalRailwayList))
 
 class openFile:
-"""
-Class contains functions to open files
+    """
+    Class contains functions to open files
 
-Functions:
-file1(self).
-file2(self, criticalstationList).
-"""
+    Functions:
+        file1(self).
+        file2(self, criticalstationList).
+    """
     def file1(self):
-    """
-    Opens inserted file.
+        """
+        Opens inserted file.
 
-    Args:
-    file1 (stationsHolland.csv).
+        Args:
+            file1 (stationsHolland.csv).
 
-    Returns:
-    stationsList: list of all stations.
-    criticalstationList: list of all critical stations.
-    """
+        Returns:
+            stationsList: list of all stations.
+            criticalstationList: list of all critical stations.
+        """
         with open(self) as csvfile:
             stationsinfo = csv.reader(csvfile, delimiter=',')
             stationList = []
@@ -59,17 +57,17 @@ file2(self, criticalstationList).
             return stationList, criticalstationList
 
     def file2(self, criticalstationList):
-            """
-            Opens inserted file.
+        """
+        Opens inserted file.
 
-            Args:
+        Args:
             file2 (ConnectiesHolland.csv).
             criticalStationList: list of all critical stations.
 
-            Returns:
+        Returns:
             RailwayList: list of all railways.
             criticalRailwayList: list of all critical railways.
-            """
+        """
         with open(self) as csvfile:
             stationConnections = csv.reader(csvfile, delimiter=',')
             RailwayList = []
