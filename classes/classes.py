@@ -46,8 +46,9 @@ class Trajectory:
     def minutesTrajectory(self):
         minutes = 0
         for station in self.Raillist:
-            if station is not '':
                 minutes += station.minutes
+        if minutes > 120:
+            print("to much minutes!")
         return minutes
 
 class Rail:
