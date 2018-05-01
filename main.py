@@ -16,12 +16,22 @@ def main():
     # make line of trajectories
     line1 = make.makeLine1(RailwayList)
 
-    helpers.show.printList(RailwayList)
+    # helpers.show.printList(RailwayList)
 
     # print calculated score
-    helpers.show.printScore(line1, criticalRailwayList)
+    # helpers.show.printScore(line1, criticalRailwayList)
 
-    rail = randomAlgoritme.randomAlgoritme(RailwayList)
+    rail = randomAlgoritme.randomAlgorithm(RailwayList)
+
+    # for traject in rail:
+    #     print("!!!!!!!!!!!!!!stop!!!!!!!!!!!!!!!!!")
+    #     for station in traject.__dict__.items():
+    #         print(station)
+    #         for stationecht in station[1]:
+    #             print(stationecht.stationBeginning)
+    #             print("to")
+    #             print(stationecht.stationEnd)
+
 
     helpers.show.printScore(rail, criticalRailwayList)
 
