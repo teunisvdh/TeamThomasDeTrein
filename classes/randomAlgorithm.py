@@ -24,8 +24,8 @@ def randomAlgorithm(RailwayList, criticalRailwayList):
         listOfRails = []
 
         # add a random connection
-        randomRail = random.randint(0, len(criticalRailwayList) - 1)
-        listOfRails.append(criticalRailwayList[randomRail])
+        randomRail = random.randint(0, len(RailwayList) - 1)
+        listOfRails.append(RailwayList[randomRail])
 
         # add a random amount more connections
         amountOfRails = random.randint(1,15)
@@ -33,7 +33,7 @@ def randomAlgorithm(RailwayList, criticalRailwayList):
             correspondingStations = []
 
             # make a list of all connections that can be added
-            for rail in criticalRailwayList:
+            for rail in RailwayList:
                 if (listOfRails[-1].stationBeginning == rail.stationBeginning
                     or listOfRails[-1].stationBeginning == rail.stationEnd
                     or listOfRails[-1].stationEnd == rail.stationBeginning
