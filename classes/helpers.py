@@ -4,6 +4,19 @@ import os
 from data import *
 from classes import classes
 
+class calculate:
+    def score(self, criticalRailwayList):
+        score = classes.Line(self).SLine(criticalRailwayList)
+        return score
+
+    def minutesTrajectory(self, Trajectory):
+        minutes = 0
+        for station in self.Trajecotry:
+                minutes += station.minutes
+        if minutes > 120:
+            print("to much minutes!")
+        return minutes
+
 class show:
     """Class contains functions to show information.
 
@@ -23,9 +36,6 @@ class show:
             print('{}:{},{},{}'.format(i, RailwayList[i].stationBeginning,
                 RailwayList[i].stationEnd,
                 RailwayList[i].minutes))
-
-    def printScore(self, criticalRailwayList):
-        return classes.Line(self).SLine(criticalRailwayList)
 
 class openFile:
     """

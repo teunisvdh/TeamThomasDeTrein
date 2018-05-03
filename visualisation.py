@@ -71,19 +71,19 @@ RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHollan
 highestScore = 0
 for i in range(100):
     rail = randomAlgorithm.randomAlgorithm(RailwayList, criticalRailwayList)
-    score = helpers.show.printScore(rail, criticalRailwayList)
+    score = helpers.calculate.score(rail, criticalRailwayList)
     if score > highestScore:
         highestScore = score
         highestRail = rail
 
 def connectLine(begin, end, style):
-        """ A function for connecting two stations in a plot, specifically
-            for the whole line.
+    """ A function for connecting two stations in a plot, specifically
+        for the whole line.
 
-            Args:
-                begin = station beginning, end = station end,
-                style = color and style line
-        """
+        Args:
+            begin = station beginning, end = station end,
+            style = color and style line
+    """
     nameBegin = begin
     nameEnd = end
     styleLine = style

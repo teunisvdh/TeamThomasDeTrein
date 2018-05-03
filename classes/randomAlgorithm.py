@@ -27,27 +27,36 @@ def randomAlgorithm(RailwayList, criticalRailwayList):
         randomRail = random.randint(0, len(RailwayList) - 1)
         listOfRails.append(RailwayList[randomRail])
 
+        # if startingpoint is StationBeginning
+        StationIsBeginning = True
+
         # add a random amount more connections
-        amountOfRails = random.randint(1,15)
+        amountOfRails = random.randint(1,10)
         for amount in range(amountOfRails):
             correspondingStations = []
-
             # make a list of all connections that can be added
-            for rail in RailwayList:
-                if (listOfRails[-1].stationBeginning == rail.stationBeginning
-                    or listOfRails[-1].stationBeginning == rail.stationEnd
-                    or listOfRails[-1].stationEnd == rail.stationBeginning
-                    or listOfRails[-1].stationEnd == rail.stationEnd):
+            if StationIsBeginning == True:
+                for rail in RailwayList:
+                    if listOfRails[-1].stationBeginning == rail.stationBeginning:
                         correspondingStations.append(rail)
-
-            randomRailNext = random.randint(0, len(correspondingStations) - 1)
-            var = 0
-            # add one random connection from this list to the trajectory
-            while(correspondingStations[randomRailNext] in listOfRails):
-                var += 1
+                    elif listOfRails[-1].stationBeginning == rail.stationEnd:
+                        correspondingStations.append(rail)
                 randomRailNext = random.randint(0, len(correspondingStations) - 1)
-                if var == 10:
-                    break
+                if correspondingStations[randomRailNext].stationBeginning == listOfRails[-1].stationBeginning:
+                    StationIsBeginning = False
+                else:
+                    StationIsBeginning = True
+            elif StationIsBeginning == False:
+                for rail in RailwayList:
+                    if listOfRails[-1].stationEnd == rail.stationBeginning:
+                        correspondingStations.append(rail)
+                    elif listOfRails[-1].stationEnd == rail.stationEnd:
+                        correspondingStations.append(rail)
+                randomRailNext = random.randint(0, len(correspondingStations) - 1)
+                if correspondingStations[randomRailNext].stationEnd == listOfRails[-1].stationBeginning:
+                    StationIsBeginning = False
+                else:
+                    StationIsBeginning = True
 
             listOfRails.append(correspondingStations[randomRailNext])
 
