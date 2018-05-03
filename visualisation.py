@@ -1,16 +1,12 @@
-import csv
-import sys
-import os
-import random
+import csv, sys, os, random
 import matplotlib.pyplot as plt
 import matplotlib.lines as lin
-# from matplotlib import colors as col
 import numpy as np
 from data import *
 from classes import classes
 from classes import helpers
 from classes import randomAlgorithm
-import __main__
+# from matplotlib import colors as col
 
 # color library for coloring lines
 # colors = []
@@ -18,11 +14,8 @@ import __main__
 #     colors.append(color)
 
 # make list with all stations
-with open('data/StationsHolland.csv') as csvfile:
-    stationsinfo = csv.reader(csvfile, delimiter=',')
-    stationList = []
-    for station in stationsinfo:
-        stationList.append(classes.Station(station[0], station[1], station[2], station[3]))
+stationList, criticalstationList = helpers.openFile.file1("data/StationsHolland.csv")
+RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHolland.csv", criticalstationList)
 
 # make list with all railways
 with open('data/ConnectiesHolland.csv') as csvfile:
@@ -63,10 +56,6 @@ def connect(begin, end):
 # plot all connections
 for connection in connectionList:
     connect(connection.stationBeginning, connection.stationEnd)
-
-# copy from randomAlgorithm.py
-stationList, criticalstationList = helpers.openFile.file1("data/StationsHolland.csv")
-RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHolland.csv", criticalstationList)
 
 highestScore = 0
 for i in range(100):
