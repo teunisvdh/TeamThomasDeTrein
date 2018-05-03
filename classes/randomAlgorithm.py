@@ -5,7 +5,7 @@ import os
 from data import *
 from classes import classes
 
-def randomAlgorithm(RailwayList):
+def randomAlgorithm(RailwayList, criticalRailwayList):
     """A random algorithm which creates a line of 7 trajectories with a maximum of
     ten railway connection in each trajectory.
 
@@ -24,16 +24,16 @@ def randomAlgorithm(RailwayList):
         listOfRails = []
 
         # add a random connection
-        randomRail = random.randint(0, len(RailwayList) - 1)
-        listOfRails.append(RailwayList[randomRail])
+        randomRail = random.randint(0, len(criticalRailwayList) - 1)
+        listOfRails.append(criticalRailwayList[randomRail])
 
         # add a random amount more connections
-        amountOfRails = random.randint(1,10)
+        amountOfRails = random.randint(1,15)
         for amount in range(amountOfRails):
             correspondingStations = []
 
             # make a list of all connections that can be added
-            for rail in RailwayList:
+            for rail in criticalRailwayList:
                 if (listOfRails[-1].stationBeginning == rail.stationBeginning
                     or listOfRails[-1].stationBeginning == rail.stationEnd
                     or listOfRails[-1].stationEnd == rail.stationBeginning

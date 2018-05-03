@@ -22,21 +22,17 @@ def main():
     # helpers.show.printScore(line1, criticalRailwayList)
     listofs = []
 
+    highestScore = 0
     for i in range(100):
-        rail = randomAlgorithm.randomAlgorithm(RailwayList)
-        listofs.append(helpers.show.printScore(rail, criticalRailwayList))
+        rail = randomAlgorithm.randomAlgorithm(RailwayList, criticalRailwayList)
+        score = helpers.show.printScore(rail, criticalRailwayList)
+        if score > highestScore:
+            highestScore = score
+            highestRail = rail
 
-    # for traject in rail:
-    #     print("!!!!!!!!!!!!!!stop!!!!!!!!!!!!!!!!!")
-    #     for station in traject.__dict__.items():
-    #         print(station)
-    #         for stationecht in station[1]:
-    #             print(stationecht.stationBeginning)
-    #             print("to")
-    #             print(stationecht.stationEnd)
 
-    print(max(listofs))
-    #helpers.show.printScore(rail, criticalRailwayList)
-
+    print(highestScore)
+    print(highestRail[1].Raillist[1].stationBeginning)
+    # print(helpers.show.printScore(line1, criticalRailwayList))
 if __name__ == "__main__":
     main()
