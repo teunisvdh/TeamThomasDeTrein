@@ -22,7 +22,7 @@ def main():
     # helpers.show.printScore(line1, criticalRailwayList)
 
     highestScore = 0
-    for i in range(1000):
+    for i in range(1):
         rail = randomAlgorithm.randomAlgorithm(RailwayList, criticalRailwayList)
         score = helpers.calculate.score(rail, criticalRailwayList)
         if score > highestScore:

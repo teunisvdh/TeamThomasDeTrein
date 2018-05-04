@@ -43,8 +43,10 @@ def randomAlgorithm(RailwayList, criticalRailwayList):
                         correspondingStations.append(rail)
                 randomRailNext = random.randint(0, len(correspondingStations) - 1)
                 if correspondingStations[randomRailNext].stationBeginning == listOfRails[-1].stationBeginning:
+                    print("1")
                     StationIsBeginning = False
                 else:
+                    print("2")
                     StationIsBeginning = True
             elif StationIsBeginning == False:
                 for rail in RailwayList:
@@ -53,10 +55,12 @@ def randomAlgorithm(RailwayList, criticalRailwayList):
                     elif listOfRails[-1].stationEnd == rail.stationEnd:
                         correspondingStations.append(rail)
                 randomRailNext = random.randint(0, len(correspondingStations) - 1)
-                if correspondingStations[randomRailNext].stationEnd == listOfRails[-1].stationBeginning:
-                    StationIsBeginning = False
-                else:
+                if correspondingStations[randomRailNext].stationEnd == listOfRails[-1].stationEnd:
+                    print("3")
                     StationIsBeginning = True
+                else:
+                    print("4")
+                    StationIsBeginning = False
 
             listOfRails.append(correspondingStations[randomRailNext])
 
