@@ -1,8 +1,6 @@
 import csv, sys, os, random
 import matplotlib.pyplot as plt
 import matplotlib.lines as lin
-import numpy as np
-from data import *
 from classes import classes
 from classes import helpers
 from classes import randomAlgorithm
@@ -17,21 +15,15 @@ from classes import randomAlgorithm
 stationList, criticalstationList = helpers.openFile.file1("data/StationsHolland.csv")
 RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHolland.csv", criticalstationList)
 
-# make list with all railways
-with open('data/ConnectiesHolland.csv') as csvfile:
-    connectioninfo = csv.reader(csvfile, delimiter=',')
-    connectionList = []
-    for connection in connectioninfo:
-        connectionList.append(classes.Rail(connection[0], connection[1], connection[2]))
-
-# stationTrajectory = [stationList[0], stationList[1], stationList[2], stationList[3]]
-
 # plot all stations
-for station in stationList:
-    x = float(station.y)
-    y = float(station.x)
-    plt.plot(x, y, 'ro-')
-    plt.annotate(station.name, xy=(x,y))
+def plotStations():
+    for station in stationList:
+        x = float(station.y)
+        y = float(station.x)
+        plt.plot(x, y, 'ro-')
+        plt.annotate(station.name, xy=(x,y))
+
+plotStations()
 
 def connect(begin, end):
     """ A function for connecting two stations in a plot.
@@ -54,7 +46,7 @@ def connect(begin, end):
     plt.plot([x1, x2], [y1, y2], 'k-', linewidth=0.2)
 
 # plot all connections
-for connection in connectionList:
+for connection in RailwayList:
     connect(connection.stationBeginning, connection.stationEnd)
 
 highestScore = 0
@@ -109,5 +101,4 @@ plt.xlabel("longitude")
 plt.ylabel("latitude")
 plt.title("Visualisation")
 plt.axis('equal')
-# plt.legend
 plt.show()
