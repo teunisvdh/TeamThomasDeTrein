@@ -1,9 +1,15 @@
 import csv, sys, os, random
 import matplotlib.pyplot as plt
 import matplotlib.lines as lin
-from classes import classes
-from classes import helpers
-from classes import randomAlgorithm
+import sys
+
+sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/Classes')
+sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/Algorithms')
+
+
+# from classes import classes
+# from classes import helpers
+# from classes import randomAlgorithm
 # from matplotlib import colors as col
 
 # color library for coloring lines
