@@ -63,15 +63,16 @@ def visualize(maxRail):
         nameBegin = begin
         nameEnd = end
         styleLine = style
+        distance = random.uniform(0, 0.01)
         for i in range(len(stationList)):
             if (stationList[i].name == nameBegin):
                 x1=float(stationList[i].y)
-                y1=float(stationList[i].x)
+                y1=float(stationList[i].x) + distance
                 break
         for i in range(len(stationList)):
             if (stationList[i].name == nameEnd):
                 x2=float(stationList[i].y)
-                y2=float(stationList[i].x)
+                y2=float(stationList[i].x) + distance
                 break
         plt.plot([x1, x2], [y1, y2], styleLine, linewidth=2)
 
