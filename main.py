@@ -7,6 +7,7 @@ from classes import classes
 from classes import helpers
 from classes import make
 from algorithms import randomAlgorithm
+from visualisation import visualisation
 
 def main():
     # open the files including critical data
@@ -32,6 +33,8 @@ def main():
         #     highestRail = rail
 
     print(slist)
+
+    visualisation.visualize();
 
 
     # for i in range(len(highestRail)):
