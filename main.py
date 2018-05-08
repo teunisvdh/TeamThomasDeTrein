@@ -2,11 +2,11 @@ import csv
 import sys
 import os
 import random
-from data import *
-from classes import classes
-from classes import helpers
-from classes import make
-from classes import randomAlgorithm
+from Data import *
+from Classes import classes
+from Classes import helpers
+from Classes import make
+from Algorithms import randomAlgorithm
 
 def main():
     # open the files including critical data
@@ -23,13 +23,15 @@ def main():
 
     slist = []
     highestScore = 0
-    for i in range(100000):
+    for i in range(1):
         rail = randomAlgorithm.randomAlgorithm(RailwayList, criticalRailwayList)
         score = helpers.calculate.score(rail, criticalRailwayList)
         slist.append(score)
         # if score > highestScore:
         #     highestScore = score
         #     highestRail = rail
+
+    print(slist)
 
 
     # for i in range(len(highestRail)):

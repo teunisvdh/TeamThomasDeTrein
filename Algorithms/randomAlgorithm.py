@@ -2,8 +2,11 @@ import random
 import csv
 import sys
 import os
-from data import *
-from classes import classes
+import sys
+from Data import *
+from Classes import classes
+from Classes import helpers
+sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/classes')
 
 def randomAlgorithm(RailwayList, criticalRailwayList):
     """A random algorithm which creates a line of 7 trajectories with a maximum of
@@ -60,14 +63,10 @@ def randomAlgorithm(RailwayList, criticalRailwayList):
 
             listOfRails.append(correspondingStations[randomRailNext])
 
-            # check if amounts of minutes does not exceed
-            minutesTrajectory = 0
-            for rails in listOfRails:
-                minutesTrajectory += rails.minutes
+            minutesTrajectory = helpers.calculate.minutesTrajectory(listOfRails)
 
-                # if so delete the last trajectory
-                if minutesTrajectory > 120:
-                    listOfRails.pop()
+            if minutesTrajectory > 120:
+                listOfRails.pop()
 
         # make trajectory object of the list of connections
         trajectoryFinal = classes.Trajectory(listOfRails)

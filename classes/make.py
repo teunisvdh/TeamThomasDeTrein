@@ -1,8 +1,8 @@
 import csv
 import sys
 import os
-from data import *
-from classes import classes
+from Data import *
+from Classes import classes
 
 def makeLine1(RailwayList):
 	"""Makes a line by combining trajectories.

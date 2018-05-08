@@ -1,17 +1,17 @@
 import csv
 import sys
 import os
-from data import *
-from classes import classes
+from Data import *
+from Classes import classes
 
 class calculate:
     def score(self, criticalRailwayList):
         score = classes.Line(self).SLine(criticalRailwayList)
         return score
 
-    def minutesTrajectory(self, Trajectory):
+    def minutesTrajectory(self):
         minutes = 0
-        for station in self.Trajecotry:
+        for station in self:
                 minutes += station.minutes
         if minutes > 120:
             print("to much minutes!")
