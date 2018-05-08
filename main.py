@@ -36,9 +36,9 @@ def main():
 
     hillClimber.hillClimber(RailwayList, criticalRailwayList)
 
-    print(slist[0])
+    # print(slist[0])
 
-    visualisation.visualize(rail);
+    # visualisation.visualize(rail);
 
 
     # for i in range(len(highestRail)):

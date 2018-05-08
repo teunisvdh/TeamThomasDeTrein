@@ -53,7 +53,10 @@ def randomTrajectory(RailwayList):
         if minutesTrajectory > 120:
             listOfRails.pop()
 
-    return listOfRails
+        # make trajectory object of the list of connections
+        trajectoryFinal = classes.Trajectory(listOfRails)
+
+    return trajectoryFinal
 
 def randomLine(RailwayList, criticalRailwayList):
     """A random algorithm which creates a line of 7 trajectories with a maximum of
@@ -71,10 +74,7 @@ def randomLine(RailwayList, criticalRailwayList):
     # iterate over all 7 trajectories
     for traject in range(amountofTrajectories):
 
-        listOfRails = randomTrajectory(RailwayList)
-
-        # make trajectory object of the list of connections
-        trajectoryFinal = classes.Trajectory(listOfRails)
+        trajectoryFinal = randomTrajectory(RailwayList)
 
         finalrail.append(trajectoryFinal)
 

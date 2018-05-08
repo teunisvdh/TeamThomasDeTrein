@@ -9,8 +9,25 @@ from algorithms import randomAlgorithm
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
 def hillClimber(RailwayList, criticalRailwayList):
-    randomStartLine = randomAlgorithm.randomLine(RailwayList, criticalRailwayList)
-    chooseRandomTrajectory = random.randint(0,6)
-    randomStartLine.remove(randomStartLine[chooseRandomTrajectory])
 
-    print(randomStartLine)
+    randomStartLine = randomAlgorithm.randomLine(RailwayList, criticalRailwayList)
+
+    for i in range(100000):
+        score = helpers.calculate.score(randomStartLine, criticalRailwayList)
+
+        chooseRandomTrajectory = random.randint(0,6)
+        randomTrajectoryRemove = randomStartLine[chooseRandomTrajectory]
+        randomStartLine.remove(randomTrajectoryRemove)
+
+        replaceTrajectory = randomAlgorithm.randomTrajectory(RailwayList)
+
+        randomStartLine.append(replaceTrajectory)
+        score_3 = helpers.calculate.score(randomStartLine, criticalRailwayList)
+
+        if score_3 < score:
+            randomStartLine.remove(replaceTrajectory)
+            randomStartLine.append(randomTrajectoryRemove)
+
+        score_4 = helpers.calculate.score(randomStartLine, criticalRailwayList)
+
+    print(score_4)
