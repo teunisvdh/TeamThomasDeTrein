@@ -2,27 +2,19 @@ import csv, sys, os, random
 import matplotlib.pyplot as plt
 import matplotlib.lines as lin
 import sys
-<<<<<<< HEAD
-from classes import classes
-from classes import helpers
-=======
->>>>>>> 837e7fd9b441f8c7a921eeaba200af5d0b445865
 sys.path.append('C:/TeamThomasDeTrein/classes')
 sys.path.append('C:/TeamThomasDeTrein/algorithms')
 from algorithms import randomAlgorithm
 from classes import helpers
-
-# from classes import classes
-# from classes import helpers
-# from classes import randomAlgorithm
 # from matplotlib import colors as col
 
 # color library for coloring lines
 # colors = []
 # for color in col.CSS4_COLORS:
 #     colors.append(color)
-def visualize():
+def visualize(maxRail):
     # make list with all stations
+    # maxRail = randomAlgorithm()
     stationList, criticalstationList = helpers.openFile.file1("data/StationsHolland.csv")
     RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHolland.csv", criticalstationList)
 
@@ -60,14 +52,6 @@ def visualize():
     for connection in RailwayList:
         connect(connection.stationBeginning, connection.stationEnd)
 
-    highestScore = 0
-    for i in range(100):
-        rail = randomAlgorithm.randomAlgorithm(RailwayList, criticalRailwayList)
-        score = helpers.calculate.score(rail, criticalRailwayList)
-        if score > highestScore:
-            highestScore = score
-            highestRail = rail
-
     def connectLine(begin, end, style):
         """ A function for connecting two stations in a plot, specifically
             for the whole line.
@@ -94,7 +78,7 @@ def visualize():
     lineStyle = ['r-.', 'r:', 'g-.', 'g:', 'c-.', 'c:', 'm-.', 'm:', 'y-.', 'y:', 'b-.', 'b:']
 
     # Connect rails in all trajectories
-    for i in range(len(highestRail)):
+    for i in range(len(maxRail)):
         print("")
         print("Traject {}".format(i+1))
         print("---------")
@@ -102,10 +86,10 @@ def visualize():
         style = random.choice(lineStyle)
         # style = random.choice(colors)
         lineStyle.remove(style)
-        for j in range(len(highestRail[i].Raillist)):
-            print(highestRail[i].Raillist[j].stationBeginning)
-            print(highestRail[i].Raillist[j].stationEnd)
-            connectLine(highestRail[i].Raillist[j].stationBeginning, highestRail[i].Raillist[j].stationEnd, style)
+        for j in range(len(maxRail[i].Raillist)):
+            print(maxRail[i].Raillist[j].stationBeginning)
+            print(maxRail[i].Raillist[j].stationEnd)
+            connectLine(maxRail[i].Raillist[j].stationBeginning, maxRail[i].Raillist[j].stationEnd, style)
 
     # make plot
     plt.xlabel("longitude")

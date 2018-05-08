@@ -7,11 +7,9 @@ from classes import classes
 from classes import helpers
 from classes import make
 from algorithms import randomAlgorithm
-<<<<<<< HEAD
 from algorithms import hillClimber
-=======
+
 from visualisation import visualisation
->>>>>>> 837e7fd9b441f8c7a921eeaba200af5d0b445865
 
 def main():
     # open the files including critical data
@@ -36,14 +34,12 @@ def main():
         #     highestScore = score
         #     highestRail = rail
 
-<<<<<<< HEAD
     hillClimber.hillClimber(RailwayList, criticalRailwayList)
-=======
-    print(slist)
 
-    visualisation.visualize();
+    print(slist[0])
 
->>>>>>> 837e7fd9b441f8c7a921eeaba200af5d0b445865
+    visualisation.visualize(rail);
+
 
     # for i in range(len(highestRail)):
     #     print("Trajectory" + str(i))
