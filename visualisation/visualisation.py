@@ -2,6 +2,7 @@ import csv, sys, os, random
 import matplotlib.pyplot as plt
 import matplotlib.lines as lin
 import sys
+from classes import classes
 from classes import helpers
 sys.path.append('C:/TeamThomasDeTrein/classes')
 # sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/classes/helpers')

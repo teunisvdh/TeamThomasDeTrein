@@ -2,7 +2,6 @@ import random
 import csv
 import sys
 import os
-import sys
 from data import *
 from classes import classes
 from classes import helpers

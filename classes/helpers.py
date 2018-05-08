@@ -13,8 +13,8 @@ class calculate:
         minutes = 0
         for station in self:
                 minutes += station.minutes
-        if minutes > 120:
-            print("to much minutes!")
+        # if minutes > 120:
+        #     print("to much minutes!")
         return minutes
 
 class show:
