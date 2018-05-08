@@ -2,11 +2,11 @@ import csv
 import sys
 import os
 import random
-from Data import *
-from Classes import classes
-from Classes import helpers
-from Classes import make
-from Algorithms import randomAlgorithm
+from data import *
+from classes import classes
+from classes import helpers
+from classes import make
+from algorithms import randomAlgorithm
 
 def main():
     # open the files including critical data

@@ -1,8 +1,8 @@
 import csv
 import sys
 import os
-from Data import *
-from Classes import classes
+from data import *
+from classes import classes
 
 class calculate:
     def score(self, criticalRailwayList):

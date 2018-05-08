@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as lin
 import sys
 
-sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/Classes')
-sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/Algorithms')
+sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/classes')
+sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/algorithms')
 
 
 # from classes import classes
