@@ -21,22 +21,25 @@ def main():
     # print calculated score
     # helpers.show.printScore(line1, criticalRailwayList)
 
+    slist = []
     highestScore = 0
-    for i in range(1):
+    for i in range(100000):
         rail = randomAlgorithm.randomAlgorithm(RailwayList, criticalRailwayList)
         score = helpers.calculate.score(rail, criticalRailwayList)
-        if score > highestScore:
-            highestScore = score
-            highestRail = rail
+        slist.append(score)
+        # if score > highestScore:
+        #     highestScore = score
+        #     highestRail = rail
 
-    for i in range(len(highestRail)):
-        print("Trajectory" + str(i))
-        for k in range(len(highestRail[i].Raillist)):
-            print("  " + "Rail " + str(k))
-            print("    " + highestRail[i].Raillist[k].stationBeginning)
-            print("    " + highestRail[i].Raillist[k].stationEnd)
 
-    print(highestScore)
+    # for i in range(len(highestRail)):
+    #     print("Trajectory" + str(i))
+    #     for k in range(len(highestRail[i].Raillist)):
+    #         print("  " + "Rail " + str(k))
+    #         print("    " + highestRail[i].Raillist[k].stationBeginning)
+    #         print("    " + highestRail[i].Raillist[k].stationEnd)
+    #
+    # print(highestScore)
     # print(helpers.show.printScore(line1, criticalRailwayList))
 if __name__ == "__main__":
     main()
