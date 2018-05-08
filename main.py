@@ -34,11 +34,12 @@ def main():
         #     highestScore = score
         #     highestRail = rail
 
-    hillClimber.hillClimber(RailwayList, criticalRailwayList)
+    railHill = hillClimber.hillClimber(RailwayList, criticalRailwayList)
 
     # print(slist[0])
 
     # visualisation.visualize(rail);
+    visualisation.visualize(railHill);
 
 
     # for i in range(len(highestRail)):

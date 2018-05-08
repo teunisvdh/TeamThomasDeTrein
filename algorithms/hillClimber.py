@@ -12,7 +12,7 @@ def hillClimber(RailwayList, criticalRailwayList):
 
     randomStartLine = randomAlgorithm.randomLine(RailwayList, criticalRailwayList)
 
-    for i in range(100000):
+    for i in range(10000):
         score = helpers.calculate.score(randomStartLine, criticalRailwayList)
 
         chooseRandomTrajectory = random.randint(0,6)
@@ -31,3 +31,5 @@ def hillClimber(RailwayList, criticalRailwayList):
         score_4 = helpers.calculate.score(randomStartLine, criticalRailwayList)
 
     print(score_4)
+
+    return randomStartLine
