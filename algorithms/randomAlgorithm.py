@@ -6,7 +6,7 @@ import sys
 from data import *
 from classes import classes
 from classes import helpers
-sys.path.append('C:/GitHub/Heuristieken/TeamThomasDeTrein/classes')
+sys.path.append('C:/TeamThomasDeTrein/classes')
 
 def randomAlgorithm(RailwayList, criticalRailwayList):
     """A random algorithm which creates a line of 7 trajectories with a maximum of
