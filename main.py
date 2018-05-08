@@ -27,7 +27,7 @@ def main():
     slist = []
     highestScore = 0
     for i in range(1):
-        rail = randomAlgorithm.randomAlgorithm(RailwayList, criticalRailwayList)
+        rail = randomAlgorithm.randomLine(RailwayList, criticalRailwayList)
         score = helpers.calculate.score(rail, criticalRailwayList)
         slist.append(score)
         # if score > highestScore:
