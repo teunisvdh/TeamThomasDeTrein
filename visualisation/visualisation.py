@@ -2,9 +2,11 @@ import csv, sys, os, random
 import matplotlib.pyplot as plt
 import matplotlib.lines as lin
 import sys
-
-sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/classes')
-sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/algorithms')
+from classes import helpers
+sys.path.append('C:/GitHub/Heuristieken/TeamThomasDeTrein/classes')
+# sys.path.append('C:/GitHub/Heuristieken_3/TeamThomasDeTrein/classes/helpers')
+sys.path.append('C:/GitHub/Heuristieken/TeamThomasDeTrein/algorithms')
+# from classes import helpers
 
 
 # from classes import classes
