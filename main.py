@@ -34,7 +34,7 @@ def main():
         #     highestScore = score
         #     highestRail = rail
 
-    hillClimber.hillClimber(RailwayList, criticalRailwayList)
+    hillClimber.hillClimber(RailwayList, criticalRailwayList, 10000)
 
     # print(slist[0])
 
