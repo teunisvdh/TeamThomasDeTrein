@@ -17,7 +17,14 @@ def visualize(maxRail):
 
         Args:
             maxRail: line with maximum score (determined by an algorithm).
-        """
+    """
+    plotMap()
+    mapConnection()
+    lineConnection(maxRail)
+    makePlot()
+
+
+def plotMap():
     # make list with all stations
     stationList, criticalstationList = helpers.openFile.file1("data/StationsHolland.csv")
     RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHolland.csv", criticalstationList)
@@ -27,72 +34,73 @@ def visualize(maxRail):
         x = float(station.y)
         y = float(station.x)
         plt.plot(x, y, 'ro-')
-        plt.annotate(station.name, xy=(x,y))
+        plt.annotate(station.name, xy=(x,y), weight='light')
+    return RailwayList, stationList
 
-    def connect(begin, end):
-        """ A function for connecting two stations in a plot.
+def connect(begin, end):
+    """ A function for connecting two stations in a plot.
 
-            Args:
-                begin = station beginning, end = station end
-        """
-        nameBegin = begin
-        nameEnd = end
-        for i in range(len(stationList)):
-            if (stationList[i].name == nameBegin):
-                x1=float(stationList[i].y)
-                y1=float(stationList[i].x)
-                break
-        for i in range(len(stationList)):
-            if (stationList[i].name == nameEnd):
-                x2=float(stationList[i].y)
-                y2=float(stationList[i].x)
-                break
-        plt.plot([x1, x2], [y1, y2], 'k-', linewidth=0.2)
+        Args:
+            begin = station beginning, end = station end
+    """
+    nameBegin = begin
+    nameEnd = end
+    stationList = plotMap()[1]
+    for i in range(len(stationList)):
+        if (stationList[i].name == nameBegin):
+            x1=float(stationList[i].y)
+            y1=float(stationList[i].x)
+            break
+    for i in range(len(stationList)):
+        if (stationList[i].name == nameEnd):
+            x2=float(stationList[i].y)
+            y2=float(stationList[i].x)
+            break
+    plt.plot([x1, x2], [y1, y2], 'k-', linewidth=0.2)
 
-    # plot all connections
+# plot all connections
+def mapConnection():
+    RailwayList = plotMap()[0]
     for connection in RailwayList:
         connect(connection.stationBeginning, connection.stationEnd)
 
-    def connectLine(begin, end, style):
-        """ A function for connecting two stations in a plot, specifically
-            for the whole line.
+def connectLine(begin, end, style):
+    """ A function for connecting two stations in a plot, specifically
+        for the whole line.
 
-            Args:
-                begin = station beginning, end = station end,
-                style = color and style line
-        """
-        nameBegin = begin
-        nameEnd = end
-        styleLine = style
-        distance = random.uniform(0, 0.001)
-        for i in range(len(stationList)):
-            if (stationList[i].name == nameBegin):
-                x1=float(stationList[i].y)
-                y1=float(stationList[i].x) + distance
-                break
-        for i in range(len(stationList)):
-            if (stationList[i].name == nameEnd):
-                x2=float(stationList[i].y)
-                y2=float(stationList[i].x) + distance
-                break
-        plt.plot([x1, x2], [y1, y2], styleLine, linewidth=2)
+        Args:
+            begin = station beginning, end = station end,
+            style = color and style line
+    """
+    nameBegin = begin
+    nameEnd = end
+    styleLine = style
+    stationList = plotMap()[1]
+    distance = random.uniform(0, 0.001)
+    for i in range(len(stationList)):
+        if (stationList[i].name == nameBegin):
+            x1=float(stationList[i].y)
+            y1=float(stationList[i].x) + distance
+            break
+    for i in range(len(stationList)):
+        if (stationList[i].name == nameEnd):
+            x2=float(stationList[i].y)
+            y2=float(stationList[i].x) + distance
+            break
+    plt.plot([x1, x2], [y1, y2], styleLine, linewidth=2)
 
+
+def lineConnection(maxRail):
     lineStyle = ['r-.', 'r:', 'g-.', 'g:', 'c-.', 'c:', 'm-.', 'm:', 'y-.', 'y:', 'b-.', 'b:']
-
     # connect rails in all trajectories
     for i in range(len(maxRail)):
-        # print("")
-        # print("Traject {}".format(i+1))
-        # print("---------")
-        # print(highestRail[i])
         style = random.choice(lineStyle)
         # style = random.choice(colors)
         lineStyle.remove(style)
         for j in range(len(maxRail[i].Raillist)):
-            # print(maxRail[i].Raillist[j].stationBeginning)
-            # print(maxRail[i].Raillist[j].stationEnd)
             connectLine(maxRail[i].Raillist[j].stationBeginning, maxRail[i].Raillist[j].stationEnd, style)
 
+def makePlot():
     # make plot
     plt.xlabel("longitude")
     plt.ylabel("latitude")
