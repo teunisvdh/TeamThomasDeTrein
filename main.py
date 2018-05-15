@@ -38,8 +38,8 @@ def main():
 
     # print(slist[0])
 
-    # visualisation.visualize(rail);
-    visualisation.visualize(railHill);
+    visualisation.printLine(railHill)
+    visualisation.visualize(railHill)
 
 
     # for i in range(len(highestRail)):

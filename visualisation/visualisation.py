@@ -13,20 +13,21 @@ from classes import helpers
 # for color in col.CSS4_COLORS:
 #     colors.append(color)
 def visualize(maxRail):
+    """ A function for plotting a graph (map) visualizing a line of railways.
+
+        Args:
+            maxRail: line with maximum score (determined by an algorithm).
+        """
     # make list with all stations
-    # maxRail = randomAlgorithm()
     stationList, criticalstationList = helpers.openFile.file1("data/StationsHolland.csv")
     RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHolland.csv", criticalstationList)
 
     # plot all stations
-    def plotStations():
-        for station in stationList:
-            x = float(station.y)
-            y = float(station.x)
-            plt.plot(x, y, 'ro-')
-            plt.annotate(station.name, xy=(x,y))
-
-    plotStations()
+    for station in stationList:
+        x = float(station.y)
+        y = float(station.x)
+        plt.plot(x, y, 'ro-')
+        plt.annotate(station.name, xy=(x,y))
 
     def connect(begin, end):
         """ A function for connecting two stations in a plot.
@@ -63,7 +64,7 @@ def visualize(maxRail):
         nameBegin = begin
         nameEnd = end
         styleLine = style
-        distance = random.uniform(0, 0.01)
+        distance = random.uniform(0, 0.001)
         for i in range(len(stationList)):
             if (stationList[i].name == nameBegin):
                 x1=float(stationList[i].y)
@@ -78,23 +79,37 @@ def visualize(maxRail):
 
     lineStyle = ['r-.', 'r:', 'g-.', 'g:', 'c-.', 'c:', 'm-.', 'm:', 'y-.', 'y:', 'b-.', 'b:']
 
-    # Connect rails in all trajectories
+    # connect rails in all trajectories
     for i in range(len(maxRail)):
-        print("")
-        print("Traject {}".format(i+1))
-        print("---------")
+        # print("")
+        # print("Traject {}".format(i+1))
+        # print("---------")
         # print(highestRail[i])
         style = random.choice(lineStyle)
         # style = random.choice(colors)
         lineStyle.remove(style)
         for j in range(len(maxRail[i].Raillist)):
-            print(maxRail[i].Raillist[j].stationBeginning)
-            print(maxRail[i].Raillist[j].stationEnd)
+            # print(maxRail[i].Raillist[j].stationBeginning)
+            # print(maxRail[i].Raillist[j].stationEnd)
             connectLine(maxRail[i].Raillist[j].stationBeginning, maxRail[i].Raillist[j].stationEnd, style)
 
     # make plot
     plt.xlabel("longitude")
     plt.ylabel("latitude")
-    plt.title("Visualisation")
+    plt.title("Line Visualisation")
     plt.axis('equal')
     plt.show()
+
+def printLine(maxRail):
+    """ A function for printing a line.
+
+        Args:
+            maxRail: line with maximum score (determined by an algorithm).
+    """
+    for i in range(len(maxRail)):
+        print("")
+        print("Traject {}".format(i+1))
+        print("---------")
+        for j in range(len(maxRail[i].Raillist)):
+            print(maxRail[i].Raillist[j].stationBeginning)
+            print(maxRail[i].Raillist[j].stationEnd)
