@@ -23,8 +23,12 @@ def hillClimber(RailwayList, criticalRailwayList, amount):
     # start with a random line
     randomStartLine = randomAlgorithm.randomLine(RailwayList, criticalRailwayList)
 
+<<<<<<< HEAD
     for i in range(amount):
         # determine score
+=======
+    for i in range(10000):
+>>>>>>> e54fda058a63502dbbe3be923035de9e78a178cd
         score = helpers.calculate.score(randomStartLine, criticalRailwayList)
 
         # remove a random trajectory
@@ -71,5 +75,11 @@ def hillClimber(RailwayList, criticalRailwayList, amount):
     # determine final score
     finalscore = helpers.calculate.score(randomStartLine, criticalRailwayList)
 
+<<<<<<< HEAD
     # print final score
     print(finalscore)
+=======
+    print(score_4)
+
+    return randomStartLine
+>>>>>>> e54fda058a63502dbbe3be923035de9e78a178cd
