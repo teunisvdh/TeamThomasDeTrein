@@ -71,5 +71,7 @@ def hillClimber(RailwayList, criticalRailwayList, amount):
     # determine final score
     finalscore = helpers.calculate.score(randomStartLine, criticalRailwayList)
 
-    # print final score
     print(finalscore)
+    print(len(randomStartLine))
+
+    return(randomStartLine)
