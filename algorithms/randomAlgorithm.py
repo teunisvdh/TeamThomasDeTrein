@@ -20,12 +20,17 @@ def randomTrajectory(trajectory, amountOfRails):
         The updated trajectory element
     """
 
+    # check if trajectory is empty
     if len(trajectory.Raillist) == 0:
+
+        # add random start rail
         trajectory.addRail()
 
+    # if trajectory was not empty make connected rails
     if len(trajectory.Raillist) > 1:
         trajectory.addConnections(amountOfRails)
 
+    # if trajectory was empty make connected rails minus one
     if len(trajectory.Raillist) == 1:
         trajectory.addConnections(amountOfRails - 1)
 
@@ -46,10 +51,13 @@ def randomLine(line, amountOfTrajectories):
     # iterate over all trajectories
     for traject in range(amountOfTrajectories):
 
+        # create empty trajectory
         emptyTrajectory = classes.Trajectory([], line.RailwayList)
 
+        # update empty trajectory randomly
         trajectoryFinal = randomTrajectory(emptyTrajectory, 10)
 
+        # add updated trajectory to line
         line.addTrajectByTrajectory(trajectoryFinal)
 
     return line
