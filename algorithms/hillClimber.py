@@ -8,7 +8,7 @@ from classes import helpers
 from algorithms import randomAlgorithm
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
-def hillClimber(RailwayList, criticalRailwayList, amount):
+def hillClimber(line, amount, RailwayList):
     """A function which changes, adds and removes trajectories from a
     random trajectory as long as the score increases
 
@@ -19,59 +19,54 @@ def hillClimber(RailwayList, criticalRailwayList, amount):
     Returns:
         The final score of the line
     """
-
-    # start with a random line
-    randomStartLine = randomAlgorithm.randomLine(RailwayList, criticalRailwayList)
-
     for i in range(amount):
         # determine score
-        score = helpers.calculate.score(randomStartLine, criticalRailwayList)
+        score = line.SLine()
 
-        # remove a random trajectory
-        chooseRandomTrajectory = random.randint(0,len(randomStartLine) - 1)
-        randomTrajectoryRemove = randomStartLine[chooseRandomTrajectory]
-        randomStartLine.remove(randomTrajectoryRemove)
+        chooseRandomTrajectory = random.randint(0, line.lenLine() - 1)
+        RandomTrajectory = line.translateTrajectByNumber(chooseRandomTrajectory)
+
+        line.removeTrajectByTrajectory(RandomTrajectory)
 
         # determine score again
-        score_2 = helpers.calculate.score(randomStartLine, criticalRailwayList)
+        score_2 = line.SLine()
 
-        # add a random trajectory
         replaceTrajectory = randomAlgorithm.randomTrajectory(RailwayList)
-        randomStartLine.append(replaceTrajectory)
+        line.addTrajectByTrajectory(replaceTrajectory)
 
         # determine score again
-        score_3 = helpers.calculate.score(randomStartLine, criticalRailwayList)
+        score_3 = line.SLine()
 
         # if first score was the highest replace first trajectory for replacement
         if score_3 < score and score_2 < score:
-            randomStartLine.remove(replaceTrajectory)
-            randomStartLine.append(randomTrajectoryRemove)
+            line.removeTrajectByTrajectory(replaceTrajectory)
+            line.addTrajectByTrajectory(RandomTrajectory)
 
         # if second score was the highest keep no trajectory
         elif score_3 < score_2 and score < score_2:
-            randomStartLine.remove(replaceTrajectory)
+            line.removeTrajectByTrajectory(replaceTrajectory)
 
         # check if line is full
-        if len(randomStartLine) < len(randomStartLine):
+        if line.lenLine() < 7:
 
             # determine score
-            score_4 = helpers.calculate.score(randomStartLine, criticalRailwayList)
+            score_4 = line.SLine()
 
             # add a new random trajectory
             newTrajectory = randomAlgorithm.randomTrajectory(RailwayList)
-            randomStartLine.append(newTrajectory)
+            line.addTrajectByTrajectory(newTrajectory)
 
             # determine score
-            score_5 = helpers.calculate.score(randomStartLine, criticalRailwayList)
+            score_5 = line.SLine()
 
             # if score is not higher, remove trajectory
             if score_4 > score_5:
-                randomStartLine.remove(newTrajectory)
+                line.removeTrajectByTrajectory(newTrajectory)
 
     # determine final score
-    finalscore = helpers.calculate.score(randomStartLine, criticalRailwayList)
+    finalscore = line.SLine()
 
     print(finalscore)
-    print(len(randomStartLine))
+    print(line.lenLine())
 
-    return(randomStartLine)
+    return(line)

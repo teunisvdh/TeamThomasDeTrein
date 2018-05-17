@@ -1,3 +1,8 @@
+import random
+import sys
+from algorithms import randomAlgorithm
+sys.path.append('C:/TeamThomasDeTrein/classes')
+
 class Line:
     """This is a class which contains all trajectories (i.e. all railways used).
 
@@ -8,10 +13,12 @@ class Line:
         Sline(self,criticalRailwayList).
     """
 
-    def __init__(self, TrajectoryList):
+    def __init__(self, TrajectoryList, RailwayList, criticalRailwayList):
         self.TrajectoryList = TrajectoryList
+        self.RailwayList = RailwayList
+        self.criticalRailwayList = criticalRailwayList
 
-    def SLine(self, criticalRailwayList):
+    def SLine(self):
         """Function that determines S for Trajectory.
 
         Args:
@@ -22,10 +29,15 @@ class Line:
         percentage of critical railways used (p) and the scorefunction
         S = 10000*p - (t*20 + min/10).
         """
-        self.criticalRailwayList = criticalRailwayList
         minutes = 0
         trains = 0
         criticalRailway = []
+
+        # print("########")
+        # print(self.RailwayList)
+        # print("########")
+        # print(self.criticalRailwayList)
+        # print("########")
 
         # adds minutes of each railway in trajectory to minutes
         for Trajectory in self.TrajectoryList:
@@ -48,6 +60,28 @@ class Line:
 
         return 10000 * p - (trains * 20 + minutes / 10)
 
+    def lenLine(self):
+        return len(self.TrajectoryList)
+
+    def translateTrajectByNumber(self, number):
+        self.number = number
+        return self.TrajectoryList[self.number]
+
+    def removeTrajectByTrajectory(self, trajectory):
+        self.trajectory = trajectory
+        self.TrajectoryList.remove(self.trajectory)
+
+        return self.TrajectoryList
+
+    def addTrajectByTrajectory(self, trajectory):
+        # add a random trajectory
+        self.trajectory = trajectory
+        self.TrajectoryList.append(self.trajectory)
+
+        return self.TrajectoryList
+
+
+
 class Trajectory:
     """
     Class which contains railways used.
@@ -55,8 +89,9 @@ class Trajectory:
     Args:
         raillist (list): List of railways.
     """
-    def __init__(self, Raillist):
+    def __init__(self, Raillist, RailwayList):
         self.Raillist = Raillist
+        self.RailwayList = RailwayList
 
         for i in range(len(self.Raillist) - 1):
             if (self.Raillist[i].stationBeginning != self.Raillist[i+1].stationBeginning
@@ -85,6 +120,57 @@ class Trajectory:
             print("to much minutes!")
         return minutes
 
+    def addRail(self):
+        # add a random connection
+        randomRail = random.randint(0, len(self.RailwayList) - 1)
+        self.Raillist.append(self.RailwayList[randomRail])
+
+    def addConnections(self):
+
+        StationIsBeginning = True
+
+        # add a random amount more connections
+        amountOfRails = random.randint(1,10)
+
+        for amount in range(amountOfRails):
+            correspondingStations = []
+            # make a list of all connections that can be added
+            if StationIsBeginning == True:
+                for rail in self.RailwayList:
+                    if self.Raillist[-1].stationBeginning == rail.stationBeginning:
+                        correspondingStations.append(rail)
+                    elif self.Raillist[-1].stationBeginning == rail.stationEnd:
+                        correspondingStations.append(rail)
+                randomRailNext = random.randint(0, len(correspondingStations) - 1)
+                if correspondingStations[randomRailNext].stationBeginning == self.Raillist[-1].stationBeginning:
+                    StationIsBeginning = False
+                else:
+                    StationIsBeginning = True
+
+            elif StationIsBeginning == False:
+                for rail in self.RailwayList:
+                    if self.Raillist[-1].stationEnd == rail.stationBeginning:
+                        correspondingStations.append(rail)
+                    elif self.Raillist[-1].stationEnd == rail.stationEnd:
+                        correspondingStations.append(rail)
+                randomRailNext = random.randint(0, len(correspondingStations) - 1)
+                if correspondingStations[randomRailNext].stationEnd == self.Raillist[-1].stationEnd:
+                    StationIsBeginning = True
+                else:
+                    StationIsBeginning = False
+
+            self.Raillist.append(correspondingStations[randomRailNext])
+
+            minutes = 0
+            for station in self.Raillist:
+                    minutes += station.minutes
+
+            if minutes > 120:
+                self.Raillist.pop()
+
+    def Pop(self):
+        self.Raillist.pop()
+
 class Rail:
     """
     Class of a rail between stations.
@@ -98,6 +184,7 @@ class Rail:
         self.stationBeginning = stationBeginning
         self.stationEnd = stationEnd
         self.minutes = int(minutes)
+
 
 class Station:
     """Class of stations.

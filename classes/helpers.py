@@ -4,19 +4,6 @@ import os
 from data import *
 from classes import classes
 
-class calculate:
-    def score(self, criticalRailwayList):
-        score = classes.Line(self).SLine(criticalRailwayList)
-        return score
-
-    def minutesTrajectory(self):
-        minutes = 0
-        for station in self:
-                minutes += station.minutes
-        # if minutes > 120:
-        #     print("to much minutes!")
-        return minutes
-
 class show:
     """Class contains functions to show information.
 
