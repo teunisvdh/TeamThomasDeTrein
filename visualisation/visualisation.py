@@ -106,12 +106,12 @@ def lineConnection(maxRail, returnPlotMap):
     """
     lineStyle = ['r-.', 'r:', 'g-.', 'g:', 'c-.', 'c:', 'm-.', 'm:', 'y-.', 'y:', 'b-.', 'b:']
     # connect rails in all trajectories
-    for i in range(len(maxRail)):
+    for i in range(len(maxRail.TrajectoryList)):
         style = random.choice(lineStyle)
         # style = random.choice(colors)
         lineStyle.remove(style)
-        for j in range(len(maxRail[i].Raillist)):
-            connectLine(maxRail[i].Raillist[j].stationBeginning, maxRail[i].Raillist[j].stationEnd, returnPlotMap, style)
+        for j in range(len(maxRail.TrajectoryList[i].Raillist)):
+            connectLine(maxRail.TrajectoryList[i].Raillist[j].stationBeginning, maxRail.TrajectoryList[i].Raillist[j].stationEnd, returnPlotMap, style)
 
 def makePlot():
     """ Shows the plot.
@@ -130,10 +130,10 @@ def printLine(maxRail):
         Args:
             maxRail: line with maximum score (determined by an algorithm).
     """
-    for i in range(len(maxRail)):
+    for i in range(len(maxRail.TrajectoryList)):
         print("")
         print("Traject {}".format(i+1))
         print("---------")
         for j in range(len(maxRail[i].Raillist)):
-            print(maxRail[i].Raillist[j].stationBeginning)
-            print(maxRail[i].Raillist[j].stationEnd)
+            print(maxRail.TrajectoryList[i].Raillist[j].stationBeginning)
+            print(maxRail.TrajectoryList[i].Raillist[j].stationEnd)
