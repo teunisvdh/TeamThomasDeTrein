@@ -44,13 +44,16 @@ class Line:
             minutes += Trajectory.minutesTrajectory()
             trains += 1
 
+        count = 0
         # looks for all critical railways in trajectory and puts them in a list
+        # print("trajectenlijst: {}".format(self.TrajectoryList))
+        # print("---------------")
+
         for Trajectory in self.TrajectoryList:
-            for Rail in Trajectory.__dict__.items():
-                for Railtje in Rail[1]:
-                    if Railtje not in criticalRailway:
-                        if Railtje in self.criticalRailwayList:
-                            criticalRailway.append(Railtje)
+            for Railtje in Trajectory.Raillist:
+                if Railtje not in criticalRailway:
+                    if Railtje in self.criticalRailwayList:
+                        criticalRailway.append(Railtje)
 
         p = len(criticalRailway) / len(self.criticalRailwayList)
 

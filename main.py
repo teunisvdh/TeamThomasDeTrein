@@ -17,31 +17,31 @@ def main():
     RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHolland.csv", criticalstationList)
 
     # make line of trajectories
-    # line1 = make.makeLine1(RailwayList)
+    line1 = make.makeLine1(RailwayList)
 
     # helpers.show.printList(RailwayList)
 
     # print calculated score
     # helpers.show.printScore(line1, criticalRailwayList)
-    #
-    # slist = []
-    # highestScore = 0
-    # for i in range(1):
-    #     rail = randomAlgorithm.randomLine(RailwayList, criticalRailwayList)
-    #     score = helpers.calculate.score(rail, criticalRailwayList)
-    #     slist.append(score)
+
+    slist = []
+    highestScore = 0
+    for i in range(1):
+        rail = randomAlgorithm.randomLine(RailwayList, criticalRailwayList)
+        score = helpers.calculate.score(rail, criticalRailwayList)
+        slist.append(score)
         # if score > highestScore:
         #     highestScore = score
         #     highestRail = rail
 
-    randomListOfTrajectories = randomAlgorithm.randomLine(RailwayList, criticalRailwayList)
 
-    # start with a random line
-    randomStartLine = classes.Line(randomListOfTrajectories, RailwayList, criticalRailwayList)
-
-    railHill = hillClimber.hillClimber(randomStartLine, 10, RailwayList)
+    railHill = hillClimber.hillClimber(RailwayList, criticalRailwayList, 10000)
 
     # print(slist[0])
+
+    visualisation.printLine(railHill)
+    visualisation.visualize(railHill)
+
 
     # for i in range(len(highestRail)):
     #     print("Trajectory" + str(i))
