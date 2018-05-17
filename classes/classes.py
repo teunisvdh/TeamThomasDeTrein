@@ -128,12 +128,13 @@ class Trajectory:
         randomRail = random.randint(0, len(self.RailwayList) - 1)
         self.Raillist.append(self.RailwayList[randomRail])
 
-    def addConnections(self):
+    def addConnections(self, maxAmountOfRails):
 
         StationIsBeginning = True
 
         # add a random amount more connections
-        amountOfRails = random.randint(1,10)
+        self.amountOfRails = maxAmountOfRails
+        amountOfRails = random.randint(0, maxAmountOfRails)
 
         for amount in range(amountOfRails):
             correspondingStations = []

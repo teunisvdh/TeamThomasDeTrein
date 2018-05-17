@@ -18,6 +18,7 @@ def main():
 
 
     emptyLine = classes.Line([], RailwayList, criticalRailwayList)
+    emptyTrajectory = classes.Trajectory([], RailwayList)
 
     randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 7)
 

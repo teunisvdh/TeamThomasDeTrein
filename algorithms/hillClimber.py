@@ -31,7 +31,9 @@ def hillClimber(line, amount):
         # determine score again
         score_2 = line.SLine()
 
-        replaceTrajectory = randomAlgorithm.randomTrajectory(line.RailwayList)
+        emptyTrajectory = classes.Trajectory([], line.RailwayList)
+
+        replaceTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 10)
         line.addTrajectByTrajectory(replaceTrajectory)
 
         # determine score again
@@ -53,7 +55,7 @@ def hillClimber(line, amount):
             score_4 = line.SLine()
 
             # add a new random trajectory
-            newTrajectory = randomAlgorithm.randomTrajectory(line.RailwayList)
+            newTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 10)
             line.addTrajectByTrajectory(newTrajectory)
 
             # determine score

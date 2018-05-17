@@ -7,14 +7,19 @@ from classes import classes
 from classes import helpers
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
-def randomTrajectory(RailwayList):
-    listOfRails = classes.Trajectory([], RailwayList)
+def randomTrajectory(trajectory, amountOfRails):
+    # listOfRails = classes.Trajectory([], RailwayList)
 
-    listOfRails.addRail()
+    if len(trajectory.Raillist) == 0:
+        trajectory.addRail()
 
-    listOfRails.addConnections()
+    if len(trajectory.Raillist) > 1:
+        trajectory.addConnections(amountOfRails)
 
-    return listOfRails
+    if len(trajectory.Raillist) == 1:
+        trajectory.addConnections(amountOfRails - 1)
+
+    return trajectory
 
 def randomLine(line, amountOfTrajectories):
     """A random algorithm which creates a line of 7 trajectories with a maximum of
@@ -30,7 +35,9 @@ def randomLine(line, amountOfTrajectories):
     # iterate over all trajectories
     for traject in range(amountOfTrajectories):
 
-        trajectoryFinal = randomTrajectory(line.RailwayList)
+        emptyTrajectory = classes.Trajectory([], line.RailwayList)
+
+        trajectoryFinal = randomTrajectory(emptyTrajectory, 10)
 
         line.addTrajectByTrajectory(trajectoryFinal)
 
