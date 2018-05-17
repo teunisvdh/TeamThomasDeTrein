@@ -8,7 +8,7 @@ from classes import helpers
 from algorithms import randomAlgorithm
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
-def hillClimber(line, amount, RailwayList):
+def hillClimber(line, amount):
     """A function which changes, adds and removes trajectories from a
     random trajectory as long as the score increases
 
@@ -31,7 +31,7 @@ def hillClimber(line, amount, RailwayList):
         # determine score again
         score_2 = line.SLine()
 
-        replaceTrajectory = randomAlgorithm.randomTrajectory(RailwayList)
+        replaceTrajectory = randomAlgorithm.randomTrajectory(line.RailwayList)
         line.addTrajectByTrajectory(replaceTrajectory)
 
         # determine score again
@@ -53,7 +53,7 @@ def hillClimber(line, amount, RailwayList):
             score_4 = line.SLine()
 
             # add a new random trajectory
-            newTrajectory = randomAlgorithm.randomTrajectory(RailwayList)
+            newTrajectory = randomAlgorithm.randomTrajectory(line.RailwayList)
             line.addTrajectByTrajectory(newTrajectory)
 
             # determine score

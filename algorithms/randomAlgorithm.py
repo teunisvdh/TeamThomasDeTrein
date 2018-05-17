@@ -16,7 +16,7 @@ def randomTrajectory(RailwayList):
 
     return listOfRails
 
-def randomLine(RailwayList, criticalRailwayList):
+def randomLine(line, amountOfTrajectories):
     """A random algorithm which creates a line of 7 trajectories with a maximum of
     ten railway connection in each trajectory.
 
@@ -26,14 +26,12 @@ def randomLine(RailwayList, criticalRailwayList):
     Returns:
         A line of seven trajectories.
     """
-    amountofTrajectories = 7
-    finalrail = []
 
-    # iterate over all 7 trajectories
-    for traject in range(amountofTrajectories):
+    # iterate over all trajectories
+    for traject in range(amountOfTrajectories):
 
-        trajectoryFinal = randomTrajectory(RailwayList)
+        trajectoryFinal = randomTrajectory(line.RailwayList)
 
-        finalrail.append(trajectoryFinal)
+        line.addTrajectByTrajectory(trajectoryFinal)
 
-    return finalrail
+    return line
