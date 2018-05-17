@@ -8,32 +8,38 @@ from classes import helpers
 from algorithms import randomAlgorithm
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
-def hillClimber(line, amount):
-    """A function which changes, adds and removes trajectories from a
-    random trajectory as long as the score increases
+def hillClimber(line, iterations):
+    """A function which changes, adds and removes trajectories from given
+    trajectory as long as the score increases
 
     Args:
-        RailwayList (list): list of all  rails.
-        criticalRailwayList (list): list of all critical rails.
+        line (Line): Line element which you want to improve
+        iterations: Amount of iterations which you want to use
 
     Returns:
         The final score of the line
     """
-    for i in range(amount):
+    for i in range(iterations):
+
         # determine score
         score = line.SLine()
 
-        chooseRandomTrajectory = random.randint(0, line.lenLine() - 1)
-        RandomTrajectory = line.translateTrajectByNumber(chooseRandomTrajectory)
+        # select a random trajectory
+        RandomTrajectory = line.selectRandomTrajectory()
 
+        # remove random trajectory
         line.removeTrajectByTrajectory(RandomTrajectory)
 
         # determine score again
         score_2 = line.SLine()
 
+        # make empty trajectory to put random rails in
         emptyTrajectory = classes.Trajectory([], line.RailwayList)
 
-        replaceTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 10)
+        # put random rails in empty trajectory
+        replaceTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 20)
+
+        # add trajectory to line
         line.addTrajectByTrajectory(replaceTrajectory)
 
         # determine score again
@@ -48,8 +54,10 @@ def hillClimber(line, amount):
         elif score_3 < score_2 and score < score_2:
             line.removeTrajectByTrajectory(replaceTrajectory)
 
+        maxAmountOfTrajectories = 7
+
         # check if line is full
-        if line.lenLine() < 7:
+        if line.lenLine() < maxAmountOfTrajectories:
 
             # determine score
             score_4 = line.SLine()

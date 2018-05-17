@@ -70,6 +70,11 @@ class Line:
         self.number = number
         return self.TrajectoryList[self.number]
 
+    def selectRandomTrajectory(self):
+        chooseRandomTrajectory = random.randint(0, self.lenLine() - 1)
+        RandomTrajectory = self.translateTrajectByNumber(chooseRandomTrajectory)
+        return RandomTrajectory
+
     def removeTrajectByTrajectory(self, trajectory):
         self.trajectory = trajectory
         self.TrajectoryList.remove(self.trajectory)

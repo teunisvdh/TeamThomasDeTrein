@@ -24,5 +24,10 @@ def main():
 
     railHill = hillClimber.hillClimber(randomListOfTrajectories, 10000)
 
+    for traject in railHill.TrajectoryList:
+        print(traject.minutesTrajectory())
+
+    visualisation.visualize(railHill)
+
 if __name__ == "__main__":
     main()
