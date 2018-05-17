@@ -19,11 +19,11 @@ class openFile:
 
         Args:
             File containing a list with all stations on the map.
-            One station contains a: name, coordinates, critical boolean.
+            One station contains a: name of the station, cheograpical coordinates, critical boolean.
 
         Returns:
-            stationsList: list of all stations.
-            criticalstationList: list of all critical stations.
+            stationsList(name, x, y, critical): list of all stations.
+            criticalstationList(name, x, y, critical): list of all critical stations.
         """
         with open(self) as csvfile:
             stationsinfo = csv.reader(csvfile, delimiter=',')
@@ -41,11 +41,12 @@ class openFile:
 
         Args:
             File containing a list with all conections on the map.
+            Connection contains a: StationBeginning(name), StationEnd(name), minutes of the connection.
             criticalStationList: list of all critical stations (from fileStations).
 
         Returns:
-            RailwayList: list of all railways.
-            criticalRailwayList: list of all critical railways.
+            RailwayList(StationBeginning, StationEnd, minutes): list of all railways .
+            criticalRailwayList(StationBeginning, StationEnd, minutes): list of all critical railways.
         """
         with open(self) as csvfile:
             stationConnections = csv.reader(csvfile, delimiter=',')
