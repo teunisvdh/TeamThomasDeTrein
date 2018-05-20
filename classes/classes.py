@@ -33,21 +33,11 @@ class Line:
         trains = 0
         criticalRailway = []
 
-        # print("########")
-        # print(self.RailwayList)
-        # print("########")
-        # print(self.criticalRailwayList)
-        # print("########")
-
-        # adds minutes of each railway in trajectory to minutes
         for Trajectory in self.TrajectoryList:
             minutes += Trajectory.minutesTrajectory()
             trains += 1
 
         count = 0
-        # looks for all critical railways in trajectory and puts them in a list
-        # print("trajectenlijst: {}".format(self.TrajectoryList))
-        # print("---------------")
 
         for Trajectory in self.TrajectoryList:
             for Railtje in Trajectory.Raillist:
@@ -129,12 +119,20 @@ class Trajectory:
         return minutes
 
     def addRail(self):
+        """Function that adds a random rail to the line.
+        """
         # add a random connection
         randomRail = random.randint(0, len(self.RailwayList) - 1)
         self.Raillist.append(self.RailwayList[randomRail])
 
     def addConnections(self, maxAmountOfRails):
+        """Function that adds a random amount of rail connections to the line,
+        with a given maximum.
 
+        Args:
+            maxAmountOfRails (int): Maximum amount of rails you want to add. The
+            added amount of rails will be a number between zero and this number.
+        """
         StationIsBeginning = True
 
         # add a random amount more connections
@@ -178,6 +176,8 @@ class Trajectory:
                 self.Raillist.pop()
 
     def Pop(self):
+        """Function that deletes the last rail in the trajectory.
+        """
         self.Raillist.pop()
 
 class Rail:
