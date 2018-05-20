@@ -1,47 +1,29 @@
 import csv
 import sys
 import os
-from data import *
+import data
 from classes import classes
-
-class show:
-    """Class contains functions to show information.
-
-    Functions:
-        printList.
-    """
-    def printList(RailwayList):
-        """Prints list indexed list of all railway connections.
-
-        Args:
-            RailwayList (list): List of railways that you want to print.
-
-        Returns:
-            Printed list of indexed railways.
-        """
-        for i in range(len(RailwayList)):
-            print('{}:{},{},{}'.format(i, RailwayList[i].stationBeginning,
-                RailwayList[i].stationEnd,
-                RailwayList[i].minutes))
 
 class openFile:
     """
-    Class contains functions to open files
+    Class contains functions to open the files containing
+    stations and connections.
 
     Functions:
-        file1(self).
-        file2(self, criticalstationList).
+        fileStations(self).
+        fileConnections(self, criticalstationList).
     """
-    def file1(self):
+    def fileStations(self):
         """
         Opens inserted file.
 
         Args:
-            file1 (stationsHolland.csv).
+            File containing a list with all stations on the map.
+            One station contains a: name of the station, cheograpical coordinates, critical boolean.
 
         Returns:
-            stationsList: list of all stations.
-            criticalstationList: list of all critical stations.
+            stationsList(name, x, y, critical): list of all stations.
+            criticalstationList(name, x, y, critical): list of all critical stations.
         """
         with open(self) as csvfile:
             stationsinfo = csv.reader(csvfile, delimiter=',')
@@ -53,17 +35,18 @@ class openFile:
                     criticalstationList.append(station[0])
             return stationList, criticalstationList
 
-    def file2(self, criticalstationList):
+    def fileConnections(self, criticalstationList):
         """
         Opens inserted file.
 
         Args:
-            file2 (ConnectiesHolland.csv).
-            criticalStationList: list of all critical stations.
+            File containing a list with all conections on the map.
+            Connection contains a: StationBeginning(name), StationEnd(name), minutes of the connection.
+            criticalStationList: list of all critical stations (from fileStations).
 
         Returns:
-            RailwayList: list of all railways.
-            criticalRailwayList: list of all critical railways.
+            RailwayList(StationBeginning, StationEnd, minutes): list of all railways .
+            criticalRailwayList(StationBeginning, StationEnd, minutes): list of all critical railways.
         """
         with open(self) as csvfile:
             stationConnections = csv.reader(csvfile, delimiter=',')

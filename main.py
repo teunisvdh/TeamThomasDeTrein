@@ -13,8 +13,8 @@ from visualisation import visualisation
 
 def main():
     # open the files including critical data
-    stationList, criticalstationList = helpers.openFile.file1("data/StationsHolland.csv")
-    RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHolland.csv", criticalstationList)
+    stationList, criticalstationList = helpers.openFile.fileStations("data/StationsHolland.csv")
+    RailwayList, criticalRailwayList = helpers.openFile.fileConnections("data/ConnectiesHolland.csv", criticalstationList)
 
 
     emptyLine = classes.Line([], RailwayList, criticalRailwayList)
