@@ -1,7 +1,7 @@
 import csv, sys, os, random
 import matplotlib.pyplot as plt
 import matplotlib.lines as lin
-import mplcursors
+# import mplcursors
 sys.path.append('C:/TeamThomasDeTrein/classes')
 sys.path.append('C:/TeamThomasDeTrein/algorithms')
 from algorithms import randomAlgorithm

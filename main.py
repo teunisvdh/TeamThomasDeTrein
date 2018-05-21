@@ -7,7 +7,9 @@ from classes import classes
 from classes import helpers
 from algorithms import randomAlgorithm
 from algorithms import hillClimber
+from algorithms import snakeAlgorithm
 from visualisation import visualisation
+
 
 def main():
     # open the files including critical data
@@ -19,16 +21,17 @@ def main():
     #     print(" ------ ")
 
     emptyLine = classes.Line([], RailwayList, criticalRailwayList)
-    emptyTrajectory = classes.Trajectory([], RailwayList)
+    # emptyTrajectory = classes.Trajectory([], RailwayList)
     #
+    snakeAlgorithm.snakeTrajectory(emptyLine, 1, 10)
 
-    randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 7)
+    # randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 7)
     #
     # print(visualisation.printLine(randomListOfTrajectories))
-    railHill = hillClimber.hillClimber(randomListOfTrajectories, 10000)
+    # railHill = hillClimber.hillClimber(randomListOfTrajectories, 10000)
 
-    for traject in railHill.TrajectoryList:
-        print(traject.minutesTrajectory())
+    # for traject in railHill.TrajectoryList:
+    #     print(traject.minutesTrajectory())
 
 
 

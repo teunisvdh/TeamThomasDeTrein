@@ -95,6 +95,11 @@ class Trajectory:
         self.trajectBeginStation = None
         self.trajectEndStation = None
 
+
+        if len(self.Raillist) > 0:
+            self.trajectBeginStation = Raillist[0].stationBeginning
+            self.trajectEndStation = Raillist[-1].stationEnd
+
         for i in range(len(self.Raillist) - 1):
             if (self.Raillist[i].stationBeginning != self.Raillist[i+1].stationBeginning
                 and self.Raillist[i].stationEnd != self.Raillist[i+1].stationEnd
@@ -148,7 +153,7 @@ class Trajectory:
         for amount in range(self.amountOfRails):
             correspondingStations = []
             # list of all possible connections
-            correspondingStations = self.correspondingStations()
+            correspondingStations = self.correspondingRails()
 
             # takes random rail and appends possible Raillist
             randomIndex = random.randint(0, len(correspondingStations) - 1)
@@ -174,7 +179,7 @@ class Trajectory:
 
 
 
-    def correspondingStations(self):
+    def correspondingRails(self):
         correspondingStations = []
 
         # checks for RailwayList of beginTraject or EndTraject connections
@@ -185,6 +190,28 @@ class Trajectory:
                 correspondingStations.append(rail)
 
         return correspondingStations
+
+    def addRailbyRailEnd(self,rail):
+        self.rail = rail
+        self.Raillist.append(self.rail)
+
+        return self.Raillist
+
+    def addRailbyRailBeginning(self,rail):
+        self.rail = rail
+        self.Raillist.insert(0, self.rail)
+
+        return self.Raillist
+
+    def removeRailbyRail(self,rail):
+        self.rail = rail
+        self.Raillist.remove(self.rail)
+
+        return self.Raillist
+
+
+
+
 
 
         # make a list of all connections that can be added
