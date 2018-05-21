@@ -18,9 +18,6 @@ def main():
     #     print(i.stationBeginning, " - ", i.stationEnd)
     #     print(" ------ ")
 
-
-
-
     emptyLine = classes.Line([], RailwayList, criticalRailwayList)
     emptyTrajectory = classes.Trajectory([], RailwayList)
     #

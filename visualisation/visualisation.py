@@ -1,17 +1,12 @@
 import csv, sys, os, random
 import matplotlib.pyplot as plt
 import matplotlib.lines as lin
-import sys
+import mplcursors
 sys.path.append('C:/TeamThomasDeTrein/classes')
 sys.path.append('C:/TeamThomasDeTrein/algorithms')
 from algorithms import randomAlgorithm
-from classes import helpers
-# from matplotlib import colors as col
+from matplotlib.widgets import CheckButtons
 
-# color library for coloring lines
-# colors = []
-# for color in col.CSS4_COLORS:
-#     colors.append(color)
 def visualize(maxRail, stationList, RailwayList):
     """ A function for plotting a graph (map) visualizing a line of railways.
 
@@ -28,11 +23,18 @@ def plotMap(stationList, RailwayList):
     """ Opens lists and plots all stations in map.
     """
     # plot all stations
+    stationNames = []
     for station in stationList:
         x = float(station.y)
         y = float(station.x)
         plt.plot(x, y, 'ro-')
-        plt.annotate(station.name, xy=(x,y))
+        stationNames.append(station.name)
+        # names = plt.annotate(station.name, xy=(x,y))
+        # mplcursors.cursor(hover=True)
+        # of Cursor voor artist?
+    cursor = mplcursors.cursor(hover=True)
+    cursor.connect("add", lambda sel: sel.annotation.set_text(stationNames[sel.target.index]))
+        # checkBox = CheckButtons(names, 'Visibility names', 'True')
     return RailwayList, stationList
 
 def connect(begin, end, stationList):
@@ -54,7 +56,7 @@ def connect(begin, end, stationList):
             x2=float(stationList[i].y)
             y2=float(stationList[i].x)
             break
-    plt.plot([x1, x2], [y1, y2], 'k-', linewidth=0.2)
+    plt.plot([x1, x2], [y1, y2], 'gray', linewidth=0.2)
 
 # plot all connections
 def mapConnection(returnPlotMap):
@@ -66,6 +68,7 @@ def mapConnection(returnPlotMap):
     RailwayList = returnPlotMap[0]
     stationList = returnPlotMap[1]
     for connection in RailwayList:
+        connect(connection.stationBeginning, connection.stationEnd, stationList)
         connect(connection.stationBeginning, connection.stationEnd, stationList)
 
 def connectLine(begin, end, returnPlotMap, style, label):
@@ -93,7 +96,6 @@ def connectLine(begin, end, returnPlotMap, style, label):
             break
     plt.plot([x1, x2], [y1, y2], styleLine, linewidth=1, label=label)
 
-
 def lineConnection(maxRail, returnPlotMap):
     """ A function for plotting the assigned connections between stations (line).
 
@@ -101,21 +103,24 @@ def lineConnection(maxRail, returnPlotMap):
             maxRail: line with maximum score (determined by an algorithm).
             returnPlotMap: RailwayList, stationList.
     """
-    lineStyle = ['r-.', 'r:', 'g-.', 'g:', 'c-.', 'c:', 'm-.', 'm:', 'y-.', 'y:', 'b-.', 'b:']
+    colors = ['r', 'g', 'c', 'm', 'y', 'b', 'k']
+    styles = [':', '-.', '--']
+    lineStyle = []
+    for color in colors:
+        for style in styles:
+            thisStyle = color + style
+            lineStyle.append(thisStyle)
+
     # connect rails in all trajectories
     for i in range(len(maxRail.TrajectoryList)):
         style = random.choice(lineStyle)
-        # style = random.choice(colors)
-        # lineStyle.remove(style)
+        lineStyle.remove(style)
         label = str(i+1)
         for j in range(len(maxRail.TrajectoryList[i].Raillist)):
             if j == 0:
                 connectLine(maxRail.TrajectoryList[i].Raillist[j].stationBeginning, maxRail.TrajectoryList[i].Raillist[j].stationEnd, returnPlotMap, style, label)
             else:
                 connectLine(maxRail.TrajectoryList[i].Raillist[j].stationBeginning, maxRail.TrajectoryList[i].Raillist[j].stationEnd, returnPlotMap, style, '')
-
-
-        # plt.legend([connected], "bla")
 
 def makePlot(maxRail):
     """ Shows the plot.
@@ -124,7 +129,6 @@ def makePlot(maxRail):
     plt.xlabel("longitude")
     plt.ylabel("latitude")
     plt.title("Line with score " + str(maxRail.SLine()), ha='center')
-    # plt.suptitle("Line Visualisation", ha='center')
     plt.axis('equal')
     # axis = plt.gca();
     # axis.text(5.2, 51.78, "Score: " + str(maxRail.SLine()), ha='left')
