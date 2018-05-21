@@ -2,11 +2,13 @@ import random
 import csv
 import sys
 import os
-from data import *
+import data
+from visualisation import visualisation
 from classes import classes
 from classes import helpers
 from algorithms import randomAlgorithm
 sys.path.append('C:/TeamThomasDeTrein/classes')
+sys.path.append('C:/TeamThomasDeTrein/visualisation')
 
 def hillClimber(line, iterations):
     """A function which changes, adds and removes trajectories from given
@@ -63,7 +65,7 @@ def hillClimber(line, iterations):
             score_4 = line.SLine()
 
             # add a new random trajectory
-            newTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 10)
+            newTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 20)
             line.addTrajectByTrajectory(newTrajectory)
 
             # determine score
@@ -73,10 +75,9 @@ def hillClimber(line, iterations):
             if score_4 > score_5:
                 line.removeTrajectByTrajectory(newTrajectory)
 
+
     # determine final score
     finalscore = line.SLine()
-
     print(finalscore)
-    print(line.lenLine())
 
     return(line)

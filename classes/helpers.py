@@ -28,14 +28,14 @@ class openFile:
         with open(self) as csvfile:
             stationsinfo = csv.reader(csvfile, delimiter=',')
             stationList = []
-            criticalstationList = []
+            criticalStationList = []
             for station in stationsinfo:
                 stationList.append(classes.Station(station[0], station[1], station[2], station[3]))
                 if station[-1] == 'Kritiek':
-                    criticalstationList.append(station[0])
-            return stationList, criticalstationList
+                    criticalStationList.append(station[0])
+            return stationList, criticalStationList
 
-    def fileConnections(self, criticalstationList):
+    def fileConnections(self, criticalStationList):
         """
         Opens inserted file.
 
@@ -51,11 +51,22 @@ class openFile:
         with open(self) as csvfile:
             stationConnections = csv.reader(csvfile, delimiter=',')
             RailwayList = []
+            tempRailwayList = []
             criticalRailwayList = []
             for lijn in stationConnections:
                 RailwayList.append(classes.Rail(lijn[0], lijn[1], lijn[2]))
+
+                # change list and append in temp
+                lijn[0], lijn[1] = lijn[1], lijn[0]
+                tempRailwayList.append(classes.Rail(lijn[0], lijn[1], lijn[2]))
+
             for lijn in RailwayList:
-                if (lijn.stationBeginning in criticalstationList or lijn.stationEnd in criticalstationList
+                if (lijn.stationBeginning in criticalStationList
+                or lijn.stationEnd in criticalStationList
                 and lijn not in criticalRailwayList):
                     criticalRailwayList.append(lijn)
+
+            for lijn in tempRailwayList:
+                RailwayList.append(lijn)
+
             return RailwayList, criticalRailwayList

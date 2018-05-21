@@ -55,7 +55,7 @@ def randomLine(line, amountOfTrajectories):
         emptyTrajectory = classes.Trajectory([], line.RailwayList)
 
         # update empty trajectory randomly
-        trajectoryFinal = randomTrajectory(emptyTrajectory, 10)
+        trajectoryFinal = randomTrajectory(emptyTrajectory, 20)
 
         # add updated trajectory to line
         line.addTrajectByTrajectory(trajectoryFinal)

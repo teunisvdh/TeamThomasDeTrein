@@ -12,24 +12,21 @@ from classes import helpers
 # colors = []
 # for color in col.CSS4_COLORS:
 #     colors.append(color)
-def visualize(maxRail):
+def visualize(maxRail, stationList, RailwayList):
     """ A function for plotting a graph (map) visualizing a line of railways.
 
         Args:
             maxRail: line with maximum score (determined by an algorithm).
     """
-    returnPlotMap = plotMap()
+    returnPlotMap = plotMap(stationList, RailwayList)
     mapConnection(returnPlotMap)
     lineConnection(maxRail, returnPlotMap)
-    makePlot()
+    makePlot(maxRail)
 
 
-def plotMap():
+def plotMap(stationList, RailwayList):
     """ Opens lists and plots all stations in map.
     """
-    # make list with all stations
-    stationList, criticalstationList = helpers.openFile.file1("data/StationsHolland.csv")
-    RailwayList, criticalRailwayList = helpers.openFile.file2("data/ConnectiesHolland.csv", criticalstationList)
     # plot all stations
     for station in stationList:
         x = float(station.y)
@@ -71,7 +68,7 @@ def mapConnection(returnPlotMap):
     for connection in RailwayList:
         connect(connection.stationBeginning, connection.stationEnd, stationList)
 
-def connectLine(begin, end, returnPlotMap, style):
+def connectLine(begin, end, returnPlotMap, style, label):
     """ A function for connecting two stations in a plot, specifically
         for the whole line.
 
@@ -94,7 +91,7 @@ def connectLine(begin, end, returnPlotMap, style):
             x2=float(stationList[i].y)
             y2=float(stationList[i].x) + distance
             break
-    plt.plot([x1, x2], [y1, y2], styleLine, linewidth=1)
+    plt.plot([x1, x2], [y1, y2], styleLine, linewidth=1, label=label)
 
 
 def lineConnection(maxRail, returnPlotMap):
@@ -109,19 +106,29 @@ def lineConnection(maxRail, returnPlotMap):
     for i in range(len(maxRail.TrajectoryList)):
         style = random.choice(lineStyle)
         # style = random.choice(colors)
-        lineStyle.remove(style)
+        # lineStyle.remove(style)
+        label = str(i+1)
         for j in range(len(maxRail.TrajectoryList[i].Raillist)):
-            connectLine(maxRail.TrajectoryList[i].Raillist[j].stationBeginning, maxRail.TrajectoryList[i].Raillist[j].stationEnd, returnPlotMap, style)
+            if j == 0:
+                connectLine(maxRail.TrajectoryList[i].Raillist[j].stationBeginning, maxRail.TrajectoryList[i].Raillist[j].stationEnd, returnPlotMap, style, label)
+            else:
+                connectLine(maxRail.TrajectoryList[i].Raillist[j].stationBeginning, maxRail.TrajectoryList[i].Raillist[j].stationEnd, returnPlotMap, style, '')
 
-def makePlot():
+
+        # plt.legend([connected], "bla")
+
+def makePlot(maxRail):
     """ Shows the plot.
     """
     # make plot
     plt.xlabel("longitude")
     plt.ylabel("latitude")
-    plt.title("Line Visualisation")
-    # plt.suptitle(maxRail.finalscore)
+    plt.title("Line with score " + str(maxRail.SLine()), ha='center')
+    # plt.suptitle("Line Visualisation", ha='center')
     plt.axis('equal')
+    # axis = plt.gca();
+    # axis.text(5.2, 51.78, "Score: " + str(maxRail.SLine()), ha='left')
+    plt.legend()
     plt.show()
 
 def printLine(maxRail):
@@ -134,6 +141,6 @@ def printLine(maxRail):
         print("")
         print("Traject {}".format(i+1))
         print("---------")
-        for j in range(len(maxRail[i].Raillist)):
+        for j in range(len(maxRail.TrajectoryList[i].Raillist)):
             print(maxRail.TrajectoryList[i].Raillist[j].stationBeginning)
             print(maxRail.TrajectoryList[i].Raillist[j].stationEnd)

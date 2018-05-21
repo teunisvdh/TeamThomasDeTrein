@@ -37,6 +37,8 @@ class Line:
             minutes += Trajectory.minutesTrajectory()
             trains += 1
 
+
+
         count = 0
 
         for Trajectory in self.TrajectoryList:
@@ -51,7 +53,7 @@ class Line:
             't = {}'.format(trains), 'p = {}'.format(p),
             'S = {}'.format(10000 * p - (trains * 20 + minutes / 10)) ]
 
-        return 10000 * p - (trains * 20 + minutes / 10)
+        return 10000 * p  - (trains * 20 + minutes / 10)
 
     def lenLine(self):
         return len(self.TrajectoryList)
@@ -90,6 +92,8 @@ class Trajectory:
     def __init__(self, Raillist, RailwayList):
         self.Raillist = Raillist
         self.RailwayList = RailwayList
+        self.trajectBeginStation = None
+        self.trajectEndStation = None
 
         for i in range(len(self.Raillist) - 1):
             if (self.Raillist[i].stationBeginning != self.Raillist[i+1].stationBeginning
@@ -114,16 +118,21 @@ class Trajectory:
         minutes = 0
         for station in self.Raillist:
                 minutes += station.minutes
-        if minutes > 120:
-            print("to much minutes!")
+        # if minutes > 120:
+            # print("to much minutes!")
         return minutes
 
     def addRail(self):
-        """Function that adds a random rail to the line.
+        """Function that adds a random rail to the trajectory.
         """
         # add a random connection
-        randomRail = random.randint(0, len(self.RailwayList) - 1)
-        self.Raillist.append(self.RailwayList[randomRail])
+        randomIndex = random.randint(0, len(self.RailwayList) - 1)
+        randomRail = self.RailwayList[randomIndex]
+
+        self.trajectBeginStation = randomRail.stationBeginning
+        self.trajectEndStation = randomRail.stationEnd
+
+        self.Raillist.append(randomRail)
 
     def addConnections(self, maxAmountOfRails):
         """Function that adds a random amount of rail connections to the line,
@@ -133,47 +142,79 @@ class Trajectory:
             maxAmountOfRails (int): Maximum amount of rails you want to add. The
             added amount of rails will be a number between zero and this number.
         """
-        StationIsBeginning = True
-
         # add a random amount more connections
         self.amountOfRails = maxAmountOfRails
-        amountOfRails = random.randint(0, maxAmountOfRails)
 
-        for amount in range(amountOfRails):
+        for amount in range(self.amountOfRails):
             correspondingStations = []
-            # make a list of all connections that can be added
-            if StationIsBeginning == True:
-                for rail in self.RailwayList:
-                    if self.Raillist[-1].stationBeginning == rail.stationBeginning:
-                        correspondingStations.append(rail)
-                    elif self.Raillist[-1].stationBeginning == rail.stationEnd:
-                        correspondingStations.append(rail)
-                randomRailNext = random.randint(0, len(correspondingStations) - 1)
-                if correspondingStations[randomRailNext].stationBeginning == self.Raillist[-1].stationBeginning:
-                    StationIsBeginning = False
+            # list of all possible connections
+            correspondingStations = self.correspondingStations()
+
+            # takes random rail and appends possible Raillist
+            randomIndex = random.randint(0, len(correspondingStations) - 1)
+            randomRail = correspondingStations[randomIndex]
+
+            # if rail is connected at beginning traject, beginTraject wil be stationEnd of new rail
+            if self.trajectBeginStation == randomRail.stationBeginning:
+                self.Raillist.insert(0, randomRail)
+                minutes = self.minutesTrajectory()
+                if minutes > 120:
+                    self.Raillist.pop(0)
                 else:
-                    StationIsBeginning = True
+                    self.trajectBeginStation = randomRail.stationEnd
 
-            elif StationIsBeginning == False:
-                for rail in self.RailwayList:
-                    if self.Raillist[-1].stationEnd == rail.stationBeginning:
-                        correspondingStations.append(rail)
-                    elif self.Raillist[-1].stationEnd == rail.stationEnd:
-                        correspondingStations.append(rail)
-                randomRailNext = random.randint(0, len(correspondingStations) - 1)
-                if correspondingStations[randomRailNext].stationEnd == self.Raillist[-1].stationEnd:
-                    StationIsBeginning = True
+            # if rail is connected at end traject, endTraject will be station End of new rail
+            elif self.trajectEndStation == randomRail.stationBeginning:
+                self.Raillist.append(randomRail)
+                minutes = self.minutesTrajectory()
+                if minutes > 120:
+                    self.Raillist.pop()
                 else:
-                    StationIsBeginning = False
+                    self.trajectEndStation = randomRail.stationEnd
 
-            self.Raillist.append(correspondingStations[randomRailNext])
 
-            minutes = 0
-            for station in self.Raillist:
-                    minutes += station.minutes
 
-            if minutes > 120:
-                self.Raillist.pop()
+    def correspondingStations(self):
+        correspondingStations = []
+
+        # checks for RailwayList of beginTraject or EndTraject connections
+        for rail in self.RailwayList:
+            if self.trajectBeginStation == rail.stationBeginning:
+                correspondingStations.append(rail)
+            elif self.trajectEndStation == rail.stationBeginning:
+                correspondingStations.append(rail)
+
+        return correspondingStations
+
+
+        # make a list of all connections that can be added
+        # if StationIsBeginning == True:
+        #     for rail in self.RailwayList:
+        #         if self.Raillist[-1].stationBeginning == rail.stationBeginning:
+        #             correspondingStations.append(rail)
+        #         elif self.Raillist[-1].stationBeginning == rail.stationEnd:
+        #             correspondingStations.append(rail)
+        #     randomRailNext = random.randint(0, len(correspondingStations) - 1)
+        #     if correspondingStations[randomRailNext].stationBeginning == self.Raillist[-1].stationBeginning:
+        #         StationIsBeginning = False
+        #     else:
+        #         StationIsBeginning = True
+        #
+        # elif StationIsBeginning == False:
+        #     for rail in self.RailwayList:
+        #         if self.Raillist[-1].stationEnd == rail.stationBeginning:
+        #             correspondingStations.append(rail)
+        #         elif self.Raillist[-1].stationEnd == rail.stationEnd:
+        #             correspondingStations.append(rail)
+        #     randomRailNext = random.randint(0, len(correspondingStations) - 1)
+        #     if correspondingStations[randomRailNext].stationEnd == self.Raillist[-1].stationEnd:
+        #         StationIsBeginning = True
+        #     else:
+        #         StationIsBeginning = False
+        #
+        # return randomRailNext, correspondingStations
+
+
 
     def Pop(self):
         """Function that deletes the last rail in the trajectory.
