@@ -65,7 +65,7 @@ def hillClimber(line, iterations):
             score_4 = line.SLine()
 
             # add a new random trajectory
-            newTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 20)
+            newTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 10)
             line.addTrajectByTrajectory(newTrajectory)
 
             # determine score
@@ -78,6 +78,7 @@ def hillClimber(line, iterations):
 
     # determine final score
     finalscore = line.SLine()
+    print(line.lenLine())
     print(finalscore)
 
     return(line)

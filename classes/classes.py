@@ -1,6 +1,7 @@
 import random
 import sys
 from algorithms import randomAlgorithm
+
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
 class Line:
@@ -13,10 +14,11 @@ class Line:
         Sline(self,criticalRailwayList).
     """
 
-    def __init__(self, TrajectoryList, RailwayList, criticalRailwayList):
+    def __init__(self, TrajectoryList, RailwayList, criticalRailwayList, inverseDict):
         self.TrajectoryList = TrajectoryList
         self.RailwayList = RailwayList
         self.criticalRailwayList = criticalRailwayList
+        self.inverseDict = inverseDict
 
     def SLine(self):
         """Function that determines S for Trajectory.
@@ -37,17 +39,15 @@ class Line:
             minutes += Trajectory.minutesTrajectory()
             trains += 1
 
-
-
         count = 0
 
         for Trajectory in self.TrajectoryList:
             for Railtje in Trajectory.Raillist:
-                if Railtje not in criticalRailway:
+                if Railtje not in criticalRailway and self.inverseDict[Railtje] not in criticalRailway:
                     if Railtje in self.criticalRailwayList:
                         criticalRailway.append(Railtje)
 
-        p = len(criticalRailway) / len(self.criticalRailwayList)
+        p = len(criticalRailway) / (len(self.criticalRailwayList) / 2)
 
         alles = ['min = {}'.format(minutes),
             't = {}'.format(trains), 'p = {}'.format(p),

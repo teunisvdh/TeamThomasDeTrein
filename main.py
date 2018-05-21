@@ -14,22 +14,22 @@ from visualisation import visualisation
 def main():
     # open the files including critical data
     stationList, criticalStationList = helpers.openFile.fileStations("data/StationsHolland.csv")
-    RailwayList, criticalRailwayList = helpers.openFile.fileConnections("data/ConnectiesHolland.csv", criticalStationList)
+    RailwayList, criticalRailwayList, inverseDict = helpers.openFile.fileConnections("data/ConnectiesHolland.csv", criticalStationList)
     # print(len(criticalRailwayList))
     # for i in criticalRailwayList:
     #     print(i.stationBeginning, " - ", i.stationEnd)
     #     print(" ------ ")
 
-    emptyLine = classes.Line([], RailwayList, criticalRailwayList)
-    # emptyTrajectory = classes.Trajectory([], RailwayList)
+    emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
+    emptyTrajectory = classes.Trajectory([], RailwayList)
     #
-    snakeAlgorithm.snakeTrajectory(emptyLine, 1, 10)
+    # snakeAlgorithm.snakeTrajectory(emptyLine, 1, 10)
 
-    # randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 7)
-    #
+    randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 7)
+
     # print(visualisation.printLine(randomListOfTrajectories))
-    # railHill = hillClimber.hillClimber(randomListOfTrajectories, 10000)
-
+    railHill = hillClimber.hillClimber(randomListOfTrajectories, 10000)
+    print(len(criticalRailwayList))
     # for traject in railHill.TrajectoryList:
     #     print(traject.minutesTrajectory())
 

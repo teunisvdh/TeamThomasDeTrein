@@ -51,14 +51,18 @@ class openFile:
         with open(self) as csvfile:
             stationConnections = csv.reader(csvfile, delimiter=',')
             RailwayList = []
-            tempRailwayList = []
             criticalRailwayList = []
+            inverseDict = {}
             for lijn in stationConnections:
-                RailwayList.append(classes.Rail(lijn[0], lijn[1], lijn[2]))
-
+                railValue = classes.Rail(lijn[0], lijn[1], lijn[2])
+                RailwayList.append(railValue)
                 # change list and append in temp
                 lijn[0], lijn[1] = lijn[1], lijn[0]
-                tempRailwayList.append(classes.Rail(lijn[0], lijn[1], lijn[2]))
+                railKey = classes.Rail(lijn[0], lijn[1], lijn[2])
+                RailwayList.append(railKey)
+
+                inverseDict[railValue] = railKey
+                inverseDict[railKey] = railValue
 
             for lijn in RailwayList:
                 if (lijn.stationBeginning in criticalStationList
@@ -66,7 +70,4 @@ class openFile:
                 and lijn not in criticalRailwayList):
                     criticalRailwayList.append(lijn)
 
-            for lijn in tempRailwayList:
-                RailwayList.append(lijn)
-
-            return RailwayList, criticalRailwayList
+            return RailwayList, criticalRailwayList, inverseDict
