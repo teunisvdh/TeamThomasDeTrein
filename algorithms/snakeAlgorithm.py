@@ -21,13 +21,11 @@ def snakeLine(line, amountOfTrajectories, stepSize):
 
         line.addTrajectByTrajectory(startTrajectory)
 
-<<<<<<< HEAD
     for i in range(3):
         trajectoryList = line.updateTrajectoryList()
         for trajectory in trajectoryList:
             line.replaceTrajectoryBySnake(trajectory, stepSize)
 
-=======
     for i in range(10):
         trajectoryList = []
         for traject in line.TrajectoryList:
@@ -49,7 +47,6 @@ def snakeLine(line, amountOfTrajectories, stepSize):
                 else:
                     line.addTrajectByTrajectory(trajectory)
     print(line.SLine())
->>>>>>> f51be71b414710b444d531a1f262aa8d5fcc5372
     return line
 
 def makeSnakeTrajectory(line, startTrajectory, stepSize):
