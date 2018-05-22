@@ -75,10 +75,10 @@ def hillClimber(line, iterations):
             if score_4 > score_5:
                 line.removeTrajectByTrajectory(newTrajectory)
 
-
     # determine final score
     finalscore = line.SLine()
-    print(finalscore)
-    print(line.lenLine())
+
+    # print(finalscore)
+    # print(line.lenLine())
 
     return(line)

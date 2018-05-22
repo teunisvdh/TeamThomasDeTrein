@@ -1,6 +1,8 @@
 import random
 import sys
+import operator
 from algorithms import randomAlgorithm
+from algorithms import snakeAlgorithm
 
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
@@ -80,6 +82,93 @@ class Line:
 
         return self.TrajectoryList
 
+    def updateTrajectoryList(self):
+        trajectoryList = []
+        for traject in self.TrajectoryList:
+            trajectoryList.append(traject)
+
+        return trajectoryList
+
+    def addHighestRailInTrajectory(self, startTrajectory):
+        listOfScores = {}
+
+        for rail in startTrajectory.RailwayList:
+            # if rail is connected at beginning traject, beginTraject wil be stationEnd of new rail
+            startTrajectory.addRailbyRailBeginning(rail)
+            self.addTrajectByTrajectory(startTrajectory)
+            score = self.SLine()
+            listOfScores[rail] = score
+            self.removeTrajectByTrajectory(startTrajectory)
+            startTrajectory.removeRailbyRailBeginning()
+
+            highestRail = (max(listOfScores.items(), key=operator.itemgetter(1))[0])
+            highestScore = (max(listOfScores.items(), key=operator.itemgetter(1))[1])
+
+        startTrajectory.addRailbyRailEnd(highestRail)
+
+    def addTrajectoryAndDetermineCorrespondingRails(self, startTrajectory):
+        listOfScoresEnd = {}
+        listOfScoresBeginning = {}
+        possibleRails = startTrajectory.correspondingRails()
+        for rail in possibleRails:
+            # if rail is connected at beginning traject, beginTraject wil be stationEnd of new rail
+            if startTrajectory.trajectBeginStation == rail.stationBeginning:
+                startTrajectory.addRailbyRailBeginning(rail)
+                self.addTrajectByTrajectory(startTrajectory)
+                score_2 = self.SLine()
+                listOfScoresBeginning[rail] = score_2
+                self.removeTrajectByTrajectory(startTrajectory)
+                startTrajectory.removeRailbyRailBeginning()
+
+            if startTrajectory.trajectEndStation == rail.stationBeginning:
+                startTrajectory.addRailbyRailEnd(rail)
+                self.addTrajectByTrajectory(startTrajectory)
+                score_2 = self.SLine()
+                listOfScoresEnd[rail] = score_2
+                self.removeTrajectByTrajectory(startTrajectory)
+                startTrajectory.removeRailbyRailEnd()
+
+        return listOfScoresBeginning, listOfScoresEnd
+
+    def checkScoreAndChoppedScore(self, startTrajectory):
+        self.addTrajectByTrajectory(startTrajectory)
+        score = self.SLine()
+        self.removeTrajectByTrajectory(startTrajectory)
+
+        startRail = startTrajectory.Raillist[0]
+        startTrajectory.removeRailbyRailBeginning()
+
+        self.addTrajectByTrajectory(startTrajectory)
+        choppedScore = self.SLine()
+        self.removeTrajectByTrajectory(startTrajectory)
+
+        startTrajectory.addRailbyRailBeginning(startRail)
+
+        return score, choppedScore
+
+    def replaceTrajectoryBySnake(self, trajectory, stepSize):
+        score = self.SLine()
+        tempTrajectory = Trajectory([], self.RailwayList)
+        for rail in trajectory.Raillist:
+            tempTrajectory.addRailbyRailEnd(rail)
+        self.removeTrajectByTrajectory(trajectory)
+        replaceTrajectory = snakeAlgorithm.makeSnakeTrajectory(self, tempTrajectory, stepSize)
+        self.addTrajectByTrajectory(replaceTrajectory)
+        score_2 = self.SLine()
+        self.removeTrajectByTrajectory(replaceTrajectory)
+
+        if score_2 > score:
+            self.addTrajectByTrajectory(replaceTrajectory)
+
+        else:
+            self.addTrajectByTrajectory(trajectory)
+
+    def determineScoreWithTrajectory(self, startTrajectory):
+        self.addTrajectByTrajectory(startTrajectory)
+        score = self.SLine()
+        self.removeTrajectByTrajectory(startTrajectory)
+
+        return score
 
 
 class Trajectory:
@@ -227,6 +316,7 @@ class Trajectory:
         self.trajectBeginStation = self.rail.stationEnd
 
         return self.Raillist
+
 
 
 
