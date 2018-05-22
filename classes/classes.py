@@ -163,7 +163,7 @@ class Trajectory:
             if self.trajectBeginStation == randomRail.stationBeginning:
                 self.Raillist.insert(0, randomRail)
                 minutes = self.minutesTrajectory()
-                if minutes > 120:
+                if minutes > 180:
                     self.Raillist.pop(0)
                 else:
                     self.trajectBeginStation = randomRail.stationEnd
@@ -172,7 +172,7 @@ class Trajectory:
             elif self.trajectEndStation == randomRail.stationBeginning:
                 self.Raillist.append(randomRail)
                 minutes = self.minutesTrajectory()
-                if minutes > 120:
+                if minutes > 180:
                     self.Raillist.pop()
                 else:
                     self.trajectEndStation = randomRail.stationEnd
@@ -193,19 +193,38 @@ class Trajectory:
 
     def addRailbyRailEnd(self,rail):
         self.rail = rail
+        if len(self.Raillist) == 0:
+            self.trajectBeginStation = rail.stationBeginning
+
         self.Raillist.append(self.rail)
+        self.trajectEndStation = rail.stationEnd
+
+
 
         return self.Raillist
 
     def addRailbyRailBeginning(self,rail):
         self.rail = rail
         self.Raillist.insert(0, self.rail)
+        self.trajectBeginStation = rail.stationBeginning
 
         return self.Raillist
 
-    def removeRailbyRail(self,rail):
-        self.rail = rail
+    def removeRailbyRailEnd(self):
+        self.rail = self.Raillist[-1]
+        self.trajectEndStation = self.rail.stationBeginning
+
         self.Raillist.remove(self.rail)
+
+
+        return self.Raillist
+
+    def removeRailbyRailBeginning(self):
+        self.rail = self.Raillist[0]
+        self.trajectBeginStation = self.rail.stationEnd
+
+        self.Raillist.remove(self.rail)
+        self.trajectBeginStation = self.rail.stationEnd
 
         return self.Raillist
 

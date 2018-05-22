@@ -29,11 +29,11 @@ def plotMap(stationList, RailwayList):
         y = float(station.x)
         plt.plot(x, y, 'ro-')
         stationNames.append(station.name)
-        # names = plt.annotate(station.name, xy=(x,y))
+        names = plt.annotate(station.name, xy=(x,y))
         # mplcursors.cursor(hover=True)
         # of Cursor voor artist?
-    cursor = mplcursors.cursor(hover=True)
-    cursor.connect("add", lambda sel: sel.annotation.set_text(stationNames[sel.target.index]))
+    # cursor = mplcursors.cursor(hover=True)
+    # cursor.connect("add", lambda sel: sel.annotation.set_text(stationNames[sel.target.index]))
         # checkBox = CheckButtons(names, 'Visibility names', 'True')
     return RailwayList, stationList
 
