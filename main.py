@@ -22,8 +22,6 @@ def main():
     #     print(i.stationBeginning, " - ", i.stationEnd)
     #     print(" ------ ")
 
-    emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
-    emptyTrajectory = classes.Trajectory([], RailwayList)
     #
     # scoreList = []
     # for i in range(10):
@@ -32,19 +30,39 @@ def main():
     #
     # print(max(scoreList))
 
-    # snake = snakeAlgorithm.snakeTrajectory(emptyLine, 15, 100)
-    # visualisation.visualize(snake, stationList, RailwayList)
+    scoreList = []
+    highestLine = None
+    highestScore = 0
+    scoreTotal = 0
+    scoreAverage = 0
 
-    randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 20)
+    for i in range(10):
+        emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
+        emptyTrajectory = classes.Trajectory([], RailwayList)
+        snake = snakeAlgorithm.snakeTrajectory(emptyLine, 15, 5)
+        score = snake.SLine()
+        scoreList.append(score)
+        scoreTotal = scoreTotal + score
+        if score > highestScore:
+            highestScore = score
+            highestLine = snake
+
+    print("highscore", highestScore)
+    print("averagescore", scoreTotal / len(scoreList))
+    visualisation.visualize(highestLine, stationList, RailwayList)
+    visualisation.printLine(highestLine)
 
 
-    railHill = hillClimber.hillClimber(randomListOfTrajectories, 10000)
-    print(len(criticalRailwayList))
+    # randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 20)
 
-    for traject in railHill.TrajectoryList:
-        print(traject.minutesTrajectory())
 
-    visualisation.visualize(railHill, stationList, RailwayList)
+    # railHill = hillClimber.hillClimber(randomListOfTrajectories, 10000)
+    # print(len(criticalRailwayList))
+
+    # for traject in railHill.TrajectoryList:
+        # print(traject.minutesTrajectory())
+
+    # visualisation.visualize(railHill, stationList, RailwayList)
 
 
 

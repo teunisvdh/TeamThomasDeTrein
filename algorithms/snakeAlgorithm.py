@@ -21,7 +21,7 @@ def snakeTrajectory(line, amountOfTrajectories, stepSize):
 
         line.addTrajectByTrajectory(startTrajectory)
 
-    for i in range(3):
+    for i in range(10):
         trajectoryList = []
         for traject in line.TrajectoryList:
             trajectoryList.append(traject)
@@ -41,7 +41,7 @@ def snakeTrajectory(line, amountOfTrajectories, stepSize):
 
                 else:
                     line.addTrajectByTrajectory(trajectory)
-
+    print(line.SLine())
     return line
 
 
