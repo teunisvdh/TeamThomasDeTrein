@@ -36,7 +36,7 @@ def main():
     scoreTotal = 0
     scoreAverage = 0
 
-    for i in range(10):
+    for i in range(5):
         emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
         emptyTrajectory = classes.Trajectory([], RailwayList)
         snake = snakeAlgorithm.snakeTrajectory(emptyLine, 15, 5)

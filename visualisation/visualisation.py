@@ -22,6 +22,7 @@ def visualize(maxRail, stationList, RailwayList):
     mapConnection(returnPlotMap)
     lineConnection(maxRail, returnPlotMap)
     makePlot(maxRail, returnPlotMap)
+    printLine(maxRail)
 
 
 def plotMap(stationList, RailwayList):
@@ -184,7 +185,7 @@ def makePlot(maxRail, returnPlotMap):
     layout = gob.Layout(title=title, autosize=True, hovermode='closest', mapbox=dict(accesstoken=mapbox_access_token, bearing=0, center=dict(lat=52.5, lon=4.5), pitch=0, zoom=10), showlegend=True)
     fig = dict(data=dataVisualise, layout=layout)
     plly.offline.plot(fig, filename='Visualisation_mapLines.html')
-    plt.show()
+    # plt.show()
 
 def printLine(maxRail):
     """ A function for printing a line.
@@ -192,6 +193,7 @@ def printLine(maxRail):
         Args:
             maxRail: line with maximum score (determined by an algorithm).
     """
+    print("startPrintline")
     trajectoryNames = []
     railsInTrajectories = []
     for i in range(len(maxRail.TrajectoryList)):
@@ -224,3 +226,4 @@ def printLine(maxRail):
     trace = gob.Table(header=dict(values=trajectoryNames, fill = dict(color='rgba(50, 50, 50, 0.1)')), cells=dict(values=railsInTrajectories))
     data = [trace]
     plly.offline.plot(data, filename = 'Visualisation_tableLines.html')
+    print('EndPrintline')
