@@ -325,6 +325,7 @@ class Trajectory:
         self.rail = rail
         if len(self.Raillist) == 0:
             self.trajectBeginStation = rail.stationBeginning
+            self.trajectEndStation = rail.stationEnd
 
         self.Raillist.append(self.rail)
         self.trajectEndStation = rail.stationEnd
@@ -336,13 +337,19 @@ class Trajectory:
     def addRailbyRailBeginning(self,rail):
         self.rail = rail
         self.Raillist.insert(0, self.rail)
+        if len(self.Raillist) == 1:
+            self.trajectEndStation = rail.stationEnd
         self.trajectBeginStation = rail.stationBeginning
+
 
         return self.Raillist
 
     def removeRailbyRailEnd(self):
         self.rail = self.Raillist[-1]
         self.trajectEndStation = self.rail.stationBeginning
+        if len(self.Raillist) == 1:
+            self.trajectEndStation = None
+            self.trajectBeginStation = None
 
         self.Raillist.remove(self.rail)
 
