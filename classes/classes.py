@@ -1,6 +1,8 @@
 import random
 import sys
 import operator
+import numpy as np
+import numpy.random as rn
 from algorithms import randomAlgorithm
 from algorithms import snakeAlgorithm
 
@@ -170,6 +172,45 @@ class Line:
 
         return score
 
+    def scoreWithAndWithoutTrajectory(self, RandomTrajectory):
+        # determine score
+        score = self.SLine()
+
+        # remove random trajectory
+        self.removeTrajectByTrajectory(RandomTrajectory)
+
+        # determine score again
+        score_2 = self.SLine()
+
+        return score, score_2
+
+    def scoreWithTrajectory(self, replaceTrajectory):
+        # add trajectory to line
+        self.addTrajectByTrajectory(replaceTrajectory)
+
+        # determine score again
+        score_3 = self.SLine()
+
+        return score_3
+
+    def addToUnfullLine(self, maxAmountOfTrajectories):
+        # check if line is full
+        if self.lenLine() < maxAmountOfTrajectories:
+
+            # determine score
+            score_4 = self.SLine()
+
+            # add a new random trajectory
+            newTrajectory = randomAlgorithm.emptyRandom(self)
+            self.addTrajectByTrajectory(newTrajectory)
+
+            # determine score
+            score_5 = self.SLine()
+
+            # if score is not higher, remove trajectory
+            if score_4 > score_5:
+                self.removeTrajectByTrajectory(newTrajectory)
+
 
 class Trajectory:
     """
@@ -316,6 +357,21 @@ class Trajectory:
         self.trajectBeginStation = self.rail.stationEnd
 
         return self.Raillist
+
+    def simAnnhealingAdd(self, var, score, randomScore, T, randomRail):
+        if snakeAlgorithm.acceptance(score, randomScore, 10*T) > rn.random():
+            if self.minutesTrajectory() < 180:
+                if var == "begin":
+                    self.addRailbyRailBeginning(randomRail)
+                if var == "end":
+                    self.addRailbyRailEnd(randomRail)
+
+    def simAnnhealingChop(self, line, T):
+        if len(self.Raillist) > 1:
+            score, choppedScore = line.checkScoreAndChoppedScore(self)
+
+            if snakeAlgorithm.acceptance(score, choppedScore,  10 * T) > rn.random():
+                self.removeRailbyRailBeginning()
 
 
 

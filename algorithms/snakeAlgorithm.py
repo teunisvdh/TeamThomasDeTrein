@@ -21,31 +21,11 @@ def snakeLine(line, amountOfTrajectories, stepSize):
 
         line.addTrajectByTrajectory(startTrajectory)
 
-    for i in range(3):
+    for i in range(20):
         trajectoryList = line.updateTrajectoryList()
         for trajectory in trajectoryList:
             line.replaceTrajectoryBySnake(trajectory, stepSize)
 
-    for i in range(10):
-        trajectoryList = []
-        for traject in line.TrajectoryList:
-            trajectoryList.append(traject)
-        for trajectory in trajectoryList:
-                score = line.SLine()
-                tempTrajectory = classes.Trajectory([], line.RailwayList)
-                for rail in trajectory.Raillist:
-                    tempTrajectory.addRailbyRailEnd(rail)
-                line.removeTrajectByTrajectory(trajectory)
-                replaceTrajectory = makeTrajectory(line, tempTrajectory, stepSize)
-                line.addTrajectByTrajectory(replaceTrajectory)
-                score_2 = line.SLine()
-                line.removeTrajectByTrajectory(replaceTrajectory)
-
-                if score_2 > score:
-                    line.addTrajectByTrajectory(replaceTrajectory)
-
-                else:
-                    line.addTrajectByTrajectory(trajectory)
     print(line.SLine())
     return line
 
@@ -66,17 +46,9 @@ def makeSnakeTrajectory(line, startTrajectory, stepSize):
 
         randomRail, randomScore = random.choice(list(selectedDict.items()))
 
-        if acceptance(score, randomScore, 10*T) > rn.random():
-            if var == "begin":
-                startTrajectory.addRailbyRailBeginning(randomRail)
-            if var == "end":
-                startTrajectory.addRailbyRailEnd(randomRail)
+        startTrajectory.simAnnhealingAdd(var, score, randomScore, T, randomRail)
 
-        if len(startTrajectory.Raillist) > 1:
-            score, choppedScore = line.checkScoreAndChoppedScore(startTrajectory)
-
-            if acceptance(score, choppedScore,  10 * T) > rn.random():
-                startTrajectory.removeRailbyRailBeginning()
+        startTrajectory.simAnnhealingChop(line, T)
 
     return startTrajectory
 

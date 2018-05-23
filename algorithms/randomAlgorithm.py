@@ -61,3 +61,12 @@ def randomLine(line, amountOfTrajectories):
         line.addTrajectByTrajectory(trajectoryFinal)
 
     return line
+
+def emptyRandom(line):
+    # make empty trajectory to put random rails in
+    emptyTrajectory = classes.Trajectory([], line.RailwayList)
+
+    # put random rails in empty trajectory
+    replaceTrajectory = randomTrajectory(emptyTrajectory, 10)
+
+    return replaceTrajectory

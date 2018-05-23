@@ -23,29 +23,14 @@ def hillClimber(line, iterations):
     """
     for i in range(iterations):
 
-        # determine score
-        score = line.SLine()
-
         # select a random trajectory
         RandomTrajectory = line.selectRandomTrajectory()
 
-        # remove random trajectory
-        line.removeTrajectByTrajectory(RandomTrajectory)
+        score, score_2 = line.scoreWithAndWithoutTrajectory(RandomTrajectory)
 
-        # determine score again
-        score_2 = line.SLine()
+        replaceTrajectory = randomAlgorithm.emptyRandom(line)
 
-        # make empty trajectory to put random rails in
-        emptyTrajectory = classes.Trajectory([], line.RailwayList)
-
-        # put random rails in empty trajectory
-        replaceTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 10)
-
-        # add trajectory to line
-        line.addTrajectByTrajectory(replaceTrajectory)
-
-        # determine score again
-        score_3 = line.SLine()
+        score_3 = line.scoreWithTrajectory(replaceTrajectory)
 
         # if first score was the highest replace first trajectory for replacement
         if score_3 < score and score_2 < score:
@@ -56,24 +41,7 @@ def hillClimber(line, iterations):
         elif score_3 < score_2 and score < score_2:
             line.removeTrajectByTrajectory(replaceTrajectory)
 
-        maxAmountOfTrajectories = 20
-
-        # check if line is full
-        if line.lenLine() < maxAmountOfTrajectories:
-
-            # determine score
-            score_4 = line.SLine()
-
-            # add a new random trajectory
-            newTrajectory = randomAlgorithm.randomTrajectory(emptyTrajectory, 10)
-            line.addTrajectByTrajectory(newTrajectory)
-
-            # determine score
-            score_5 = line.SLine()
-
-            # if score is not higher, remove trajectory
-            if score_4 > score_5:
-                line.removeTrajectByTrajectory(newTrajectory)
+        line.addToUnfullLine(20)
 
     # determine final score
     finalscore = line.SLine()

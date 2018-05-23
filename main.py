@@ -36,10 +36,10 @@ def main():
     scoreTotal = 0
     scoreAverage = 0
 
-    for i in range(5):
+    for i in range(10):
         emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
         emptyTrajectory = classes.Trajectory([], RailwayList)
-        snake = snakeAlgorithm.snakeTrajectory(emptyLine, 15, 5)
+        snake = snakeAlgorithm.snakeLine(emptyLine, 12, 5)
         score = snake.SLine()
         scoreList.append(score)
         scoreTotal = scoreTotal + score
@@ -52,12 +52,13 @@ def main():
     visualisation.visualize(highestLine, stationList, RailwayList)
     visualisation.printLine(highestLine)
 
-
+    # emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
     # randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 20)
-
-
-    # railHill = hillClimber.hillClimber(randomListOfTrajectories, 10000)
-    # print(len(criticalRailwayList))
+    #
+    #
+    # railHill = hillClimber.hillClimber(randomListOfTrajectories, 1000)
+    #
+    # print(railHill.SLine())
 
     # for traject in railHill.TrajectoryList:
         # print(traject.minutesTrajectory())
