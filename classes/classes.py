@@ -196,7 +196,7 @@ class Line:
 
         return score_3
 
-    def addToUnfullLine(self, maxAmountOfTrajectories):
+    def addToUnfullLine(self, maxAmountOfTrajectories, replace):
         # check if line is full
         if self.lenLine() < maxAmountOfTrajectories:
 
@@ -204,7 +204,8 @@ class Line:
             score_4 = self.SLine()
 
             # add a new random trajectory
-            newTrajectory = randomAlgorithm.emptyRandom(self)
+            newTrajectory = self.makeReplace(replace)
+
             self.addTrajectByTrajectory(newTrajectory)
 
             # determine score
@@ -213,6 +214,16 @@ class Line:
             # if score is not higher, remove trajectory
             if score_4 > score_5:
                 self.removeTrajectByTrajectory(newTrajectory)
+
+    def makeReplace(self, replace):
+        if replace == "random":
+            replaceTrajectory = randomAlgorithm.emptyRandom(self)
+
+        if replace == "snake":
+            emptyTrajectory = Trajectory([], self.RailwayList)
+            replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(self, emptyTrajectory, 15)
+
+        return replaceTrajectory
 
 
 class Trajectory:
@@ -383,15 +394,7 @@ class Trajectory:
             if SimulatedAnnealing.acceptance(score, choppedScore,  10 * T) > rn.random():
                 self.removeRailbyRailBeginning()
 
-    def makeReplace(self, line, replace):
-        if replace == "random":
-            replaceTrajectory = randomAlgorithm.emptyRandom(line)
 
-        if replace == "snake":
-            emptyTrajectory = Trajectory([], line.RailwayList)
-            replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(line, emptyTrajectory, 15)
-
-        return replaceTrajectory
 
 
 

@@ -17,20 +17,26 @@ def hillClimber(line, iterations, replace):
 
     Args:
         line (Line): Line element which you want to improve
-        iterations: Amount of iterations which you want to use
+        iterations (int): Amount of iterations which you want to use
+        replace (string): input "random" when you want to replace for random
+            trajectories, input "snake" when you want to replace for snake
+            trajectories.
 
     Returns:
-        The final score of the line
+        The final line
     """
     for i in range(iterations):
 
         # select a random trajectory
         RandomTrajectory = line.selectRandomTrajectory()
 
+        # determine score of trajectory and the score without a random trajectory
         score, score_2 = line.scoreWithAndWithoutTrajectory(RandomTrajectory)
 
-        replaceTrajectory = RandomTrajectory.makeReplace(line, replace)
+        # make a replacement trajectory, either by snake or random
+        replaceTrajectory = line.makeReplace(replace)
 
+        # add replaceTrajectory and determine score
         score_3 = line.scoreWithTrajectory(replaceTrajectory)
 
         # if first score was the highest replace first trajectory for replacement
@@ -42,6 +48,7 @@ def hillClimber(line, iterations, replace):
         elif score_3 < score_2 and score < score_2:
             line.removeTrajectByTrajectory(replaceTrajectory)
 
-        line.addToUnfullLine(20)
+        # try to add another trajectory and accept when score get higher
+        line.addToUnfullLine(20, replace)
 
     return(line)

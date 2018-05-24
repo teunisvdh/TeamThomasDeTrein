@@ -18,7 +18,7 @@ def snakeLine(line, amountOfTrajectories, stepSize, replace):
     for amount in range(amountOfTrajectories):
         emptyTrajectory = classes.Trajectory([], line.RailwayList)
 
-        startTrajectory = emptyTrajectory.makeReplace(line, replace)
+        startTrajectory = line.makeReplace(replace)
 
         line.addTrajectByTrajectory(startTrajectory)
 
