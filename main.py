@@ -4,13 +4,13 @@ import os
 import random
 import numpy as np
 import numpy.random as rn
-from data import *
 from classes import classes
 from classes import helpers
 from algorithms import randomAlgorithm
 from algorithms import hillClimber
 from algorithms import snakeAlgorithm
 from visualisation import visualisation
+import data
 
 
 def main():
@@ -51,6 +51,7 @@ def main():
     print("averagescore", scoreTotal / len(scoreList))
     visualisation.visualize(highestLine, stationList, RailwayList)
     visualisation.printLine(highestLine)
+
 
     # emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
     # randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 20)

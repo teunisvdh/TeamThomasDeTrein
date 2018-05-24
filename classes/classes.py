@@ -114,7 +114,7 @@ class Line:
         possibleRails = startTrajectory.correspondingRails()
         for rail in possibleRails:
             # if rail is connected at beginning traject, beginTraject wil be stationEnd of new rail
-            if startTrajectory.trajectBeginStation == rail.stationBeginning:
+            if startTrajectory.trajectBeginStation == rail.stationEnd:
                 startTrajectory.addRailbyRailBeginning(rail)
                 self.addTrajectByTrajectory(startTrajectory)
                 score_2 = self.SLine()
@@ -281,7 +281,6 @@ class Trajectory:
         self.amountOfRails = maxAmountOfRails
 
         for amount in range(self.amountOfRails):
-            correspondingStations = []
             # list of all possible connections
             correspondingStations = self.correspondingRails()
 
@@ -290,13 +289,13 @@ class Trajectory:
             randomRail = correspondingStations[randomIndex]
 
             # if rail is connected at beginning traject, beginTraject wil be stationEnd of new rail
-            if self.trajectBeginStation == randomRail.stationBeginning:
+            if self.trajectBeginStation == randomRail.stationEnd:
                 self.Raillist.insert(0, randomRail)
                 minutes = self.minutesTrajectory()
                 if minutes > 180:
                     self.Raillist.pop(0)
                 else:
-                    self.trajectBeginStation = randomRail.stationEnd
+                    self.trajectBeginStation = randomRail.stationBeginning
 
             # if rail is connected at end traject, endTraject will be station End of new rail
             elif self.trajectEndStation == randomRail.stationBeginning:
@@ -307,14 +306,11 @@ class Trajectory:
                 else:
                     self.trajectEndStation = randomRail.stationEnd
 
-
-
     def correspondingRails(self):
         correspondingStations = []
-
         # checks for RailwayList of beginTraject or EndTraject connections
         for rail in self.RailwayList:
-            if self.trajectBeginStation == rail.stationBeginning:
+            if self.trajectBeginStation == rail.stationEnd:
                 correspondingStations.append(rail)
             elif self.trajectEndStation == rail.stationBeginning:
                 correspondingStations.append(rail)
@@ -324,44 +320,48 @@ class Trajectory:
     def addRailbyRailEnd(self,rail):
         self.rail = rail
         if len(self.Raillist) == 0:
-            self.trajectBeginStation = rail.stationBeginning
-            self.trajectEndStation = rail.stationEnd
+            self.trajectBeginStation = self.rail.stationBeginning
+            self.trajectEndStation = self.rail.stationEnd
+        else:
+            self.trajectEndStation = self.rail.stationEnd
 
         self.Raillist.append(self.rail)
-        self.trajectEndStation = rail.stationEnd
-
-
 
         return self.Raillist
 
     def addRailbyRailBeginning(self,rail):
         self.rail = rail
-        self.Raillist.insert(0, self.rail)
-        if len(self.Raillist) == 1:
-            self.trajectEndStation = rail.stationEnd
-        self.trajectBeginStation = rail.stationBeginning
+        if len(self.Raillist) == 0:
+            self.trajectBeginStation = self.rail.stationBeginning
+            self.trajectEndStation = self.rail.stationEnd
+        else:
+            self.trajectBeginStation = self.rail.stationBeginning
 
+        self.Raillist.insert(0, self.rail)
 
         return self.Raillist
 
     def removeRailbyRailEnd(self):
-        self.rail = self.Raillist[-1]
-        self.trajectEndStation = self.rail.stationBeginning
-        if len(self.Raillist) == 1:
-            self.trajectEndStation = None
-            self.trajectBeginStation = None
+        if len(self.Raillist) != 0:
+            if len(self.Raillist) == 1:
+                self.trajectEndStation = None
+                self.trajectBeginStation = None
+            else:
+                self.trajectEndStation = self.Raillist[-1].stationBeginning
 
-        self.Raillist.remove(self.rail)
-
+            self.Raillist.pop()
 
         return self.Raillist
 
     def removeRailbyRailBeginning(self):
-        self.rail = self.Raillist[0]
-        self.trajectBeginStation = self.rail.stationEnd
+        if len(self.Raillist) != 0:
+            if len(self.Raillist) == 1:
+                self.trajectEndStation = None
+                self.trajectBeginStation = None
+            else:
+                self.trajectBeginStation = self.Raillist[0].stationEnd
 
-        self.Raillist.remove(self.rail)
-        self.trajectBeginStation = self.rail.stationEnd
+            self.Raillist.remove(self.Raillist[0])
 
         return self.Raillist
 

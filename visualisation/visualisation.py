@@ -21,7 +21,6 @@ def visualize(maxRail, stationList, RailwayList):
     mapConnection(returnPlotMap)
     lineConnection(maxRail, returnPlotMap)
     makePlot(maxRail, returnPlotMap)
-    printLine(maxRail)
 
 
 def plotMap(stationList, RailwayList):
@@ -221,3 +220,12 @@ def printLine(maxRail):
     data = [trace]
     plly.offline.plot(data, filename = 'Visualisation_tableLines.html')
     print('EndPrintline')
+
+def printTest(maxRail):
+    for i in range(len(maxRail.TrajectoryList)):
+        print("")
+        print("Traject {}".format(i+1))
+        print("---------")
+        for j in range(len(maxRail.TrajectoryList[i].Raillist)):
+            print(maxRail.TrajectoryList[i].Raillist[j].stationBeginning, "trajectBeginning: ", maxRail.TrajectoryList[i].trajectBeginStation, "trajectEnd: ", maxRail.TrajectoryList[i].trajectEndStation)
+            print(maxRail.TrajectoryList[i].Raillist[j].stationEnd, "trajectBeginning: ", maxRail.TrajectoryList[i].trajectBeginStation, "trajectEnd: ", maxRail.TrajectoryList[i].trajectEndStation)
