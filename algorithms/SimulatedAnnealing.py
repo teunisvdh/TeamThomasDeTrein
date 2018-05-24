@@ -14,17 +14,24 @@ from visualisation import visualisation
 sys.path.append('C:/TeamThomasDeTrein/classes')
 sys.path.append('C:/TeamThomasDeTrein/visualisation')
 
-def snakeLine(line, amountOfTrajectories, stepSize):
+def snakeLine(line, amountOfTrajectories, stepSize, replace):
     for amount in range(amountOfTrajectories):
         emptyTrajectory = classes.Trajectory([], line.RailwayList)
-        startTrajectory = makeSnakeTrajectory(line, emptyTrajectory, stepSize)
+
+        if replace == "random":
+            startTrajectory = randomAlgorithm.emptyRandom(line)
+        if replace == "snake":
+            startTrajectory = makeSnakeTrajectory(line, emptyTrajectory, stepSize)
 
         line.addTrajectByTrajectory(startTrajectory)
 
     for i in range(20):
         trajectoryList = line.updateTrajectoryList()
         for trajectory in trajectoryList:
-            line.replaceTrajectoryBySnake(trajectory, stepSize)
+            if replace == "random":
+                line.replaceTrajectory(trajectory, stepSize, "random")
+            if replace == "snake":
+                line.replaceTrajectory(trajectory, stepSize, "snake")
 
     print(line.SLine())
     return line
@@ -46,18 +53,21 @@ def makeSnakeTrajectory(line, startTrajectory, stepSize):
 
         randomRail, randomScore = random.choice(list(selectedDict.items()))
 
-        startTrajectory.simAnnhealingAdd(var, score, randomScore, T, randomRail)
+        startTrajectory.simAnnealingAdd(var, score, randomScore, T, randomRail)
 
-        startTrajectory.simAnnhealingChop(line, T)
+        startTrajectory.simAnnealingChop(line, T)
 
     return startTrajectory
 
 def acceptance(oldScore, newScore, temperature):
     if newScore < oldScore:
         p = np.exp(- (oldScore - newScore) / temperature)
-        return p
+        if p > rn.random():
+            return True
+        else:
+            return False
     else:
-        return 1
+        return True
 
 def temperature(fraction):
     return max(0.01, min(1, 1 - fraction))

@@ -8,8 +8,11 @@ from classes import classes
 from classes import helpers
 from algorithms import randomAlgorithm
 from algorithms import hillClimber
-from algorithms import snakeAlgorithm
+from algorithms import SimulatedAnnealing
+from algorithms import Annealclimber
 from visualisation import visualisation
+
+
 import data
 
 
@@ -25,7 +28,7 @@ def main():
     #
     # scoreList = []
     # for i in range(10):
-    #     score = snakeAlgorithm.snakeTrajectory(emptyLine, 4, 100)
+    #     score = SimulatedAnnealing.snakeTrajectory(emptyLine, 4, 100)
     #     scoreList.append(score)
     #
     # print(max(scoreList))
@@ -36,10 +39,10 @@ def main():
     scoreTotal = 0
     scoreAverage = 0
 
-    for i in range(10):
+    for i in range(2):
         emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
         emptyTrajectory = classes.Trajectory([], RailwayList)
-        snake = snakeAlgorithm.snakeLine(emptyLine, 12, 5)
+        snake = SimulatedAnnealing.snakeLine(emptyLine, 12, 5, "snake")
         score = snake.SLine()
         scoreList.append(score)
         scoreTotal = scoreTotal + score
@@ -56,8 +59,7 @@ def main():
     # emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
     # randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 20)
     #
-    #
-    # railHill = hillClimber.hillClimber(randomListOfTrajectories, 1000)
+    # railHill = hillClimber.hillClimber(randomListOfTrajectories, 100, "snake")
     #
     # print(railHill.SLine())
 

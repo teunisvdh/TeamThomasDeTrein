@@ -4,7 +4,7 @@ import operator
 import numpy as np
 import numpy.random as rn
 from algorithms import randomAlgorithm
-from algorithms import snakeAlgorithm
+from algorithms import SimulatedAnnealing
 
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
@@ -148,13 +148,16 @@ class Line:
 
         return score, choppedScore
 
-    def replaceTrajectoryBySnake(self, trajectory, stepSize):
+    def replaceTrajectory(self, trajectory, stepSize, replace):
         score = self.SLine()
         tempTrajectory = Trajectory([], self.RailwayList)
         for rail in trajectory.Raillist:
             tempTrajectory.addRailbyRailEnd(rail)
         self.removeTrajectByTrajectory(trajectory)
-        replaceTrajectory = snakeAlgorithm.makeSnakeTrajectory(self, tempTrajectory, stepSize)
+        if replace == "random":
+            replaceTrajectory = randomAlgorithm.randomTrajectory(tempTrajectory, stepSize)
+        if replace == "snake":
+            replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(self, tempTrajectory, stepSize)
         self.addTrajectByTrajectory(replaceTrajectory)
         score_2 = self.SLine()
         self.removeTrajectByTrajectory(replaceTrajectory)
@@ -365,19 +368,19 @@ class Trajectory:
 
         return self.Raillist
 
-    def simAnnhealingAdd(self, var, score, randomScore, T, randomRail):
-        if snakeAlgorithm.acceptance(score, randomScore, 10*T) > rn.random():
+    def simAnnealingAdd(self, var, score, randomScore, T, randomRail):
+        if SimulatedAnnealing.acceptance(score, randomScore, 10*T) == True:
             if self.minutesTrajectory() < 180:
                 if var == "begin":
                     self.addRailbyRailBeginning(randomRail)
                 if var == "end":
                     self.addRailbyRailEnd(randomRail)
 
-    def simAnnhealingChop(self, line, T):
+    def simAnnealingChop(self, line, T):
         if len(self.Raillist) > 1:
             score, choppedScore = line.checkScoreAndChoppedScore(self)
 
-            if snakeAlgorithm.acceptance(score, choppedScore,  10 * T) > rn.random():
+            if SimulatedAnnealing.acceptance(score, choppedScore,  10 * T) > rn.random():
                 self.removeRailbyRailBeginning()
 
 
