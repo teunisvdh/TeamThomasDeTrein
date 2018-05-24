@@ -9,32 +9,40 @@ from classes import helpers
 
 
 class Files:
+    """
+    Class contains functions to open the files containing
+    stations and connections and to set the right variables
+    based on the map
 
-    def setFiles(self):
+    Functions:
+        setFiles(self.)
+        fileStations(self).
+        fileConnections(self, criticalstationList).
+    """
+
+    def setVariables(self):
+        """
+        Updates all variables to match the used map.
+        Variables in the project files (helpers.py and classes.py) are updated.
+
+        Args:
+            Map(String, "holland" or "nationaal"):stating which map is used.
+        """
+
         global file
         file = "init"
         helpers.Files.file = self
 
-    """
-    Class contains functions to open the files containing
-    stations and connections.
 
-    Functions:
-        fileStations(self).
-        fileConnections(self, criticalstationList).
-    """
     def fileStations():
         """
-        Opens inserted file.
-
-        Args:
-            File containing a list with all stations on the map.
-            One station contains a: name of the station, cheograpical coordinates, critical boolean.
+        Opens the needed file containing a list of stations (stations)
 
         Returns:
             stationsList(name, x, y, critical): list of all stations.
             criticalstationList(name, x, y, critical): list of all critical stations.
         """
+
         if helpers.Files.file == "holland":
             usedfile = "data/StationsHolland.csv"
         if helpers.Files.file == "nationaal":
@@ -52,17 +60,16 @@ class Files:
 
     def fileConnections(criticalStationList):
         """
-        Opens inserted file.
+        Opens the needed file containing a list of connections (rails)
 
         Args:
-            File containing a list with all conections on the map.
-            Connection contains a: StationBeginning(name), StationEnd(name), minutes of the connection.
             criticalStationList: list of all critical stations (from fileStations).
 
         Returns:
             RailwayList(StationBeginning, StationEnd, minutes): list of all railways .
             criticalRailwayList(StationBeginning, StationEnd, minutes): list of all critical railways.
         """
+
         if helpers.Files.file == "holland":
             usedfile = "data/ConnectiesHolland.csv"
         elif settings.Files.file == "nationaal":
