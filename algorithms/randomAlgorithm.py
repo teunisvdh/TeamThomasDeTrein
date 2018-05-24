@@ -3,7 +3,9 @@ import csv
 import sys
 import os
 from data import *
-from classes import classes
+from classes import lineClass
+from classes import trajectoryClass
+from classes import railAndStationClass
 from classes import helpers
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
@@ -71,7 +73,7 @@ def emptyRandom(line):
     """
 
     # make empty trajectory to put random rails in
-    emptyTrajectory = classes.Trajectory([], line.RailwayList)
+    emptyTrajectory = trajectoryClass.Trajectory([], line.RailwayList)
 
     # put random rails in empty trajectory
     replaceTrajectory = randomTrajectory(emptyTrajectory, 10)

@@ -2,21 +2,17 @@ import csv
 import sys
 import os
 import data
-from classes import classes
+from classes import lineClass
+from classes import trajectoryClass
+from classes import railAndStationClass
 from classes import helpers
 
 
 class Files:
 
     def setFiles(self):
-        helpers.Files.initialize()
-        helpers.Files.openFile(self)
-
-    def initialize():
         global file
         file = "init"
-
-    def openFile(self):
         helpers.Files.file = self
 
     """
@@ -49,7 +45,7 @@ class Files:
             stationList = []
             criticalStationList = []
             for station in stationsinfo:
-                stationList.append(classes.Station(station[0], station[1], station[2], station[3]))
+                stationList.append(railAndStationClass.Station(station[0], station[1], station[2], station[3]))
                 if station[-1] == 'Kritiek':
                     criticalStationList.append(station[0])
             return stationList, criticalStationList
@@ -78,11 +74,11 @@ class Files:
             criticalRailwayList = []
             inverseDict = {}
             for lijn in stationConnections:
-                railValue = classes.Rail(lijn[0], lijn[1], lijn[2])
+                railValue = railAndStationClass.Rail(lijn[0], lijn[1], lijn[2])
                 RailwayList.append(railValue)
                 # change list and append in temp
                 lijn[0], lijn[1] = lijn[1], lijn[0]
-                railKey = classes.Rail(lijn[0], lijn[1], lijn[2])
+                railKey = railAndStationClass.Rail(lijn[0], lijn[1], lijn[2])
                 RailwayList.append(railKey)
 
                 inverseDict[railValue] = railKey

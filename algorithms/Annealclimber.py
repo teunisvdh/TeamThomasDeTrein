@@ -4,7 +4,9 @@ import sys
 import os
 import data
 from visualisation import visualisation
-from classes import classes
+from classes import lineClass
+from classes import trajectoryClass
+from classes import railAndStationClass
 from classes import helpers
 from algorithms import SimulatedAnnealing
 from algorithms import randomAlgorithm

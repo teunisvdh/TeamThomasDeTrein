@@ -4,7 +4,9 @@ import os
 import random
 import numpy as np
 import numpy.random as rn
-from classes import classes
+from classes import lineClass
+from classes import trajectoryClass
+from classes import railAndStationClass
 from classes import helpers
 from algorithms import randomAlgorithm
 from algorithms import hillClimber
@@ -41,9 +43,9 @@ def main():
     scoreAverage = 0
 
     for i in range(2):
-        emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
-        emptyTrajectory = classes.Trajectory([], RailwayList)
-        snake = SimulatedAnnealing.snakeLine(emptyLine, 7, 5, "random")
+        emptyLine = lineClass.Line([], RailwayList, criticalRailwayList, inverseDict)
+        emptyTrajectory = trajectoryClass.Trajectory([], RailwayList)
+        snake = SimulatedAnnealing.snakeLine(emptyLine, 7, 5, 15, "random")
         score = snake.SLine()
         scoreList.append(score)
         scoreTotal = scoreTotal + score
