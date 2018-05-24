@@ -3,6 +3,8 @@ import sys
 import os
 import data
 from classes import classes
+from classes import settings
+
 
 class openFile:
     """
@@ -13,7 +15,7 @@ class openFile:
         fileStations(self).
         fileConnections(self, criticalstationList).
     """
-    def fileStations(self):
+    def fileStations():
         """
         Opens inserted file.
 
@@ -25,7 +27,12 @@ class openFile:
             stationsList(name, x, y, critical): list of all stations.
             criticalstationList(name, x, y, critical): list of all critical stations.
         """
-        with open(self) as csvfile:
+        if settings.file == "holland":
+            usedfile = "data/StationsHolland.csv"
+        if settings.file == "nationaal":
+            usedfile = "data/StationsNationaal.csv"
+
+        with open(usedfile) as csvfile:
             stationsinfo = csv.reader(csvfile, delimiter=',')
             stationList = []
             criticalStationList = []
@@ -35,7 +42,7 @@ class openFile:
                     criticalStationList.append(station[0])
             return stationList, criticalStationList
 
-    def fileConnections(self, criticalStationList):
+    def fileConnections(criticalStationList):
         """
         Opens inserted file.
 
@@ -48,7 +55,12 @@ class openFile:
             RailwayList(StationBeginning, StationEnd, minutes): list of all railways .
             criticalRailwayList(StationBeginning, StationEnd, minutes): list of all critical railways.
         """
-        with open(self) as csvfile:
+        if settings.file == "holland":
+            usedfile = "data/ConnectiesHolland.csv"
+        elif settings.file == "nationaal":
+            usedfile = "data/ConnectiesNationaal.csv"
+
+        with open(usedfile) as csvfile:
             stationConnections = csv.reader(csvfile, delimiter=',')
             RailwayList = []
             criticalRailwayList = []

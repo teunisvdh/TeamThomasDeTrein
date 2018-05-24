@@ -11,15 +11,20 @@ from algorithms import hillClimber
 from algorithms import SimulatedAnnealing
 from algorithms import Annealclimber
 from visualisation import visualisation
-
-
 import data
+from classes import settings
 
 
 def main():
+    settings.initialize()
+    filename = "holland"
+    settings.setFile(filename)
+
+    # put "holland" or "nationaal"
+
     # open the files including critical data
-    stationList, criticalStationList = helpers.openFile.fileStations("data/StationsNationaal.csv")
-    RailwayList, criticalRailwayList, inverseDict = helpers.openFile.fileConnections("data/ConnectiesNationaal.csv", criticalStationList)
+    stationList, criticalStationList = helpers.openFile.fileStations()
+    RailwayList, criticalRailwayList, inverseDict = helpers.openFile.fileConnections(criticalStationList)
     # print(len(criticalRailwayList))
     # for i in criticalRailwayList:
     #     print(i.stationBeginning, " - ", i.stationEnd)
@@ -42,7 +47,7 @@ def main():
     for i in range(2):
         emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
         emptyTrajectory = classes.Trajectory([], RailwayList)
-        snake = SimulatedAnnealing.snakeLine(emptyLine, 12, 5, "random")
+        snake = SimulatedAnnealing.snakeLine(emptyLine, 7, 5, "random")
         score = snake.SLine()
         scoreList.append(score)
         scoreTotal = scoreTotal + score
@@ -53,7 +58,7 @@ def main():
     print("highscore", highestScore)
     print("averagescore", scoreTotal / len(scoreList))
     visualisation.visualize(highestLine, stationList, RailwayList)
-    visualisation.printLine(highestLine)
+    visualisation.printTest(highestLine)
 
 
     # emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)

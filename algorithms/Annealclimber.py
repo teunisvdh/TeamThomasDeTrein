@@ -11,6 +11,7 @@ from algorithms import randomAlgorithm
 sys.path.append('C:/TeamThomasDeTrein/classes')
 sys.path.append('C:/TeamThomasDeTrein/visualisation')
 
+
 def annealclimber(line, iterations, replace):
     """A function which changes, adds and removes trajectories from given
     trajectory as long as the score increases
