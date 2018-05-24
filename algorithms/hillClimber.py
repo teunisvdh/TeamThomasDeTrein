@@ -29,12 +29,7 @@ def hillClimber(line, iterations, replace):
 
         score, score_2 = line.scoreWithAndWithoutTrajectory(RandomTrajectory)
 
-        if replace == "random":
-            replaceTrajectory = randomAlgorithm.emptyRandom(line)
-
-        if replace == "snake":
-            emptyTrajectory = classes.Trajectory([], line.RailwayList)
-            replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(line, emptyTrajectory, 15)
+        replaceTrajectory = RandomTrajectory.makeReplace(line, replace)
 
         score_3 = line.scoreWithTrajectory(replaceTrajectory)
 
@@ -48,11 +43,5 @@ def hillClimber(line, iterations, replace):
             line.removeTrajectByTrajectory(replaceTrajectory)
 
         line.addToUnfullLine(20)
-
-    # determine final score
-    finalscore = line.SLine()
-
-    # print(finalscore)
-    # print(line.lenLine())
 
     return(line)

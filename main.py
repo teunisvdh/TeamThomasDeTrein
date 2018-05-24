@@ -42,7 +42,7 @@ def main():
     for i in range(2):
         emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
         emptyTrajectory = classes.Trajectory([], RailwayList)
-        snake = SimulatedAnnealing.snakeLine(emptyLine, 12, 5, "snake")
+        snake = SimulatedAnnealing.snakeLine(emptyLine, 12, 5, "random")
         score = snake.SLine()
         scoreList.append(score)
         scoreTotal = scoreTotal + score
@@ -54,8 +54,8 @@ def main():
     print("averagescore", scoreTotal / len(scoreList))
     visualisation.visualize(highestLine, stationList, RailwayList)
     visualisation.printLine(highestLine)
-
-
+    #
+    #
     # emptyLine = classes.Line([], RailwayList, criticalRailwayList, inverseDict)
     # randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 20)
     #

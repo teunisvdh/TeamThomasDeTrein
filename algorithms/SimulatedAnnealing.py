@@ -18,10 +18,7 @@ def snakeLine(line, amountOfTrajectories, stepSize, replace):
     for amount in range(amountOfTrajectories):
         emptyTrajectory = classes.Trajectory([], line.RailwayList)
 
-        if replace == "random":
-            startTrajectory = randomAlgorithm.emptyRandom(line)
-        if replace == "snake":
-            startTrajectory = makeSnakeTrajectory(line, emptyTrajectory, stepSize)
+        startTrajectory = emptyTrajectory.makeReplace(line, replace)
 
         line.addTrajectByTrajectory(startTrajectory)
 

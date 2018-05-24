@@ -383,6 +383,16 @@ class Trajectory:
             if SimulatedAnnealing.acceptance(score, choppedScore,  10 * T) > rn.random():
                 self.removeRailbyRailBeginning()
 
+    def makeReplace(self, line, replace):
+        if replace == "random":
+            replaceTrajectory = randomAlgorithm.emptyRandom(line)
+
+        if replace == "snake":
+            emptyTrajectory = Trajectory([], line.RailwayList)
+            replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(line, emptyTrajectory, 15)
+
+        return replaceTrajectory
+
 
 
 
