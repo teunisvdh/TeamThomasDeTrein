@@ -3,10 +3,22 @@ import sys
 import os
 import data
 from classes import classes
-from classes import settings
+from classes import helpers
 
 
-class openFile:
+class Files:
+
+    def setFiles(self):
+        helpers.Files.initialize()
+        helpers.Files.openFile(self)
+
+    def initialize():
+        global file
+        file = "init"
+
+    def openFile(self):
+        helpers.Files.file = self
+
     """
     Class contains functions to open the files containing
     stations and connections.
@@ -27,9 +39,9 @@ class openFile:
             stationsList(name, x, y, critical): list of all stations.
             criticalstationList(name, x, y, critical): list of all critical stations.
         """
-        if settings.file == "holland":
+        if helpers.Files.file == "holland":
             usedfile = "data/StationsHolland.csv"
-        if settings.file == "nationaal":
+        if helpers.Files.file == "nationaal":
             usedfile = "data/StationsNationaal.csv"
 
         with open(usedfile) as csvfile:
@@ -55,9 +67,9 @@ class openFile:
             RailwayList(StationBeginning, StationEnd, minutes): list of all railways .
             criticalRailwayList(StationBeginning, StationEnd, minutes): list of all critical railways.
         """
-        if settings.file == "holland":
+        if helpers.Files.file == "holland":
             usedfile = "data/ConnectiesHolland.csv"
-        elif settings.file == "nationaal":
+        elif settings.Files.file == "nationaal":
             usedfile = "data/ConnectiesNationaal.csv"
 
         with open(usedfile) as csvfile:

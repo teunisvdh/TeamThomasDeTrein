@@ -5,7 +5,7 @@ import numpy as np
 import numpy.random as rn
 from algorithms import randomAlgorithm
 from algorithms import SimulatedAnnealing
-from classes import settings
+from classes import helpers
 
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
@@ -443,13 +443,13 @@ class Trajectory:
                 self.Raillist.insert(0, randomRail)
                 minutes = self.minutesTrajectory()
 
-                if settings.file == "holland":
+                if helpers.Files.file == "holland":
                     if minutes > 120:
                         self.Raillist.pop(0)
                     else:
                         self.trajectBeginStation = randomRail.stationBeginning
 
-                if settings.file == "nationaal":
+                if helpers.Files.file == "nationaal":
                     if minutes > 180:
                         self.Raillist.pop(0)
                     else:
@@ -460,13 +460,13 @@ class Trajectory:
                 self.Raillist.append(randomRail)
                 minutes = self.minutesTrajectory()
 
-                if settings.file == "holland":
+                if helpers.Files.file == "holland":
                     if minutes > 120:
                         self.Raillist.pop()
                     else:
                         self.trajectEndStation = randomRail.stationEnd
 
-                if settings.file == "nationaal":
+                if helpers.Files.file == "nationaal":
                     if minutes > 180:
                         self.Raillist.pop()
                     else:
@@ -508,11 +508,11 @@ class Trajectory:
 
         self.Raillist.append(self.rail)
 
-        if settings.file == "holland":
+        if helpers.Files.file == "holland":
             if self.minutesTrajectory() > 120:
                 self.removeRailbyRailEnd(self)
 
-        if settings.file == "nationaal":
+        if helpers.Files.file == "nationaal":
             if self.minutesTrajectory() > 180:
                 self.removeRailbyRailEnd(self)
 
@@ -534,11 +534,11 @@ class Trajectory:
 
         self.Raillist.insert(0, self.rail)
 
-        if settings.file == "holland":
+        if helpers.Files.file == "holland":
             if self.minutesTrajectory() > 120:
                 self.removeRailbyRailBeginning(self)
 
-        if settings.file == "nationaal":
+        if helpers.Files.file == "nationaal":
             if self.minutesTrajectory() > 180:
                 self.removeRailbyRailBeginning(self)
 
@@ -587,14 +587,14 @@ class Trajectory:
             addRail: Rail you want to add
         """
         if SimulatedAnnealing.acceptance(score, newScore, 10*T) == True:
-            if settings.file == "holland":
+            if helpers.Files.file == "holland":
                 if self.minutesTrajectory() < 120:
                     if var == "begin":
                         self.addRailbyRailBeginning(addRail)
                     if var == "end":
                         self.addRailbyRailEnd(addRail)
 
-            if settings.file == "nationaal":
+            if helpers.Files.file == "nationaal":
                 if self.minutesTrajectory() < 180:
                     if var == "begin":
                         self.addRailbyRailBeginning(addRail)

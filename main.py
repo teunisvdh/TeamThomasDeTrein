@@ -12,19 +12,15 @@ from algorithms import SimulatedAnnealing
 from algorithms import Annealclimber
 from visualisation import visualisation
 import data
-from classes import settings
 
 
 def main():
-    settings.initialize()
-    filename = "holland"
-    settings.setFile(filename)
-
+    helpers.Files.setFiles("holland")
     # put "holland" or "nationaal"
 
     # open the files including critical data
-    stationList, criticalStationList = helpers.openFile.fileStations()
-    RailwayList, criticalRailwayList, inverseDict = helpers.openFile.fileConnections(criticalStationList)
+    stationList, criticalStationList = helpers.Files.fileStations()
+    RailwayList, criticalRailwayList, inverseDict = helpers.Files.fileConnections(criticalStationList)
     # print(len(criticalRailwayList))
     # for i in criticalRailwayList:
     #     print(i.stationBeginning, " - ", i.stationEnd)
