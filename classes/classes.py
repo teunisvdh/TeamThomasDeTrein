@@ -225,6 +225,12 @@ class Line:
 
         return replaceTrajectory
 
+    def replace(self, replace, trajectory, stepSize):
+        if replace == "random":
+            self.replaceTrajectory(trajectory, stepSize, "random")
+        if replace == "snake":
+            self.replaceTrajectory(trajectory, stepSize, "snake")
+
 
 class Trajectory:
     """

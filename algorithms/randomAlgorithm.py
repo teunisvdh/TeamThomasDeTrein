@@ -14,7 +14,7 @@ def randomTrajectory(trajectory, amountOfRails):
     Args:
         trajectory (Trajectory): A Trajectory element which you want to update
         amountOfRails (int): Maximum amount of rails which you want to add. The amount
-        of rails added will be a random number between zero and this number.
+        of rails added will be a random number between zero and this number
 
     Returns:
         The updated trajectory element
@@ -60,6 +60,16 @@ def randomLine(line, amountOfTrajectories):
     return line
 
 def emptyRandom(line):
+    """A function that adds to an empty line a random number between 0 and 10 of
+    trajectories
+
+    Args:
+        line (Line): A Line element which you want to update.
+
+    Returns:
+        A random trajectory.
+    """
+
     # make empty trajectory to put random rails in
     emptyTrajectory = classes.Trajectory([], line.RailwayList)
 

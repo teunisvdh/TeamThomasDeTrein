@@ -18,9 +18,9 @@ def hillClimber(line, iterations, replace):
     Args:
         line (Line): Line element which you want to improve
         iterations (int): Amount of iterations which you want to use
-        replace (string): input "random" when you want to replace for random
-            trajectories, input "snake" when you want to replace for snake
-            trajectories.
+        replace (string): Input "random" when you want to replace for random
+            trajectories, Input "snake" when you want to replace for snake
+            trajectories
 
     Returns:
         The final line
