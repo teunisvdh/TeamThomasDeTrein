@@ -78,7 +78,7 @@ def makeSnakeTrajectory(line, startTrajectory, stepSize):
 
         # determine all rails that can be added (at begin and end of trajectory)
         # and the corresponding scores
-        begScores, endScores = line.addTrajectoryAndDetermineCorrespondingRails(startTrajectory)
+        begScores, endScores = line.determineRailsBeginEnd(startTrajectory)
 
         # choose if you want to add to begin or end of trajectory randomly
         selectedDict, var = chooseDict(begScores, endScores)
@@ -128,14 +128,14 @@ def temperature(fraction):
     return max(0.01, min(1, 1 - fraction))
 
 def chooseDict(begScores, endScores):
-    """A function that determines temperature based on the fraction of the iterations
-    in which the proces is
+    """A function that chooses a dict given two dicts with a var either "begin" or "end:
 
     Args:
-        fraction (float): Fraction of iterations where the proces is currently at
+        begScores (dict): dict one with var "begin"
+        endScores (dict): dict two with var "end"
 
     Returns:
-        The temperature
+        chosen dict and corresponding var
     """
     listOfDicts = []
     listOfDicts.append(begScores)
