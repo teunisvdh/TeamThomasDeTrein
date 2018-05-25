@@ -82,7 +82,7 @@ To make use of the project you have to follow the following steps in main.py:
 	
 	Step 2: Select the critical station file you want to use: 'normal' for the number determined by the case or 'critical' for making all stations critical. 
 	
-	Step 3: Select the line (different for each algorithm) you want to use: randomLine, hillclimberLine or simulatedannealingLine. Make sure you comment out the other two lines you don't want to use (saves computing power).
+	Step 3: Select the line (different for each algorithm) you want to use: randomLine, hillclimberLine or simulatedannealingLine. Make sure you comment out the lines you don't want to use (saves computing power). Note that when choosing simulatedAnnealingLine, the randomLine also has to be made. 
 	
 	Step 4: Change the parameters for the line used.
 	
