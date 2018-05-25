@@ -6,15 +6,19 @@ Assignment for the UvA-course **'Heuristics'**
 
 **Case:** [RailNL](http://heuristieken.nl/wiki/index.php?title=RailNL)
 
-
+## Summary
 
 This project is made for determining what (existing) rails can best be used for connecting train stations in a certain area. A distinction can be made between ordinary railways and critical railways, that are logistically most important. 
+
+The project is focused on determining the best line for trains in The Netherlands or the provinces Noord- and Zuid-Holland. 
 
 Determining what trajectories can best be made is done by maximizing the following **formula:** 
 
 	S = p*10.000 - (t*20 + min/10). 
 		
 	S is the score, p is the fraction of critical railways used, t is the number of trajectories used and min is the total amount of time (in minutes) of all the trajectories combined.  
+
+## Files
 
 The repository contains several **files:** 
 
@@ -70,7 +74,41 @@ The repository contains several **files:**
 
 		- Visualisation_tableLines.html: A file containg the table visualisation of a line. Updated every time printLine() is used.
 
-**Use**
-...
+## Use
+
+To make use of the project you have to follow the following steps in main.py:
+
+	Step 1: Select the file you want to use: 'nationaal' for the map of The Netherlands or 'holland' for the map of the provinces Noord- and Zuid-Holland. 
+	
+	Step 2: Select the critical station file you want to use: 'normal' for the number determined by the case or 'critical' for making all stations critical. 
+	
+	Step 3: Select the line (different for each algorithm) you want to use: randomLine, hillclimberLine or simulatedannealingLine. Make sure you comment out the other two lines you don't want to use (saves computing power).
+	
+	Step 4: Change the parameters for the line used.
+	
+		For randomLine: 
+			line (Line): A Line element which you want to update.
+			amountOfTrajectories (int): Amount of trajectories which you want to add.
+			iterarations (int): Amount of rails you want to add
+			amountOfRails (int): Amount of rails you want to add per trajectory
+			
+		For hillclimberLine:
+			line (Line): Line element which you want to improve
+			iterations (int): Amount of iterations which you want to use
+			replace (string): Input "random" when you want to replace for random trajectories, Input "snake" when you want to replace for snake trajectories
+			amountOfRails (int): Amount of rails you want to add per trajectory
+			
+		For simulatedAnnealingLine:
+		        line (Line): A Line element which you want to update.
+			amountOfTrajectories (int): Amount of trajectories which you want to add
+			stepSize (int): Amount of steps you want to take to make the trajectory
+			iterations (int): Amount of times you want to try to improve all the the trajectories
+			replace (string): Input "random" when you want to update trajectories with random algorithm and "snake" for the makeSnakeTrajectory function
+			multiplicationAdd (float): Multiplication factor of T for adding rails
+			multiplicationChop (float): Multiplication factor of T for chopping rails
+			
+	Step 5: Change setMultiplicationAdd() and setMultiplicationChop() when you have chosen to use "snake". This will determine the temperature used in the simulated annealing process. 
+	
+	Step 6: Set the line you want to visualise to randomLine, hillclimberLine or simulatedAnnealingLine. 
 
 All files are free to use. For **questions** you can always send an email to markvandenhoven@icloud.com, thymenyj@gmail.com, teunisvanderhofstad@hotmail.com. 
