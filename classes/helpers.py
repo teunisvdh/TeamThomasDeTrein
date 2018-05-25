@@ -9,20 +9,13 @@ from classes import helpers
 
 
 class Files:
-    """
-    Class contains functions to open the files containing
+    """Class contains functions to open the files containing
     stations and connections and to set the right variables
     based on the map
-
-    Functions:
-        setFiles(self).
-        fileStations(self).
-        fileConnections(self, criticalstationList).
     """
 
     def initializeVariables(self):
-        """
-        Updates all variables to match the used map.
+        """Updates all variables to match the used map.
         Variables in the project files (helpers.py and classes.py and algorithms) are updated.
 
         Args:
