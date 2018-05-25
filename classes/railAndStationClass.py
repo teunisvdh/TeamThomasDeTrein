@@ -12,8 +12,7 @@ from classes import helpers
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
 class Rail:
-    """
-    Class of a rail between stations.
+    """Class of a rail between stations.
 
     Args:
         stationBeginning (str): Station where rail begins.
