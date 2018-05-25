@@ -42,6 +42,8 @@ class Files:
         multiplicationChop = 0
 
         helpers.Files.file = self
+        if self != "holland" and self != "nationaal":
+            raise ValueError("file must be 'holland' or 'nationaal'")
 
     def setCritical(self):
         """Set the global map files.If 'citical' is used as input the critical station map is used.
@@ -51,6 +53,8 @@ class Files:
             Map(String, "critical" or "normal"):stating which map is used.
         """
         helpers.Files.criticalMap = self
+        if self != "normal" and self != "critical":
+            raise ValueError("critical value must be 'normal' or 'critical'")
 
         if helpers.Files.file == "holland":
             helpers.Files.maxTrajectories = 7

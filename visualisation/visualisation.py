@@ -166,7 +166,7 @@ def lineConnection(maxRail, returnPlotMap):
             countLegend += 1
 
 def makePlot(maxRail, returnPlotMap):
-    """ Shows the plot.
+    """ Shows the final plot (map) for all stations and connections (dataVisualise).
 
         Args:
             maxRail: line with maximum score (determined by an algorithm)
@@ -182,17 +182,6 @@ def makePlot(maxRail, returnPlotMap):
                         bearing=0, center=dict(lat=52.4, lon=4.9), pitch=0, zoom=10), showlegend=True)
     fig = dict(data=dataVisualise, layout=layout)
     plly.offline.plot(fig, filename='visualisation/Visualisation_mapLines.html')
-
-def printTest(maxRail):
-    for i in range(len(maxRail.TrajectoryList)):
-        print("")
-        print("Traject {}".format(i+1))
-        print("---------")
-        for j in range(len(maxRail.TrajectoryList[i].Raillist)):
-            print(maxRail.TrajectoryList[i].Raillist[j].stationBeginning, "trajectBeginning: ",
-                  maxRail.TrajectoryList[i].trajectBeginStation, "trajectEnd: ", maxRail.TrajectoryList[i].trajectEndStation)
-            print(maxRail.TrajectoryList[i].Raillist[j].stationEnd, "trajectBeginning: ",
-                  maxRail.TrajectoryList[i].trajectBeginStation, "trajectEnd: ", maxRail.TrajectoryList[i].trajectEndStation)
 
 def printLine(maxRail):
     """ Prints a line in a table. Columns: trajectories.
