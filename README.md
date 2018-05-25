@@ -26,7 +26,7 @@ The repository contains several **files:**
 	
 	- requirements.txt: A file stating what extra plugins (and what versions) are needed to install to run the program. 
 	
-	**algorithms**
+	|| algorithms ||
 	
 	- hillClimber.py: Contains the hillClimber() function. This changes, adds and removes trajectories from a line as long as the score improves. 
 	
@@ -34,7 +34,7 @@ The repository contains several **files:**
 	
 	- SimulatedAnnealing.py: Contains functions for adjusting a line. Starts with a line and changes the line according to makeSnakeTrajectory() or the random algorithm. Accepts changes when the score becomes lower only if the temperature is high enough. 
 	
-	**classes**
+	|| classes ||
 	
 	- helpers.py: A supporting file. For now containing a program that displays all railways and their information to make things visible for programmers. 
 	
@@ -44,7 +44,7 @@ The repository contains several **files:**
 	
 	- trajectoryClass.py: A file containing the Trajectory class. This includes a list of railways used and a list of all railways, but several functions as well. 
 	
-	**data**
+	|| data ||
 	
 	- ConnectiesHolland.csv: A file containing all railways (for intercity-trains) in the provinces of Noord- and Zuid-Holland (The Netherlands).
 	
@@ -62,7 +62,7 @@ The repository contains several **files:**
 	
 	- README.md: A short summary of reasearch done with the program. 
 	
-	**visualisation**
+	|| visualisation ||
 	
 	- visualisation.py: A file containing functions for making a map visualisation and a table visualisation of a line. 
 	
