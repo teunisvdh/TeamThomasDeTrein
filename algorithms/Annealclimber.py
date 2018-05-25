@@ -52,6 +52,6 @@ def annealclimber(line, iterations, replace):
                 line.removeTrajectByTrajectory(RandomTrajectory)
                 line.addTrajectByTrajectory(replaceTrajectory)
 
-        line.addToUnfullLine(20)
+        line.addToUnfullLine(helpers.Files.maxTrajectories)
 
     return(line)

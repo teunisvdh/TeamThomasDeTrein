@@ -30,8 +30,18 @@ class Files:
         """
 
         global file
+        global maxTrajectories
         file = "init"
+        maxTrajectories = 0
         helpers.Files.file = self
+        if self == "holland":
+            helpers.Files.maxTrajectories = 7
+            helpers.Files.maxMinutes = 120
+        elif self == "nationaal":
+            helpers.Files.maxTrajectories = 20
+            helpers.Files.maxMinutes = 180
+
+
 
 
     def fileStations():
@@ -72,7 +82,7 @@ class Files:
 
         if helpers.Files.file == "holland":
             usedfile = "data/ConnectiesHolland.csv"
-        elif settings.Files.file == "nationaal":
+        elif helpers.Files.file == "nationaal":
             usedfile = "data/ConnectiesNationaal.csv"
 
         with open(usedfile) as csvfile:

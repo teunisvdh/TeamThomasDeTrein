@@ -16,7 +16,7 @@ from visualisation import visualisation
 sys.path.append('C:/TeamThomasDeTrein/classes')
 sys.path.append('C:/TeamThomasDeTrein/visualisation')
 
-def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace):
+def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace, multiplicationAdd, multiplicationChop):
     """A function that adds to a line a given amount of trajectories produced
     by either the makeSnakeTrajectory or random algorithm and then iterates over
     it's own trajectories 20 times and tries to improve its trajectories,
@@ -28,11 +28,16 @@ def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace):
         stepSize (int): Amount of steps you want to take to make the trajectory
         iterations (int): Amount of times you want to try to improve all the the trajectories
         replace (string): Input "random" when you want to update trajectories
-        with random algorithm and "snake" for the makeSnakeTrajectory function
+            with random algorithm and "snake" for the makeSnakeTrajectory function
+        multiplicationAdd (float): Multiplication factor of T for adding rails
+        multiplicationChop (float): Multiplication factor of T for chopping rails
 
     Returns:
         A updated line of trajectories.
     """
+    # check if amount of trajectories is not exceeded
+    if amountOfTrajectories + len(line.TrajectoryList) > helpers.Files.maxTrajectories:
+        raise ValueError('Too many trajectories')
 
     for amount in range(amountOfTrajectories):
 
@@ -54,7 +59,7 @@ def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace):
 
     return line
 
-def makeSnakeTrajectory(line, startTrajectory, stepSize):
+def makeSnakeTrajectory(line, startTrajectory, stepSize, multiplicationAdd, multiplicationChop):
     """A function that make a trajectory by adding and deleting rails
 
     Args:
@@ -90,10 +95,10 @@ def makeSnakeTrajectory(line, startTrajectory, stepSize):
         randomRail, randomScore = random.choice(list(selectedDict.items()))
 
         # add the rail by simmulated annealing
-        startTrajectory.simAnnealingAdd(var, score, randomScore, T, randomRail)
+        startTrajectory.simAnnealingAdd(var, score, randomScore, T, randomRail, multiplicationAdd)
 
         # delete a rail by simmulated annealing
-        startTrajectory.simAnnealingChop(line, T)
+        startTrajectory.simAnnealingChop(line, T, multiplicationChop)
 
     return startTrajectory
 

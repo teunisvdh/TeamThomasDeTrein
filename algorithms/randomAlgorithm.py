@@ -38,30 +38,34 @@ def randomTrajectory(trajectory, amountOfRails):
 
     return trajectory
 
-def randomLine(line, amountOfTrajectories):
+def randomLine(line, amountOfTrajectories, amountOfRails):
     """A random algorithm adds to a line a given amount of trajectories by
     the randomTrajectory function
 
     Args:
         line (Line): A Line element which you want to update.
         amountOfTrajectories (int): Amount of trajectories which you want to add.
+        iterarations (int): Amount of rails you want to add
 
     Returns:
         A updated line of trajectories.
     """
+    # check if amount of trajectories is not exceeded
+    if amountOfTrajectories + len(line.TrajectoryList) > helpers.Files.maxTrajectories:
+        raise ValueError('Too many trajectories')
 
     # iterate over all trajectories
     for traject in range(amountOfTrajectories):
 
         # update empty trajectory randomly
-        trajectoryFinal = emptyRandom(line)
+        trajectoryFinal = emptyRandom(line, amountOfRails)
 
         # add updated trajectory to line
         line.addTrajectByTrajectory(trajectoryFinal)
 
     return line
 
-def emptyRandom(line):
+def emptyRandom(line, amountOfRails):
     """A function that adds to an empty line a random number between 0 and 10 of
     trajectories
 
@@ -76,6 +80,6 @@ def emptyRandom(line):
     emptyTrajectory = trajectoryClass.Trajectory([], line.RailwayList)
 
     # put random rails in empty trajectory
-    replaceTrajectory = randomTrajectory(emptyTrajectory, 10)
+    replaceTrajectory = randomTrajectory(emptyTrajectory, amountOfRails)
 
     return replaceTrajectory

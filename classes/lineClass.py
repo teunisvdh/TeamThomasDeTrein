@@ -233,7 +233,7 @@ class Line:
         if replace == "random":
             replaceTrajectory = randomAlgorithm.randomTrajectory(tempTrajectory, stepSize)
         if replace == "snake":
-            replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(self, tempTrajectory, stepSize)
+            replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(self, tempTrajectory, stepSize, multiplicationAdd, multiplicationChop)
 
         self.addTrajectByTrajectory(replaceTrajectory)
 

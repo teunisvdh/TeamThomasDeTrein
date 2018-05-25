@@ -50,11 +50,6 @@ def hillClimber(line, iterations, replace):
         elif score_3 < score_2 and score < score_2:
             line.removeTrajectByTrajectory(replaceTrajectory)
 
-        # try to add another trajectory and accept when score get higher
-        if file == "nationaal":
-            line.addToUnfullLine(20, replace)
-
-        if file == "holland":
-            line.addToUnfullLine(7, replace)
+        line.addToUnfullLine(helpers.Files.maxTrajectories, replace)
 
     return(line)
