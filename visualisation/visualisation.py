@@ -128,16 +128,20 @@ def lineConnection(maxRail, returnPlotMap):
         for j in range(len(maxRail.TrajectoryList[i].Raillist)):
             y1, y2, x1, x2 = connect(maxRail.TrajectoryList[i].Raillist[j].stationBeginning,
                                      maxRail.TrajectoryList[i].Raillist[j].stationEnd, stationList)
-
-            count = 1
-            countOdd = 0
-            countEven = 0
             coordinates = [y1, y2, x1, x2]
 
             # check if rail is used multiple times
+            countEven = 1
+            countOdd = 2
+            count = 1
             for coordinateBlock in alreadyListed:
                 if (coordinateBlock == coordinates):
                     count += 1
+                    if (count % 2 == 0):
+                        countEven += 1
+                    else:
+                        countOdd += 1
+
             alreadyListed.append(coordinates)
             coordinatesReverse = [y2, y1, x2, x1]
             alreadyListed.append(coordinatesReverse)
@@ -149,17 +153,15 @@ def lineConnection(maxRail, returnPlotMap):
 
             # if count even, scattermapbox query for plotting rail, extra curve
             if (count % 2 == 0):
-                countEven += 1
-                result = gob.Scattermapbox(lat=[y1, (y1+y2-0.003*countEven)/2, y2], lon=[x1, (x1+x2-0.003*countEven)/2, x2], mode='lines',
+                result = gob.Scattermapbox(lat=[y1, (y1+y2-0.001*countEven)/2, y2], lon=[x1, (x1+x2-0.001*countEven)/2, x2], mode='lines',
                                            line=dict(width=2, color=trajColor), name=label, legendgroup=label, showlegend=legendShow)
 
            # if count odd, scattermapbox query for plotting, extra curve other side
             else:
-                countOdd += 1
-                result = gob.Scattermapbox(lat=[y1, (y1+y2+0.003*countOdd)/2, y2], lon=[x1, (x1+x2+0.003*countOdd)/2, x2], mode='lines',
+                result = gob.Scattermapbox(lat=[y1, (y1+y2+0.001*countOdd)/2, y2], lon=[x1, (x1+x2+0.001*countOdd)/2, x2], mode='lines',
                                            line=dict(width=2, color=trajColor), name=label, legendgroup=label, showlegend=legendShow)
 
-           # aput query in list for later use
+           # put query in list for later use
             dataVisualise.append(result)
             countLegend += 1
 
