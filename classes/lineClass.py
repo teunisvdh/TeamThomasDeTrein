@@ -5,10 +5,10 @@ import numpy as np
 import numpy.random as rn
 from algorithms import randomAlgorithm
 from algorithms import SimulatedAnnealing
-from classes import lineClass
 from classes import trajectoryClass
 from classes import railAndStationClass
 from classes import helpers
+from classes import lineClass
 sys.path.append('C:/TeamThomasDeTrein/classes')
 
 class Line:
