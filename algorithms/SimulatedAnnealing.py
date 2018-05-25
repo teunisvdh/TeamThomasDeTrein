@@ -13,8 +13,9 @@ from classes import railAndStationClass
 from classes import helpers
 from algorithms import randomAlgorithm
 from visualisation import visualisation
-sys.path.append('C:/TeamThomasDeTrein/classes')
-sys.path.append('C:/TeamThomasDeTrein/visualisation')
+directory = os.path.dirname(os.getcwd())
+sys.path.append(directory + '/TeamThomasDeTrein/classes')
+sys.path.append(directory + '/TeamThomasDeTrein/algorithms')
 
 def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace, amountOfRails):
     """A function that adds to a line a given amount of trajectories produced

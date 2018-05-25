@@ -1,5 +1,6 @@
 import random
 import sys
+import os
 import operator
 import numpy as np
 import numpy.random as rn
@@ -9,7 +10,8 @@ from classes import trajectoryClass
 from classes import railAndStationClass
 from classes import helpers
 from classes import lineClass
-sys.path.append('C:/TeamThomasDeTrein/classes')
+directory = os.path.dirname(os.getcwd())
+sys.path.append(directory + '/TeamThomasDeTrein/classes')
 
 class Line:
     """This is a class which contains  a list of all trajectories used,

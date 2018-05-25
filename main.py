@@ -16,16 +16,19 @@ import data
 
 
 def main():
+    # initialize the variables
     helpers.Files.initializeVariables("nationaal")
-    helpers.Files.setCritical("critical")
+    helpers.Files.setCritical("normal")
 
-    helpers.Files.setMulitplicationAdd(1)
-    helpers.Files.setMulitplicationChop(1000)
+    # determine the values for multiplication in temperature
+    helpers.Files.setMulitplicationAdd(20)
+    helpers.Files.setMulitplicationChop(20)
     # put "holland" or "nationaal"
 
     # open the files including critical data
     stationList, criticalStationList = helpers.Files.fileStations()
     RailwayList, criticalRailwayList, inverseDict = helpers.Files.fileConnections(criticalStationList)
+
     # print(len(criticalRailwayList))
     # for i in criticalRailwayList:
     #     print(i.stationBeginning, " - ", i.stationEnd)
@@ -39,35 +42,38 @@ def main():
     #
     # print(max(scoreList))
 
-    # scoreList = []
-    # highestLine = None
-    # highestScore = 0
-    # scoreTotal = 0
-    # scoreAverage = 0
-    #
-    # for i in range(2):
-    #     emptyLine = lineClass.Line([], RailwayList, criticalRailwayList, inverseDict)
-    #     emptyTrajectory = trajectoryClass.Trajectory([], RailwayList)
-    #     snake = SimulatedAnnealing.snakeLine(emptyLine, helpers.Files.maxTrajectories, 5, 15, "snake", 10)
-    #     score = snake.SLine()
-    #     scoreList.append(score)
-    #     scoreTotal = scoreTotal + score
-    #     if score > highestScore:
-    #         highestScore = score
-    #         highestLine = snake
-    #
-    # print("highscore", highestScore)
-    # print("averagescore", scoreTotal / len(scoreList))
-    # visualisation.visualize(highestLine, stationList, RailwayList)
-    # visualisation.printTest(highestLine)
-
 
     emptyLine = lineClass.Line([], RailwayList, criticalRailwayList, inverseDict)
     randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 7, 10)
 
     railHill = hillClimber.hillClimber(randomListOfTrajectories, 2000, "random", 20)
 
-    print(railHill.SLine())
+    scoreList = []
+    highestLine = None
+    highestScore = 0
+    scoreTotal = 0
+    scoreAverage = 0
+
+    for i in range(2):
+        emptyLine = lineClass.Line([], RailwayList, criticalRailwayList, inverseDict)
+        emptyTrajectory = trajectoryClass.Trajectory([], RailwayList)
+        snake = SimulatedAnnealing.snakeLine(railHill, 1, 5, 15, "snake", 10)
+        score = snake.SLine()
+        scoreList.append(score)
+        scoreTotal = scoreTotal + score
+        if score > highestScore:
+            highestScore = score
+            highestLine = snake
+
+    print("highscore", highestScore)
+    print("averagescore", scoreTotal / len(scoreList))
+    visualisation.visualize(highestLine, stationList, RailwayList)
+    visualisation.printTest(highestLine)
+
+
+    #
+    # visualisation.visualize(railHill, stationList, RailwayList)
+
 
     # for traject in railHill.TrajectoryList:
     #     print(traject.minutesTrajectory())

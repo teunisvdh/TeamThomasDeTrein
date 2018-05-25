@@ -10,8 +10,9 @@ from classes import railAndStationClass
 from classes import helpers
 from algorithms import randomAlgorithm
 from algorithms import SimulatedAnnealing
-sys.path.append('C:/TeamThomasDeTrein/classes')
-sys.path.append('C:/TeamThomasDeTrein/visualisation')
+directory = os.path.dirname(os.getcwd())
+sys.path.append(directory + '/TeamThomasDeTrein/classes')
+sys.path.append(directory + '/TeamThomasDeTrein/algorithms')
 
 def hillClimber(line, iterations, replace, amountOfRails):
     """A function which changes, adds and removes trajectories from given
