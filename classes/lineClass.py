@@ -233,7 +233,7 @@ class Line:
         if replace == "random":
             replaceTrajectory = randomAlgorithm.randomTrajectory(tempTrajectory, stepSize)
         if replace == "snake":
-            replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(self, tempTrajectory, stepSize, multiplicationAdd, multiplicationChop)
+            replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(self, tempTrajectory, stepSize)
 
         self.addTrajectByTrajectory(replaceTrajectory)
 
@@ -345,7 +345,7 @@ class Line:
             replaceTrajectory = randomAlgorithm.emptyRandom(self, amountOfRails)
 
         if replace == "snake":
-            emptyTrajectory = Trajectory([], self.RailwayList)
+            emptyTrajectory = trajectoryClass.Trajectory([], self.RailwayList)
             replaceTrajectory = SimulatedAnnealing.makeSnakeTrajectory(self, emptyTrajectory, 15)
 
         return replaceTrajectory

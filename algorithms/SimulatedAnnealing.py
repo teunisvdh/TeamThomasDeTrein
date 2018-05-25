@@ -16,7 +16,7 @@ from visualisation import visualisation
 sys.path.append('C:/TeamThomasDeTrein/classes')
 sys.path.append('C:/TeamThomasDeTrein/visualisation')
 
-def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace, multiplicationAdd, multiplicationChop):
+def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace, amountOfRails):
     """A function that adds to a line a given amount of trajectories produced
     by either the makeSnakeTrajectory or random algorithm and then iterates over
     it's own trajectories 20 times and tries to improve its trajectories,
@@ -42,7 +42,7 @@ def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace, multipl
     for amount in range(amountOfTrajectories):
 
         # make a trajectory and add to line
-        startTrajectory = line.makeReplace(replace)
+        startTrajectory = line.makeReplace(replace, amountOfRails)
         line.addTrajectByTrajectory(startTrajectory)
 
 
@@ -59,7 +59,7 @@ def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace, multipl
 
     return line
 
-def makeSnakeTrajectory(line, startTrajectory, stepSize, multiplicationAdd, multiplicationChop):
+def makeSnakeTrajectory(line, startTrajectory, stepSize):
     """A function that make a trajectory by adding and deleting rails
 
     Args:
@@ -95,10 +95,10 @@ def makeSnakeTrajectory(line, startTrajectory, stepSize, multiplicationAdd, mult
         randomRail, randomScore = random.choice(list(selectedDict.items()))
 
         # add the rail by simmulated annealing
-        startTrajectory.simAnnealingAdd(var, score, randomScore, T, randomRail, multiplicationAdd)
+        startTrajectory.simAnnealingAdd(var, score, randomScore, T, randomRail)
 
         # delete a rail by simmulated annealing
-        startTrajectory.simAnnealingChop(line, T, multiplicationChop)
+        startTrajectory.simAnnealingChop(line, T)
 
     return startTrajectory
 

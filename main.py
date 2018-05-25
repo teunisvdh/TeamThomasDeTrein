@@ -16,8 +16,11 @@ import data
 
 
 def main():
-    helpers.Files.setVariables("nationaal")
-    helpers.Files.setCritical("normal")
+    helpers.Files.initializeVariables("nationaal")
+    helpers.Files.setCritical("critical")
+
+    helpers.Files.setMulitplicationAdd(1)
+    helpers.Files.setMulitplicationChop(1000)
     # put "holland" or "nationaal"
 
     # open the files including critical data
@@ -45,7 +48,7 @@ def main():
     # for i in range(2):
     #     emptyLine = lineClass.Line([], RailwayList, criticalRailwayList, inverseDict)
     #     emptyTrajectory = trajectoryClass.Trajectory([], RailwayList)
-    #     snake = SimulatedAnnealing.snakeLine(emptyLine, helpers.Files.maxTrajectories, 5, 15, "random", 20, 20)
+    #     snake = SimulatedAnnealing.snakeLine(emptyLine, helpers.Files.maxTrajectories, 5, 15, "snake", 10)
     #     score = snake.SLine()
     #     scoreList.append(score)
     #     scoreTotal = scoreTotal + score
@@ -62,14 +65,14 @@ def main():
     emptyLine = lineClass.Line([], RailwayList, criticalRailwayList, inverseDict)
     randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 7, 10)
 
-    railHill = hillClimber.hillClimber(randomListOfTrajectories, 1000, "random", 15)
+    railHill = hillClimber.hillClimber(randomListOfTrajectories, 2000, "random", 20)
 
     print(railHill.SLine())
 
-    for traject in railHill.TrajectoryList:
-        print(traject.minutesTrajectory())
-
-    visualisation.visualize(railHill, stationList, RailwayList)
+    # for traject in railHill.TrajectoryList:
+    #     print(traject.minutesTrajectory())
+    #
+    # visualisation.visualize(railHill, stationList, RailwayList)
 
     # list0 = []
     # list1000 = []

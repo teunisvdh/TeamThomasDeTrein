@@ -15,15 +15,15 @@ class Files:
     based on the map
 
     Functions:
-        setFiles(self.)
+        setFiles(self).
         fileStations(self).
         fileConnections(self, criticalstationList).
     """
 
-    def setVariables(self):
+    def initializeVariables(self):
         """
         Updates all variables to match the used map.
-        Variables in the project files (helpers.py and classes.py) are updated.
+        Variables in the project files (helpers.py and classes.py and algorithms) are updated.
 
         Args:
             Map(String, "holland" or "nationaal"):stating which map is used.
@@ -35,6 +35,8 @@ class Files:
         global maxMinutes
         global usedfileStations
         global usedfileConnections
+        global multiplicationAdd
+        global multiplicationChop
 
 
         file = "init"
@@ -43,10 +45,18 @@ class Files:
         maxMinutes = 0
         usedfileStations = "init"
         usedfileConnections = "init"
+        multiplicationAdd = 0
+        multiplicationChop = 0
 
         helpers.Files.file = self
 
     def setCritical(self):
+        """Set the global map files.If 'citical' is used as input the critical station map is used.
+            When 'normal' is used as input, the normal station map is used.
+
+        Args:
+            Map(String, "critical" or "normal"):stating which map is used.
+        """
         helpers.Files.criticalMap = self
 
         if helpers.Files.file == "holland":
@@ -57,7 +67,7 @@ class Files:
             if self == "normal":
                 helpers.Files.usedfileStations = "data/StationsHolland.csv"
             elif self == "critical":
-                helpers.Files.usedfileStations = "data/StationsHollandCritical"
+                helpers.Files.usedfileStations = "data/StationsHollandCritical.csv"
 
         elif helpers.Files.file == "nationaal":
             helpers.Files.maxTrajectories = 20
@@ -67,12 +77,21 @@ class Files:
             if self == "normal":
                 helpers.Files.usedfileStations = "data/StationsNationaal.csv"
             elif self == "critical":
-                helpers.Files.usedfileStations = "data/StationsNationaalCritical"
+                helpers.Files.usedfileStations = "data/StationsNationaalCritical.csv"
+
+    def setMulitplicationAdd(self):
+        """Sets the multiplication for temperature for adding rails.
+        """
+        helpers.Files.multiplicationAdd = self
+
+    def setMulitplicationChop(self):
+        """Sets the multiplication for temperature for chopping off rails.
+        """
+        helpers.Files.multiplicationChop = self
 
 
     def fileStations():
-        """
-        Opens the needed file containing a list of stations (stations)
+        """Opens the needed file containing a list of stations (stations)
 
         Returns:
             stationsList(name, x, y, critical): list of all stations.
@@ -90,8 +109,7 @@ class Files:
             return stationList, criticalStationList
 
     def fileConnections(criticalStationList):
-        """
-        Opens the needed file containing a list of connections (rails)
+        """Opens the needed file containing a list of connections (rails)
 
         Args:
             criticalStationList: list of all critical stations (from fileStations).
@@ -100,9 +118,6 @@ class Files:
             RailwayList(StationBeginning, StationEnd, minutes): list of all railways .
             criticalRailwayList(StationBeginning, StationEnd, minutes): list of all critical railways.
         """
-
-
-
         with open(helpers.Files.usedfileConnections) as csvfile:
             stationConnections = csv.reader(csvfile, delimiter=',')
             RailwayList = []
@@ -111,6 +126,7 @@ class Files:
             for lijn in stationConnections:
                 railValue = railAndStationClass.Rail(lijn[0], lijn[1], lijn[2])
                 RailwayList.append(railValue)
+
                 # change list and append in temp
                 lijn[0], lijn[1] = lijn[1], lijn[0]
                 railKey = railAndStationClass.Rail(lijn[0], lijn[1], lijn[2])
