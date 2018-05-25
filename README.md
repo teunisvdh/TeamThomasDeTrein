@@ -69,5 +69,8 @@ The repository contains several **files:**
 		- Visualisation_mapLines.html: A file containg the map visualisation of a line. Updated every time visualize() is used. 
 
 		- Visualisation_tableLines.html: A file containg the table visualisation of a line. Updated every time printLine() is used.
-	
+
+**Use**
+...
+
 All files are free to use. For **questions** you can always send an email to markvandenhoven@icloud.com, thymenyj@gmail.com, teunisvanderhofstad@hotmail.com. 
