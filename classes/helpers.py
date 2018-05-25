@@ -30,18 +30,44 @@ class Files:
         """
 
         global file
+        global criticalMap
         global maxTrajectories
+        global maxMinutes
+        global usedfileStations
+        global usedfileConnections
+
+
         file = "init"
+        critical = "init"
         maxTrajectories = 0
+        maxMinutes = 0
+        usedfileStations = "init"
+        usedfileConnections = "init"
+
         helpers.Files.file = self
-        if self == "holland":
+
+    def setCritical(self):
+        helpers.Files.criticalMap = self
+
+        if helpers.Files.file == "holland":
             helpers.Files.maxTrajectories = 7
             helpers.Files.maxMinutes = 120
-        elif self == "nationaal":
+            helpers.Files.usedfileConnections = "data/ConnectiesHolland.csv"
+
+            if self == "normal":
+                helpers.Files.usedfileStations = "data/StationsHolland.csv"
+            elif self == "critical":
+                helpers.Files.usedfileStations = "data/StationsHollandCritical"
+
+        elif helpers.Files.file == "nationaal":
             helpers.Files.maxTrajectories = 20
             helpers.Files.maxMinutes = 180
+            helpers.Files.usedfileConnections = "data/ConnectiesNationaal.csv"
 
-
+            if self == "normal":
+                helpers.Files.usedfileStations = "data/StationsNationaal.csv"
+            elif self == "critical":
+                helpers.Files.usedfileStations = "data/StationsNationaalCritical"
 
 
     def fileStations():
@@ -53,12 +79,7 @@ class Files:
             criticalstationList(name, x, y, critical): list of all critical stations.
         """
 
-        if helpers.Files.file == "holland":
-            usedfile = "data/StationsHolland.csv"
-        if helpers.Files.file == "nationaal":
-            usedfile = "data/StationsNationaal.csv"
-
-        with open(usedfile) as csvfile:
+        with open(helpers.Files.usedfileStations) as csvfile:
             stationsinfo = csv.reader(csvfile, delimiter=',')
             stationList = []
             criticalStationList = []
@@ -80,12 +101,9 @@ class Files:
             criticalRailwayList(StationBeginning, StationEnd, minutes): list of all critical railways.
         """
 
-        if helpers.Files.file == "holland":
-            usedfile = "data/ConnectiesHolland.csv"
-        elif helpers.Files.file == "nationaal":
-            usedfile = "data/ConnectiesNationaal.csv"
 
-        with open(usedfile) as csvfile:
+
+        with open(helpers.Files.usedfileConnections) as csvfile:
             stationConnections = csv.reader(csvfile, delimiter=',')
             RailwayList = []
             criticalRailwayList = []

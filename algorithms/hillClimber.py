@@ -13,7 +13,7 @@ from algorithms import SimulatedAnnealing
 sys.path.append('C:/TeamThomasDeTrein/classes')
 sys.path.append('C:/TeamThomasDeTrein/visualisation')
 
-def hillClimber(line, iterations, replace):
+def hillClimber(line, iterations, replace, amountOfRails):
     """A function which changes, adds and removes trajectories from given
     trajectory as long as the score increases
 
@@ -23,6 +23,7 @@ def hillClimber(line, iterations, replace):
         replace (string): Input "random" when you want to replace for random
             trajectories, Input "snake" when you want to replace for snake
             trajectories
+        amountOfRails (int): Amount of rails you want to add per trajectory
 
     Returns:
         The final line
@@ -36,7 +37,7 @@ def hillClimber(line, iterations, replace):
         score, score_2 = line.scoreWithAndWithoutTrajectory(RandomTrajectory)
 
         # make a replacement trajectory, either by snake or random
-        replaceTrajectory = line.makeReplace(replace)
+        replaceTrajectory = line.makeReplace(replace, amountOfRails)
 
         # add replaceTrajectory and determine score
         score_3 = line.scoreWithTrajectory(replaceTrajectory)
@@ -50,6 +51,6 @@ def hillClimber(line, iterations, replace):
         elif score_3 < score_2 and score < score_2:
             line.removeTrajectByTrajectory(replaceTrajectory)
 
-        line.addToUnfullLine(helpers.Files.maxTrajectories, replace)
+        line.addToUnfullLine(helpers.Files.maxTrajectories, replace, amountOfRails)
 
     return(line)

@@ -15,7 +15,7 @@ def randomTrajectory(trajectory, amountOfRails):
 
     Args:
         trajectory (Trajectory): A Trajectory element which you want to update
-        amountOfRails (int): Maximum amount of rails which you want to add. The amount
+        amountOfRails (int): Amount of rails which you want to add. The amount
         of rails added will be a random number between zero and this number
 
     Returns:
@@ -46,6 +46,7 @@ def randomLine(line, amountOfTrajectories, amountOfRails):
         line (Line): A Line element which you want to update.
         amountOfTrajectories (int): Amount of trajectories which you want to add.
         iterarations (int): Amount of rails you want to add
+        amountOfRails (int): Amount of rails you want to add per trajectory
 
     Returns:
         A updated line of trajectories.
@@ -71,6 +72,7 @@ def emptyRandom(line, amountOfRails):
 
     Args:
         line (Line): A Line element which you want to update.
+        amountOfRails (int): Amount of rails you want to add per trajectory
 
     Returns:
         A random trajectory.

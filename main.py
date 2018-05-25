@@ -11,13 +11,13 @@ from classes import helpers
 from algorithms import randomAlgorithm
 from algorithms import hillClimber
 from algorithms import SimulatedAnnealing
-from algorithms import Annealclimber
 from visualisation import visualisation
 import data
 
 
 def main():
     helpers.Files.setVariables("nationaal")
+    helpers.Files.setCritical("normal")
     # put "holland" or "nationaal"
 
     # open the files including critical data
@@ -62,14 +62,14 @@ def main():
     emptyLine = lineClass.Line([], RailwayList, criticalRailwayList, inverseDict)
     randomListOfTrajectories = randomAlgorithm.randomLine(emptyLine, 7, 10)
 
-    # railHill = hillClimber.hillClimber(randomListOfTrajectories, 100, "random")
-    #
-    # print(railHill.SLine())
+    railHill = hillClimber.hillClimber(randomListOfTrajectories, 1000, "random", 15)
 
-    # for traject in railHill.TrajectoryList:
-        # print(traject.minutesTrajectory())
+    print(railHill.SLine())
 
-    # visualisation.visualize(railHill, stationList, RailwayList)
+    for traject in railHill.TrajectoryList:
+        print(traject.minutesTrajectory())
+
+    visualisation.visualize(railHill, stationList, RailwayList)
 
     # list0 = []
     # list1000 = []

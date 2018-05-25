@@ -305,13 +305,14 @@ class Line:
 
         return score_3
 
-    def addToUnfullLine(self, maxAmountOfTrajectories, replace):
+    def addToUnfullLine(self, maxAmountOfTrajectories, replace, amountOfRails):
         """ Function that adds trajectories to a line that is not full yet
 
         Args:
             maxAmountOfTrajectories (int): Maximum amount of trajectories you want to add
             replace (string): "random" for adding with random algorithm, "snake" for
                 snake algorithm
+            amountOfRails (int): Amount of rails you want to add per trajectory
         """
 
         # check if line is full
@@ -321,7 +322,7 @@ class Line:
             score_4 = self.SLine()
 
             # add a new random trajectory
-            newTrajectory = self.makeReplace(replace)
+            newTrajectory = self.makeReplace(replace, amountOfRails)
 
             self.addTrajectByTrajectory(newTrajectory)
 
@@ -332,15 +333,16 @@ class Line:
             if score_4 > score_5:
                 self.removeTrajectByTrajectory(newTrajectory)
 
-    def makeReplace(self, replace):
+    def makeReplace(self, replace, amountOfRails):
         """ Function that makes a trajectory to replace
 
         Args:
             replace (string): "random" for adding with random algorithm, "snake" for
                 snake algorithm
+            amountOfRails (int): Amount of rails you want to add per trajectory
         """
         if replace == "random":
-            replaceTrajectory = randomAlgorithm.emptyRandom(self)
+            replaceTrajectory = randomAlgorithm.emptyRandom(self, amountOfRails)
 
         if replace == "snake":
             emptyTrajectory = Trajectory([], self.RailwayList)
