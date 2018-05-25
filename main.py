@@ -43,10 +43,10 @@ def main():
     # call SimulatedAnnealing
     simulatedannealingLine = SimulatedAnnealing.snakeLine(emptyLine, 1, 5, 15, "snake", 10)
 
-    # call visualisation (choose algorithm randomline, hillclimberLine or simulatedannealingLine)
-    algorithm = simulatedannealingLine
-    visualisation.visualize(algorithm, stationList, RailwayList)
-    visualisation.printLine(algorithm)
+    # call visualisation (choose line randomline, hillclimberLine or simulatedannealingLine)
+    line = simulatedannealingLine
+    visualisation.visualize(line, stationList, RailwayList)
+    visualisation.printLine(line)
 
 if __name__ == "__main__":
     main()
