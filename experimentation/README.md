@@ -45,6 +45,7 @@ Results:
 
 	Holland:
 		- critical: random vs snake (hillclimber)
+		![Alst text](TeamThomasDeTrein/experimentation/doc/Holland critical vs not critical, random vs snake (9000+).png)
 		- not critical: random vs snake (hillclimber) 
 
 	Nationaal:
