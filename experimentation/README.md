@@ -94,6 +94,7 @@ Results:
 ![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Nationaal%20iteration%20and%20setpSize%20(9000%2B).png)
 
 Conclusion:
+
 	Changing the map:
 		- National: lower scores and longer runtimes.
 		- All critical/ normal: the national map shows a smaller difference in score,
