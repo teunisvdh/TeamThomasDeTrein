@@ -97,3 +97,5 @@ Conclusion:
 
 	
 	
+Table experimentation:
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/tablethomas.JPG)
