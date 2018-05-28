@@ -42,16 +42,23 @@ Introduction:
 Results:
 
 	Holland vs Nationaal (random):
+	
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Holland%20vs%20Nationaal%2C%20not%20critical%20vs%20critical.png)
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Holland%20critical%20vs%20not%20critical%2C%20random%20vs%20snake%20(9000%2B).png)
 
 	Holland:
 		- critical: random vs snake (hillclimber)
-		![graph](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Holland%20critical%20vs%20not%20critical%2C%20random%20vs%20snake%20(9000%2B).png)
 		- not critical: random vs snake (hillclimber) 
+
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Holland%20critical%20vs%20not%20critical%2C%20random%20vs%20snake.png)
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Holland%20critical%20vs%20not%20critical%2C%20random%20vs%20snake%20(9000%2B).png)	
 
 	Nationaal:
 		- critical: random vs snake (hillclimber)
 		- not critical: random vs snake (hillclimber) 
-
+		
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Nationaal%20critical%20vs%20not%20critical%2C%20random%20vs%20snake.png)
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Nationaal%20critical%20vs%20not%20critical%2C%20random%20vs%20snake%20(9000%2B).png)	
 
 	Holland: 
 	Simulated Annealing snake: 
@@ -59,11 +66,18 @@ Results:
 		- temperature 10 add/ 100 chop
 		- temperature 20 add/ 200 chop
 		
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Holland%20temperature.png)	
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Holland%20temperature%20(9000%2B).png)
+
 	Nationaal: 
 	Simulated Annealing snake: 
 		- temperature 5 add/ 50 chop
 		- temperature 10 add/ 100 chop
-		- temperature 20 add/ 200 chop 
+		- temperature 20 add/ 200 chop
+		
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Nationaal%20temperature.png)	
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Nationaal%20temperature%20(9000%2B).png)	
+
 		
 	Nationaal:
 	Simulated Annealing snake:
@@ -75,6 +89,9 @@ Results:
 		- 10 iterations/ 20 stepSize
 		- 10 iterations/ 20 stepSize		
 		- 20 iterations/ 20 stepSize
+
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Nationaal%20iteration%20and%20stepSize.png)	
+![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Nationaal%20iteration%20and%20setpSize%20(9000%2B).png)
 
 Conclusion:
 
