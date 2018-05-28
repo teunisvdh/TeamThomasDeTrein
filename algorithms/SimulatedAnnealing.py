@@ -46,17 +46,37 @@ def snakeLine(line, amountOfTrajectories, stepSize, iterations, replace, amountO
         startTrajectory = line.makeReplace(replace, amountOfRails)
         line.addTrajectByTrajectory(startTrajectory)
 
+        for i in range(iterations):
+            fraction = i / float(iterations)
+            T = temperature(fraction)
 
-    for i in range(iterations):
+            # select a random trajectory
+            RandomTrajectory = line.selectRandomTrajectory()
 
-        # determine line's trajectories
-        trajectoryList = line.updateTrajectoryList()
+            # determine score of trajectory and the score without a random trajectory
+            score, score_2 = line.scoreWithAndWithoutTrajectory(RandomTrajectory)
 
-        # iterate over trajectories
-        for trajectory in trajectoryList:
+            # make a replacement trajectory, either by snake or random
+            replaceTrajectory = line.makeReplace(replace, amountOfRails)
 
-            # replace trajectory by a snake or random trajectory when improving
-            line.replace(replace, trajectory, stepSize)
+            # add replaceTrajectory and determine score
+            score_3 = line.scoreWithTrajectory(replaceTrajectory)
+
+            line.removeTrajectByTrajectory(replaceTrajectory)
+            line.addTrajectByTrajectory(RandomTrajectory)
+
+            choice = random.choice([score_2, score_3])
+
+            if choice == score_2:
+                if acceptance(score, score_2, 100000 * T) == True:
+                    line.removeTrajectByTrajectory(RandomTrajectory)
+
+            if choice == score_3:
+                if acceptance(score, score_3, 100000 * T) == True:
+                    line.removeTrajectByTrajectory(RandomTrajectory)
+                    line.addTrajectByTrajectory(replaceTrajectory)
+
+            line.addToUnfullLine(helpers.Files.maxTrajectories, replace, amountOfRails)
 
     return line
 
