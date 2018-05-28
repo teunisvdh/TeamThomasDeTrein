@@ -94,8 +94,19 @@ Results:
 ![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/Nationaal%20iteration%20and%20setpSize%20(9000%2B).png)
 
 Conclusion:
-
+	Changing the map:
+		- National: lower scores and longer runtimes.
+		- All critical/ normal: the national map shows a smaller difference in score,
+			Also when the snake algorithm is runned, the score effect of the amount
+			of critical stationss is smaller.
+	Chaning termperature:
+		- A lower temperature causes higher scores.
+		
+	Changing amount iterations and stepSize:
+		- There is no significance difference when the different parameters are changed.
+			
 	
 	
 Table experimentation:
+
 ![Alt text](https://github.com/teunisvdh/TeamThomasDeTrein/blob/master/experimentation/doc/tablethomas.JPG)
